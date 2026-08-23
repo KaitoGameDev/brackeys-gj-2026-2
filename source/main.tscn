@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://bykcclwelh4p1"]
+
+[node name="Main" type="Node" unique_id=788541686]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1115977841]
+
+[node name="Bg" type="ColorRect" parent="CanvasLayer" unique_id=534212323]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.4117647, 0.3372549, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1939503300]
+anchors_preset = -1
+anchor_left = 0.16171876
+anchor_top = 0.4375
+anchor_right = 0.8382813
+anchor_bottom = 0.5625
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Brackeys GameJam 2026  - 2"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true

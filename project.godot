@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="brackeys_game_jam_2026_2"
+run/main_scene="uid://bykcclwelh4p1"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -20,6 +21,10 @@ EventBus="*uid://dl1gq4hv3725k"
 
 [display]
 
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/window_width_override=1280
+window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
