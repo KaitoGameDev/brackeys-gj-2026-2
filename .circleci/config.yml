@@ -5,17 +5,17 @@ version: 2.1
   # Define a job to be invoked later in a workflow.
   # See: https://circleci.com/docs/guides/orchestrate/jobs-steps/#jobs-overview & https://circleci.com/docs/reference/configuration-reference/#jobs
 
-filter-master: &filter-master
+filter-master: &filter-main
   branches:
     only:
-      - /master/
+      - /main/
     ignore:
       - /.*/
 
 jobs:
   build-and-publish:
     docker:
-      - image: barichello/godot-ci:4.5.1
+      - image: barichello/godot-ci:4.7.2
 
     steps:
       - checkout
@@ -32,15 +32,15 @@ jobs:
             butler push ./build/web $ITCHIO_USERNAME/$ITCHIO_GAME:web
 
 workflows:
-  master-workflow:
+  main-workflow:
     jobs:
       - authorize-workflow:
           type: approval
           filters:
-            <<: *filter-master
+            <<: *filter-main
 
       - build-and-publish:
           requires:
             - authorize-workflow
           filters:
-            <<: *filter-master
+            <<: *filter-main
