@@ -1,6 +1,6 @@
 extends Node
 
-@export var money_scene: PackedScene = preload("res://source/money_swipe/money.tscn")
+@export var money_scene: PackedScene = preload("res://source/money/money.tscn")
 
 @export_group("Positions")
 @export var money_container: Node3D

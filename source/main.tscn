@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bykcclwelh4p1"]
 
 [ext_resource type="Script" uid="uid://dsp5hhamtrmop" path="res://source/money_swipe/money_swipe_controller.gd" id="1_kaxhg"]
-[ext_resource type="PackedScene" uid="uid://b3vk4ea6maey0" path="res://source/money/money.tscn" id="2_62cc7"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8heyh"]
 
@@ -19,7 +18,6 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 
 [node name="MoneySwipeController" type="Node" parent="Controllers" unique_id=595820871 node_paths=PackedStringArray("money_container", "customer_position", "table_position", "player_position")]
 script = ExtResource("1_kaxhg")
-money_scene = ExtResource("2_62cc7")
 money_container = NodePath("../../MoneyContainer")
 customer_position = NodePath("../../MoneyContainer/CustomerPosition")
 table_position = NodePath("../../MoneyContainer/TablePosition")
