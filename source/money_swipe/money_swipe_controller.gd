@@ -73,6 +73,7 @@ func spawn_money() -> void:
 
 	money_container.add_child(money)
 	money.global_position = customer_position.global_position
+	money.rotation.y = deg_to_rad(randf_range(-30.0, 30.0))
 	current_money = money
 	_slide_to(table_position)
 
