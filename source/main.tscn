@@ -1,8 +1,26 @@
 [gd_scene format=3 uid="uid://bykcclwelh4p1"]
 
+[ext_resource type="Script" uid="uid://dsp5hhamtrmop" path="res://source/money_swipe/money_swipe_controller.gd" id="1_kaxhg"]
+
 [node name="Main" type="Node" unique_id=788541686]
 
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1411386893]
+transform = Transform3D(1, 0, 0, 0, 2.9802322e-08, 1, 0, -1, 2.9802322e-08, 0, 2, 5.9604645e-08)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=507146176]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+
+[node name="Controllers" type="Node" parent="." unique_id=601628348]
+
+[node name="MoneySwipeController" type="Node" parent="Controllers" unique_id=595820871 node_paths=PackedStringArray("money_container", "customer_position", "table_position", "player_position")]
+script = ExtResource("1_kaxhg")
+money_container = NodePath("../../MoneyContainer")
+customer_position = NodePath("../../MoneyContainer/CustomerPosition")
+table_position = NodePath("../../MoneyContainer/TablePosition")
+player_position = NodePath("../../MoneyContainer/PlayerPosition")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1115977841]
+visible = false
 
 [node name="Bg" type="ColorRect" parent="CanvasLayer" unique_id=534212323]
 anchors_preset = 15
@@ -25,3 +43,13 @@ text = "Brackeys GameJam 2026  - 2 (rebuild)"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="MoneyContainer" type="Node3D" parent="." unique_id=537026169]
+
+[node name="CustomerPosition" type="Node3D" parent="MoneyContainer" unique_id=5805678]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+
+[node name="TablePosition" type="Node3D" parent="MoneyContainer" unique_id=1097910481]
+
+[node name="PlayerPosition" type="Node3D" parent="MoneyContainer" unique_id=678556403]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
