@@ -1,6 +1,7 @@
 extends Node
 
 @export var money_scene: PackedScene = preload("res://source/money/money.tscn")
+var bill_100: MoneyResource = preload("res://resources/money/100_bill.tres")
 
 @export_group("Positions")
 @export var money_container: Node3D
@@ -66,7 +67,9 @@ func spawn_money() -> void:
 	if current_money != null:
 		return
 
-	var money := money_scene.instantiate() as Node3D
+	var money : Money = money_scene.instantiate() as Node3D
+	money.setup(bill_100)
+	
 	if money == null:
 		push_warning("MoneySwipeController: money_scene root must be a Node3D.")
 		return

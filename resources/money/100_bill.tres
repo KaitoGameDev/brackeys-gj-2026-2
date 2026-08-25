@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MoneyResource" format=3 uid="uid://b6wfrbnlhrevb"]
+
+[ext_resource type="Script" uid="uid://3icy6k2k177c" path="res://source/money/money_resource.gd" id="1_8anns"]
+[ext_resource type="Texture2D" uid="uid://blcrocqpej7ku" path="res://icon.svg" id="1_p8vof"]
+
+[resource]
+script = ExtResource("1_8anns")
+front_value = 100
+back_value = 100
+front_color = Color(5.2943824e-07, 0.5483107, 0.5487384, 1)
+back_color = Color(0, 0.54901963, 0.54901963, 1)
+front_stamp = ExtResource("1_p8vof")
+back_stamp = ExtResource("1_p8vof")
+front_serial = "A-1234"
+back_serial = "A-1234"
