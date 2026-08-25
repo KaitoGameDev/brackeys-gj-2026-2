@@ -15,7 +15,7 @@ albedo_texture = SubResource("ViewportTexture_2txy0")
 [sub_resource type="PlaneMesh" id="PlaneMesh_sotg8"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_2txy0")
-size = Vector2(0.5, 0.3)
+size = Vector2(1.2, 0.7)
 center_offset = Vector3(0, 0.01, 0)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_tl28a"]
