@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://dydtyn1wmm7x8"]
+
+[ext_resource type="Script" uid="uid://bv5gc2wn4g14u" path="res://source/money/money_content.gd" id="1_s6klt"]
+
+[node name="FrontContent" type="Control" unique_id=1918357279]
+layout_mode = 3
+anchor_right = 0.4
+anchor_bottom = 0.42777777
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s6klt")
+metadata/_edit_use_anchors_ = true
+
+[node name="BgColor" type="ColorRect" parent="." unique_id=1623927592]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.99999994, 0.3636082, 0.8473227, 1)
+
+[node name="TopLeftValue" type="Label" parent="." unique_id=1186786822]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.01953125
+anchor_right = 0.234375
+anchor_bottom = 0.29220778
+theme_override_font_sizes/font_size = 32
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BottomRightValue" type="Label" parent="." unique_id=1842809506]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.765625
+anchor_top = 0.7077922
+anchor_right = 0.98046875
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Serial" type="Label" parent="." unique_id=190021042]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0234375
+anchor_top = 0.8089827
+anchor_right = 0.30078125
+anchor_bottom = 0.9583333
+offset_top = 3.75
+offset_right = -14.599998
+grow_vertical = 0
+theme_override_font_sizes/font_size = 16
+text = "B-123456"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true

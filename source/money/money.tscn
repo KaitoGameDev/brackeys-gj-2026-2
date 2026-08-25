@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://b3vk4ea6maey0"]
+
+[ext_resource type="Script" uid="uid://bfjra18xevslq" path="res://source/money/money.gd" id="1_uaqoi"]
+[ext_resource type="PackedScene" uid="uid://b51gnq710nggk" path="res://source/money/viewport_money.tscn" id="2_bk5si"]
+[ext_resource type="PackedScene" uid="uid://dydtyn1wmm7x8" path="res://source/money/front_content.tscn" id="3_wgjbk"]
+[ext_resource type="PackedScene" uid="uid://dxeqqyfbyghfa" path="res://source/money/back_content.tscn" id="4_uj11b"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2txy0"]
+viewport_path = NodePath("Front/ViewportMoney")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2txy0"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_2txy0")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_sotg8"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_2txy0")
+size = Vector2(0.5, 0.3)
+center_offset = Vector3(0, 0.01, 0)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_tl28a"]
+viewport_path = NodePath("Back/ViewportMoney")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lh0r7"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_tl28a")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2txy0"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_lh0r7")
+size = Vector2(0.5, 0.3)
+
+[node name="Money" type="Node3D" unique_id=243199542]
+script = ExtResource("1_uaqoi")
+
+[node name="Front" type="MeshInstance3D" parent="." unique_id=1470114227]
+mesh = SubResource("PlaneMesh_sotg8")
+
+[node name="ViewportMoney" parent="Front" unique_id=741079584 instance=ExtResource("2_bk5si")]
+size = Vector2i(256, 154)
+
+[node name="FrontContent" parent="Front/ViewportMoney" unique_id=1918357279 instance=ExtResource("3_wgjbk")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Back" type="MeshInstance3D" parent="." unique_id=757209700]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("PlaneMesh_2txy0")
+
+[node name="ViewportMoney" parent="Back" unique_id=1945990133 instance=ExtResource("2_bk5si")]
+size = Vector2i(256, 154)
+
+[node name="BackContent" parent="Back/ViewportMoney" unique_id=544899693 instance=ExtResource("4_uj11b")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
