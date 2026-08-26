@@ -7,9 +7,9 @@
 script = ExtResource("1_8anns")
 front_value = 100
 back_value = 100
-front_color = Color(5.2943824e-07, 0.5483107, 0.5487384, 1)
-back_color = Color(0, 0.54901963, 0.54901963, 1)
+front_color = Color(0.3764706, 0.29803923, 0.18039216, 1)
+back_color = Color(0.3764706, 0.29803923, 0.18039216, 1)
 front_stamp = ExtResource("1_p8vof")
 back_stamp = ExtResource("1_p8vof")
-front_serial = "A-1234"
-back_serial = "A-1234"
+front_serial = "S-100100"
+back_serial = "S-100100"

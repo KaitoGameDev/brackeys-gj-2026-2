@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="MoneyResource" format=3 uid="uid://doyd3f2167sjy"]
+
+[ext_resource type="Texture2D" uid="uid://blcrocqpej7ku" path="res://icon.svg" id="1_isa8a"]
+[ext_resource type="Script" uid="uid://3icy6k2k177c" path="res://source/money/money_resource.gd" id="2_b5l5r"]
+
+[resource]
+script = ExtResource("2_b5l5r")
+front_value = 20
+back_value = 20
+front_color = Color(0.70980394, 0.2901961, 0.6627451, 1)
+back_color = Color(0.70980394, 0.2901961, 0.6627451, 1)
+front_stamp = ExtResource("1_isa8a")
+back_stamp = ExtResource("1_isa8a")
+front_serial = "L-2020"
+back_serial = "L-2020"

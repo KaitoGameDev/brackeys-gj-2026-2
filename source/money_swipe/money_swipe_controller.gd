@@ -1,7 +1,14 @@
 extends Node
 
 @export var money_scene: PackedScene = preload("res://source/money/money.tscn")
-var bill_100: MoneyResource = preload("res://resources/money/100_bill.tres")
+@export var bill_pool: Array[MoneyResource] = [
+	preload("res://resources/money/2_bill.tres"),
+	preload("res://resources/money/5_bill.tres"),
+	preload("res://resources/money/10_bill.tres"),
+	preload("res://resources/money/20_bill.tres"),
+	preload("res://resources/money/50_bill.tres"),
+	preload("res://resources/money/100_bill.tres"),
+]
 
 @export_group("Positions")
 @export var money_container: Node3D
@@ -48,7 +55,6 @@ func _ready() -> void:
 
 	spawn_money()
 
-
 func _on_debug_event(event: Object) -> void:
 	if event is MoneySpawnedEvent:
 		var spawned := event as MoneySpawnedEvent
@@ -93,12 +99,17 @@ func spawn_money() -> void:
 	if current_money != null:
 		return
 
+	if bill_pool.is_empty():
+		push_warning("MoneySwipeController: bill_pool is empty.")
+		return
+
 	var money : Money = money_scene.instantiate() as Node3D
-	money.setup(bill_100)
-	
 	if money == null:
 		push_warning("MoneySwipeController: money_scene root must be a Node3D.")
 		return
+
+	var bill: MoneyResource = bill_pool.pick_random()
+	money.setup(bill)
 
 	money_container.add_child(money)
 	money.global_position = customer_position.global_position
