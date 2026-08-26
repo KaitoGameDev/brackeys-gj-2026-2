@@ -38,12 +38,31 @@ const _POINTER_MOUSE := -2
 
 
 func _ready() -> void:
+	# Remove the comment below to see the Swipe Event logs
+	# EventBus.on_event.connect(_on_debug_event)
+
 	if money_container == null or customer_position == null \
 			or table_position == null or player_position == null:
 		push_error("MoneySwipeController: assign all position node references in the inspector.")
 		return
 
 	spawn_money()
+
+
+func _on_debug_event(event: Object) -> void:
+	if event is MoneySpawnedEvent:
+		var spawned := event as MoneySpawnedEvent
+		print("[EventBus] MoneySpawnedEvent resource=", spawned.money_resource)
+	elif event is MoneyDestroyedEvent:
+		var destroyed := event as MoneyDestroyedEvent
+		print("[EventBus] MoneyDestroyedEvent resource=", destroyed.money_resource)
+	elif event is MoneySwipedEvent:
+		var swiped := event as MoneySwipedEvent
+		var direction_name := "UP" if swiped.direction == MoneySwipedEvent.Direction.UP else "DOWN"
+		print("[EventBus] MoneySwipedEvent direction=", direction_name, " resource=", swiped.money_resource)
+	elif event is RotateMoneyEvent:
+		var rotated := event as RotateMoneyEvent
+		print("[EventBus] RotateMoneyEvent showing_back=", rotated.showing_back, " resource=", rotated.money_resource)
 
 
 func _input(event: InputEvent) -> void:
@@ -85,6 +104,7 @@ func spawn_money() -> void:
 	money.global_position = customer_position.global_position
 	money.rotation.y = deg_to_rad(randf_range(-30.0, 30.0))
 	current_money = money
+	EventBus.send_event(MoneySpawnedEvent.create(money, money.money_resource))
 	_slide_to(table_position)
 
 
@@ -118,11 +138,18 @@ func _resolve_swipe(screen_end: Vector2) -> void:
 	if absf(delta.x) > abs_vertical * swipe_max_horizontal_ratio:
 		return
 
+	var money := current_money as Money
 	if vertical < 0.0:
 		# Bottom -> top: give to customer, then destroy + respawn.
+		EventBus.send_event(MoneySwipedEvent.create(
+			money, money.money_resource, MoneySwipedEvent.Direction.UP
+		))
 		_slide_to(customer_position, _destroy_current_and_respawn)
 	else:
 		# Top -> bottom: take to player, then destroy + respawn.
+		EventBus.send_event(MoneySwipedEvent.create(
+			money, money.money_resource, MoneySwipedEvent.Direction.DOWN
+		))
 		_slide_to(player_position, _destroy_current_and_respawn)
 
 
@@ -131,9 +158,12 @@ func _flip_current_money() -> void:
 		return
 
 	_is_flipping = true
-	var money := current_money
+	var money := current_money as Money
 	var base_y := money.global_position.y
 	var target_z := money.rotation.z + PI
+	var normalized_z := fposmod(target_z, TAU)
+	var showing_back := normalized_z > PI * 0.5 and normalized_z < PI * 1.5
+	EventBus.send_event(RotateMoneyEvent.create(money, money.money_resource, showing_back))
 
 	var tween := create_tween()
 	tween.set_parallel(true)
@@ -174,6 +204,8 @@ func _slide_to(target: Node3D, on_finished: Callable = Callable()) -> void:
 
 func _destroy_current_and_respawn() -> void:
 	if current_money != null:
-		current_money.queue_free()
+		var money := current_money as Money
+		EventBus.send_event(MoneyDestroyedEvent.create(money, money.money_resource))
+		money.queue_free()
 		current_money = null
 	spawn_money()
