@@ -20,8 +20,15 @@ var bill_100: MoneyResource = preload("res://resources/money/100_bill.tres")
 ## Horizontal drift may be at most this fraction of vertical travel.
 @export var swipe_max_horizontal_ratio: float = 0.85
 
+@export_group("Flip")
+@export var flip_duration: float = 0.4
+@export var flip_jump_height: float = 0.3
+@export var flip_trans: Tween.TransitionType = Tween.TRANS_QUAD
+@export var flip_ease: Tween.EaseType = Tween.EASE_IN_OUT
+
 var current_money: Node3D
 var _is_sliding: bool = false
+var _is_flipping: bool = false
 
 # -1 = none, -2 = mouse, >= 0 = touch index
 var _active_pointer: int = -1
@@ -96,10 +103,14 @@ func _end_swipe(screen_pos: Vector2, pointer_id: int) -> void:
 
 
 func _resolve_swipe(screen_end: Vector2) -> void:
-	if current_money == null or _is_sliding:
+	if current_money == null or _is_sliding or _is_flipping:
 		return
 
 	var delta := screen_end - _swipe_start
+	if delta.length() < swipe_min_distance:
+		_flip_current_money()
+		return
+
 	var vertical := delta.y
 	var abs_vertical := absf(vertical)
 	if abs_vertical < swipe_min_distance:
@@ -113,6 +124,34 @@ func _resolve_swipe(screen_end: Vector2) -> void:
 	else:
 		# Top -> bottom: take to player, then destroy + respawn.
 		_slide_to(player_position, _destroy_current_and_respawn)
+
+
+func _flip_current_money() -> void:
+	if current_money == null or _is_sliding or _is_flipping:
+		return
+
+	_is_flipping = true
+	var money := current_money
+	var base_y := money.global_position.y
+	var target_z := money.rotation.z + PI
+
+	var tween := create_tween()
+	tween.set_parallel(true)
+	tween.set_trans(flip_trans)
+	tween.set_ease(flip_ease)
+	tween.tween_property(money, "rotation:z", target_z, flip_duration)
+	tween.tween_method(
+		func(t: float) -> void:
+			if not is_instance_valid(money):
+				return
+			money.global_position.y = base_y + flip_jump_height * sin(t * PI),
+		0.0,
+		1.0,
+		flip_duration
+	)
+	tween.finished.connect(func () -> void:
+		_is_flipping = false
+	, CONNECT_ONE_SHOT)
 
 
 func _slide_to(target: Node3D, on_finished: Callable = Callable()) -> void:
