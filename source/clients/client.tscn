@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bdxefne37rpw2"]
+
+[ext_resource type="Texture2D" uid="uid://pepi5boiwf85" path="res://assets/characters/Ulises.png" id="1_iy4jk"]
+
+[node name="Client" type="Sprite3D" unique_id=1809174983]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+billboard = 1
+texture = ExtResource("1_iy4jk")

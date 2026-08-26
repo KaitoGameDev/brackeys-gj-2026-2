@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ClientResource" format=3 uid="uid://me8molp66ws5"]
+
+[ext_resource type="Script" uid="uid://cdgknd6qunwba" path="res://source/clients/client_resource.gd" id="1_1n76f"]
+[ext_resource type="Texture2D" uid="uid://diqj8h2utrcev" path="res://assets/characters/Gramma.png" id="2_p2l82"]
+
+[resource]
+script = ExtResource("1_1n76f")
+name = "Gertrudis"
+texture = ExtResource("2_p2l82")
+lines = Array[String](["Hello dear, I want to deposit my pention", "Today was a great day at the bingo", "This money will be to my grandson, I love him", "What a day, when you are my age, doing this is way to have fun"])
+metadata/_custom_type_script = "uid://cdgknd6qunwba"

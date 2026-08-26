@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ClientResource" format=3 uid="uid://n4vjcmdxhncl"]
+
+[ext_resource type="Script" uid="uid://cdgknd6qunwba" path="res://source/clients/client_resource.gd" id="1_okf6h"]
+[ext_resource type="Texture2D" uid="uid://dokk5sx5pqolh" path="res://assets/characters/Chuck.png" id="2_2ft2g"]
+
+[resource]
+script = ExtResource("1_okf6h")
+name = "Chuck"
+texture = ExtResource("2_2ft2g")
+lines = Array[String](["Honk! honk!...", "My wallet is like an onion. Every time I open it, it makes me cry", "Keep calm and honk on", "Not all clowns wear costumes. Some just live rent free in your head"])
+metadata/_custom_type_script = "uid://cdgknd6qunwba"

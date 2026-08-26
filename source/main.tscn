@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bykcclwelh4p1"]
 
 [ext_resource type="Script" uid="uid://dsp5hhamtrmop" path="res://source/money_swipe/money_swipe_controller.gd" id="1_kaxhg"]
+[ext_resource type="PackedScene" uid="uid://bdxefne37rpw2" path="res://source/clients/client.tscn" id="2_62cc7"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8heyh"]
 
@@ -64,3 +65,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Table" unique_id=1571220179]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1.5, 0, -0.1, 0)
 mesh = SubResource("BoxMesh_8heyh")
+
+[node name="DeskContainer" type="Node3D" parent="." unique_id=1004945751]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6144667, 0, 0)
+
+[node name="Client" parent="DeskContainer" unique_id=1809174983 instance=ExtResource("2_62cc7")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -1.5145016, 0, 0)

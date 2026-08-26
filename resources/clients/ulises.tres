@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ClientResource" format=3 uid="uid://ymrln18bsxm4"]
+
+[ext_resource type="Script" uid="uid://cdgknd6qunwba" path="res://source/clients/client_resource.gd" id="1_hh6rl"]
+[ext_resource type="Texture2D" uid="uid://pepi5boiwf85" path="res://assets/characters/Ulises.png" id="2_nkqfc"]
+
+[resource]
+script = ExtResource("1_hh6rl")
+name = "Ulises"
+texture = ExtResource("2_nkqfc")
+lines = Array[String](["Let's do this fast", "Do not waste my time", "Dude! just save this", "C'mon! just take my money", "What is taking too long"])
+metadata/_custom_type_script = "uid://cdgknd6qunwba"
