@@ -28,7 +28,7 @@ albedo_texture = SubResource("ViewportTexture_tl28a")
 [sub_resource type="PlaneMesh" id="PlaneMesh_2txy0"]
 resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_lh0r7")
-size = Vector2(0.5, 0.3)
+size = Vector2(1.2, 0.7)
 
 [node name="Money" type="Node3D" unique_id=243199542]
 script = ExtResource("1_uaqoi")
