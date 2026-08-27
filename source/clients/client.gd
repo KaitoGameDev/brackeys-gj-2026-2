@@ -21,10 +21,16 @@ func move_to(target_position: Vector3, is_end_position: bool = false) -> void:
 		func():
 			if is_end_position:
 				finished_transition.emit()
-			if stage == 1:
-				dialog.set_text(client_resource.lines.pick_random())
-				dialog.start_dialog()
+			_handle_stage()
 	)
+
+func _handle_stage() -> void:
+	if stage == 1:
+		dialog.set_text(client_resource.lines.pick_random())
+		dialog.start_dialog()
+		EventBus.send_event(OnClientEntered.new())
+	if stage == 2:
+		EventBus.send_event(OnClientExited.new())
 
 func _ready() -> void:
 	if client_resource:
