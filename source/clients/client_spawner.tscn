@@ -4,3 +4,9 @@
 
 [node name="ClientSpawner" type="Node3D" unique_id=142628562]
 script = ExtResource("1_ldih6")
+
+[node name="Origin" type="Marker3D" parent="." unique_id=1756742981]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3799281, 0, 0)
+
+[node name="End" type="Marker3D" parent="." unique_id=784233869]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2772613, 0, 0)

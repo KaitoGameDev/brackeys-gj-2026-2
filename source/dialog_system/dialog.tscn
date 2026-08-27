@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dp5xlgruqvtqk"]
+
+[ext_resource type="Script" uid="uid://b8y1r3ccweh1o" path="res://source/dialog_system/dialog.gd" id="1_lj16x"]
+[ext_resource type="Texture2D" uid="uid://cp3wgloakks2f" path="res://assets/UI/pop up window.png" id="1_ydr1h"]
+
+[node name="Dialog" type="Control" unique_id=772810524]
+layout_mode = 3
+anchor_left = 0.003125
+anchor_right = 0.3828125
+anchor_bottom = 0.25277779
+script = ExtResource("1_lj16x")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_vertical_guides_ = [245.0]
+metadata/_edit_horizontal_guides_ = [360.0]
+
+[node name="Panel" type="NinePatchRect" parent="." unique_id=2026693320]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ydr1h")
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="Text" type="Label" parent="." unique_id=564640493]
+custom_maximum_size = Vector2(200, 100)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+max_lines_visible = 4
