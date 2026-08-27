@@ -45,10 +45,20 @@ const _POINTER_MOUSE := -2
 
 enum FakeFeature {
 	FRONT_SERIAL,
+	BACK_SERIAL,
+	FRONT_VALUE,
+	BACK_VALUE,
+	FRONT_COLOR,
+	BACK_COLOR,
 }
 
 const _IMPLEMENTED_FAKE_FEATURES: Array[FakeFeature] = [
 	FakeFeature.FRONT_SERIAL,
+	FakeFeature.BACK_SERIAL,
+	FakeFeature.FRONT_VALUE,
+	FakeFeature.BACK_VALUE,
+	FakeFeature.FRONT_COLOR,
+	FakeFeature.BACK_COLOR,
 ]
 
 
@@ -142,18 +152,89 @@ func _alter_fake_feature(bill: MoneyResource, feature: FakeFeature) -> void:
 	match feature:
 		FakeFeature.FRONT_SERIAL:
 			_alter_front_serial(bill)
+		FakeFeature.BACK_SERIAL:
+			_alter_back_serial(bill)
+		FakeFeature.FRONT_VALUE:
+			_alter_front_value(bill)
+		FakeFeature.BACK_VALUE:
+			_alter_back_value(bill)
+		FakeFeature.FRONT_COLOR:
+			_alter_front_color(bill)
+		FakeFeature.BACK_COLOR:
+			_alter_back_color(bill)
 
 
-func _alter_front_serial(bill: MoneyResource) -> void:
+func _pick_donor_bill(bill: MoneyResource, matches_exclusion: Callable) -> MoneyResource:
 	var donors: Array[MoneyResource] = []
 	for candidate in bill_pool:
-		if candidate.front_serial == bill.front_serial and candidate.front_value == bill.front_value:
+		if matches_exclusion.call(candidate, bill):
 			continue
 		donors.append(candidate)
 	if donors.is_empty():
+		return null
+	return donors.pick_random()
+
+
+func _alter_front_serial(bill: MoneyResource) -> void:
+	var donor := _pick_donor_bill(bill, func(candidate: MoneyResource, current: MoneyResource) -> bool:
+		return candidate.front_serial == current.front_serial \
+			and candidate.front_value == current.front_value
+	)
+	if donor == null:
 		push_warning("MoneySwipeController: no donor bill for front_serial alteration.")
 		return
-	bill.front_serial = donors.pick_random().front_serial
+	bill.front_serial = donor.front_serial
+
+
+func _alter_back_serial(bill: MoneyResource) -> void:
+	var donor := _pick_donor_bill(bill, func(candidate: MoneyResource, current: MoneyResource) -> bool:
+		return candidate.back_serial == current.back_serial \
+			and candidate.back_value == current.back_value
+	)
+	if donor == null:
+		push_warning("MoneySwipeController: no donor bill for back_serial alteration.")
+		return
+	bill.back_serial = donor.back_serial
+
+
+func _alter_front_value(bill: MoneyResource) -> void:
+	var donor := _pick_donor_bill(bill, func(candidate: MoneyResource, current: MoneyResource) -> bool:
+		return candidate.front_value == current.front_value
+	)
+	if donor == null:
+		push_warning("MoneySwipeController: no donor bill for front_value alteration.")
+		return
+	bill.front_value = donor.front_value
+
+
+func _alter_back_value(bill: MoneyResource) -> void:
+	var donor := _pick_donor_bill(bill, func(candidate: MoneyResource, current: MoneyResource) -> bool:
+		return candidate.back_value == current.back_value
+	)
+	if donor == null:
+		push_warning("MoneySwipeController: no donor bill for back_value alteration.")
+		return
+	bill.back_value = donor.back_value
+
+
+func _alter_front_color(bill: MoneyResource) -> void:
+	var donor := _pick_donor_bill(bill, func(candidate: MoneyResource, current: MoneyResource) -> bool:
+		return candidate.front_color.is_equal_approx(current.front_color)
+	)
+	if donor == null:
+		push_warning("MoneySwipeController: no donor bill for front_color alteration.")
+		return
+	bill.front_color = donor.front_color
+
+
+func _alter_back_color(bill: MoneyResource) -> void:
+	var donor := _pick_donor_bill(bill, func(candidate: MoneyResource, current: MoneyResource) -> bool:
+		return candidate.back_color.is_equal_approx(current.back_color)
+	)
+	if donor == null:
+		push_warning("MoneySwipeController: no donor bill for back_color alteration.")
+		return
+	bill.back_color = donor.back_color
 
 
 func _begin_swipe(screen_pos: Vector2, pointer_id: int) -> void:
