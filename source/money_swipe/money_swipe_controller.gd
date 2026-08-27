@@ -43,6 +43,14 @@ var _swipe_start: Vector2 = Vector2.ZERO
 
 const _POINTER_MOUSE := -2
 
+enum FakeFeature {
+	FRONT_SERIAL,
+}
+
+const _IMPLEMENTED_FAKE_FEATURES: Array[FakeFeature] = [
+	FakeFeature.FRONT_SERIAL,
+]
+
 
 func _ready() -> void:
 	# Remove the comment below to see the Swipe Event logs
@@ -90,7 +98,7 @@ func _input(event: InputEvent) -> void:
 			_end_swipe(mouse.position, _POINTER_MOUSE)
 
 
-func spawn_money(is_fake: bool = false) -> void:
+func spawn_money(is_fake: bool = false, alter_count: int = 0) -> void:
 	if money_scene == null or money_container == null:
 		push_warning("MoneySwipeController: money_scene or money_container is not set.")
 		return
@@ -108,6 +116,8 @@ func spawn_money(is_fake: bool = false) -> void:
 
 	var bill: MoneyResource = bill_pool.pick_random().duplicate()
 	bill.fake = is_fake
+	if is_fake and alter_count > 0:
+		_apply_fake_alterations(bill, alter_count)
 	money.setup(bill)
 
 	money_container.add_child(money)
@@ -116,6 +126,34 @@ func spawn_money(is_fake: bool = false) -> void:
 	current_money = money
 	EventBus.send_event(MoneySpawnedEvent.create(money, money.money_resource))
 	_slide_to(table_position)
+
+
+func _apply_fake_alterations(bill: MoneyResource, alter_count: int) -> void:
+	var count := mini(alter_count, _IMPLEMENTED_FAKE_FEATURES.size())
+	if count <= 0:
+		return
+	var features := _IMPLEMENTED_FAKE_FEATURES.duplicate()
+	features.shuffle()
+	for i in count:
+		_alter_fake_feature(bill, features[i])
+
+
+func _alter_fake_feature(bill: MoneyResource, feature: FakeFeature) -> void:
+	match feature:
+		FakeFeature.FRONT_SERIAL:
+			_alter_front_serial(bill)
+
+
+func _alter_front_serial(bill: MoneyResource) -> void:
+	var donors: Array[MoneyResource] = []
+	for candidate in bill_pool:
+		if candidate.front_serial == bill.front_serial and candidate.front_value == bill.front_value:
+			continue
+		donors.append(candidate)
+	if donors.is_empty():
+		push_warning("MoneySwipeController: no donor bill for front_serial alteration.")
+		return
+	bill.front_serial = donors.pick_random().front_serial
 
 
 func _begin_swipe(screen_pos: Vector2, pointer_id: int) -> void:

@@ -13,16 +13,19 @@
 [sub_resource type="Resource" id="WaveConfig_1"]
 script = ExtResource("8_wcfg")
 fake_chance = 0.2
+fake_alter_count = 1
 
 [sub_resource type="Resource" id="WaveConfig_2"]
 script = ExtResource("8_wcfg")
 money_count = 5
 fake_chance = 0.5
+fake_alter_count = 1
 
 [sub_resource type="Resource" id="WaveConfig_3"]
 script = ExtResource("8_wcfg")
 money_count = 7
 fake_chance = 0.7
+fake_alter_count = 2
 
 [sub_resource type="BoxMesh" id="BoxMesh_8heyh"]
 

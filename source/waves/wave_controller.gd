@@ -63,8 +63,9 @@ func _try_spawn_next() -> void:
 		return
 
 	var is_fake := randf() < current_wave.fake_chance
+	var alter_count := current_wave.fake_alter_count if is_fake else 0
 	_update_bill_auth_label(is_fake)
-	money_swipe_controller.spawn_money(is_fake)
+	money_swipe_controller.spawn_money(is_fake, alter_count)
 	_spawned_in_wave += 1
 	_awaiting_destroy = true
 
