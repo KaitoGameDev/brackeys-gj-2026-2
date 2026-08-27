@@ -90,7 +90,7 @@ func _input(event: InputEvent) -> void:
 			_end_swipe(mouse.position, _POINTER_MOUSE)
 
 
-func spawn_money() -> void:
+func spawn_money(is_fake: bool = false) -> void:
 	if money_scene == null or money_container == null:
 		push_warning("MoneySwipeController: money_scene or money_container is not set.")
 		return
@@ -106,7 +106,8 @@ func spawn_money() -> void:
 		push_warning("MoneySwipeController: money_scene root must be a Node3D.")
 		return
 
-	var bill: MoneyResource = bill_pool.pick_random()
+	var bill: MoneyResource = bill_pool.pick_random().duplicate()
+	bill.fake = is_fake
 	money.setup(bill)
 
 	money_container.add_child(money)

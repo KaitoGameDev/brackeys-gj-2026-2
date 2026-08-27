@@ -8,6 +8,21 @@
 [ext_resource type="Resource" uid="uid://ymrln18bsxm4" path="res://resources/clients/ulises.tres" id="5_1elff"]
 [ext_resource type="Resource" uid="uid://n4vjcmdxhncl" path="res://resources/clients/chuck.tres" id="6_2uit2"]
 [ext_resource type="Texture2D" uid="uid://d2pvvijie7tql" path="res://assets/Bank.png" id="7_4naa1"]
+[ext_resource type="Script" uid="uid://c6wbvrir1wq2o" path="res://source/waves/wave_config.gd" id="8_wcfg"]
+
+[sub_resource type="Resource" id="WaveConfig_1"]
+script = ExtResource("8_wcfg")
+fake_chance = 0.2
+
+[sub_resource type="Resource" id="WaveConfig_2"]
+script = ExtResource("8_wcfg")
+money_count = 5
+fake_chance = 0.5
+
+[sub_resource type="Resource" id="WaveConfig_3"]
+script = ExtResource("8_wcfg")
+money_count = 7
+fake_chance = 0.7
 
 [sub_resource type="BoxMesh" id="BoxMesh_8heyh"]
 
@@ -30,10 +45,12 @@ customer_position = NodePath("../../MoneyContainer/CustomerPosition")
 table_position = NodePath("../../MoneyContainer/TablePosition")
 player_position = NodePath("../../MoneyContainer/PlayerPosition")
 
-[node name="WaveController" type="Node" parent="Controllers" unique_id=615429479 node_paths=PackedStringArray("money_swipe_controller", "wave_label")]
+[node name="WaveController" type="Node" parent="Controllers" unique_id=615429479 node_paths=PackedStringArray("money_swipe_controller", "wave_label", "bill_auth_label")]
 script = ExtResource("2_1elff")
 money_swipe_controller = NodePath("../MoneySwipeController")
 wave_label = NodePath("../../CanvasLayer/WaveContainer/Label")
+bill_auth_label = NodePath("../../CanvasLayer/DebugContainer/BillAuth")
+waves = Array[ExtResource("8_wcfg")]([SubResource("WaveConfig_1"), SubResource("WaveConfig_2"), SubResource("WaveConfig_3")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1115977841]
 
@@ -53,6 +70,27 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Wave 1/99"
 horizontal_alignment = 2
+
+[node name="DebugContainer" type="Control" parent="CanvasLayer" unique_id=1973432247]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BillAuth" type="Label" parent="CanvasLayer/DebugContainer" unique_id=1104409678]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -68.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Fake: No"
 
 [node name="Bg" type="ColorRect" parent="CanvasLayer" unique_id=534212323]
 visible = false
