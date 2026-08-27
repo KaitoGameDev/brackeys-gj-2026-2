@@ -46,14 +46,12 @@ const _POINTER_MOUSE := -2
 
 func _ready() -> void:
 	# Remove the comment below to see the Swipe Event logs
-	# EventBus.on_event.connect(_on_debug_event)
+	#EventBus.on_event.connect(_on_debug_event)
 
 	if money_container == null or customer_position == null \
 			or table_position == null or player_position == null:
 		push_error("MoneySwipeController: assign all position node references in the inspector.")
 		return
-
-	spawn_money()
 
 func _on_debug_event(event: Object) -> void:
 	if event is MoneySpawnedEvent:
@@ -151,17 +149,17 @@ func _resolve_swipe(screen_end: Vector2) -> void:
 
 	var money := current_money as Money
 	if vertical < 0.0:
-		# Bottom -> top: give to customer, then destroy + respawn.
+		# Bottom -> top: give to customer, then destroy.
 		EventBus.send_event(MoneySwipedEvent.create(
 			money, money.money_resource, MoneySwipedEvent.Direction.UP
 		))
-		_slide_to(customer_position, _destroy_current_and_respawn)
+		_slide_to(customer_position, _destroy_current)
 	else:
-		# Top -> bottom: take to player, then destroy + respawn.
+		# Top -> bottom: take to player, then destroy.
 		EventBus.send_event(MoneySwipedEvent.create(
 			money, money.money_resource, MoneySwipedEvent.Direction.DOWN
 		))
-		_slide_to(player_position, _destroy_current_and_respawn)
+		_slide_to(player_position, _destroy_current)
 
 
 func _flip_current_money() -> void:
@@ -213,10 +211,10 @@ func _slide_to(target: Node3D, on_finished: Callable = Callable()) -> void:
 	, CONNECT_ONE_SHOT)
 
 
-func _destroy_current_and_respawn() -> void:
-	if current_money != null:
-		var money := current_money as Money
-		EventBus.send_event(MoneyDestroyedEvent.create(money, money.money_resource))
-		money.queue_free()
-		current_money = null
-	spawn_money()
+func _destroy_current() -> void:
+	if current_money == null:
+		return
+	var money := current_money as Money
+	current_money = null
+	EventBus.send_event(MoneyDestroyedEvent.create(money, money.money_resource))
+	money.queue_free()
