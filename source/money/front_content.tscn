@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dydtyn1wmm7x8"]
 
 [ext_resource type="Script" uid="uid://bv5gc2wn4g14u" path="res://source/money/money_content.gd" id="1_s6klt"]
+[ext_resource type="Texture2D" uid="uid://ch2pedbiseir7" path="res://assets/bill_bg.png" id="2_wdipl"]
 
 [node name="FrontContent" type="Control" unique_id=1918357279]
 layout_mode = 3
@@ -11,14 +12,14 @@ grow_vertical = 2
 script = ExtResource("1_s6klt")
 metadata/_edit_use_anchors_ = true
 
-[node name="BgColor" type="ColorRect" parent="." unique_id=1623927592]
+[node name="BgColor" type="NinePatchRect" parent="." unique_id=579738913]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.99999994, 0.3636082, 0.8473227, 1)
+texture = ExtResource("2_wdipl")
 
 [node name="TopLeftValue" type="Label" parent="." unique_id=1186786822]
 layout_mode = 1

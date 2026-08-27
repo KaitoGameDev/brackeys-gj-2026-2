@@ -336,5 +336,6 @@ func _destroy_current() -> void:
 		return
 	var money := current_money as Money
 	current_money = null
+	print("kaito")
 	EventBus.send_event(MoneyDestroyedEvent.create(money, money.money_resource))
 	money.queue_free()

@@ -13,13 +13,11 @@
 [sub_resource type="Resource" id="WaveConfig_1"]
 script = ExtResource("8_wcfg")
 fake_chance = 0.2
-fake_alter_count = 1
 
 [sub_resource type="Resource" id="WaveConfig_2"]
 script = ExtResource("8_wcfg")
 money_count = 5
 fake_chance = 0.5
-fake_alter_count = 1
 
 [sub_resource type="Resource" id="WaveConfig_3"]
 script = ExtResource("8_wcfg")
@@ -28,6 +26,15 @@ fake_chance = 0.7
 fake_alter_count = 2
 
 [sub_resource type="BoxMesh" id="BoxMesh_8heyh"]
+
+[sub_resource type="Gradient" id="Gradient_2uit2"]
+colors = PackedColorArray(1, 1, 1, 1, 0.050980393, 0.5529412, 0.6313726, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2uit2"]
+gradient = SubResource("Gradient_2uit2")
+fill = 2
+fill_from = Vector2(0, 0.0064102565)
+fill_to = Vector2(0, 0.012820513)
 
 [node name="Main" type="Node" unique_id=788541686]
 
@@ -140,9 +147,15 @@ mesh = SubResource("BoxMesh_8heyh")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6144667, -0.58776855, 0)
 
 [node name="ClientSpawner" parent="DeskContainer" unique_id=142628562 instance=ExtResource("2_62cc7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9133301, 0)
 client_resources = Array[ExtResource("3_s8x7u")]([ExtResource("4_4naa1"), ExtResource("5_1elff"), ExtResource("6_2uit2")])
 
 [node name="BankBg" type="Sprite3D" parent="DeskContainer" unique_id=1125830694]
-transform = Transform3D(0.19, 0, 0, 0, 0.19, 0, 0, 0, 0.19, -0.09362602, -10, 0)
+transform = Transform3D(0.19, 0, 0, 0, 0.19, 0, 0, 0, 0.19, -0.060441017, -3, -0.021023095)
 billboard = 1
 texture = ExtResource("7_4naa1")
+
+[node name="DesktopBg" type="Sprite3D" parent="DeskContainer" unique_id=152060971]
+transform = Transform3D(4.477812, 0, 4.3711385e-08, 1.9573137e-07, 6.572907e-15, -0.9999999, 0, 3.440078, 1.9106853e-15, 2.0037303, 0.03656006, 0)
+alpha_cut = 3
+texture = SubResource("GradientTexture2D_2uit2")

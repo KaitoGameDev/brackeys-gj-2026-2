@@ -11,9 +11,10 @@ var current_client: Client
 var count: int = 0
 
 func _ready() -> void:
-	get_tree().create_timer(2.0).timeout.connect(spawn_client)
-	get_tree().create_timer(8.0).timeout.connect(spawn_client)
-	get_tree().create_timer(16.0).timeout.connect(spawn_client)
+	spawn_client.call_deferred()
+#	get_tree().create_timer(2.0).timeout.connect(spawn_client)
+#	get_tree().create_timer(8.0).timeout.connect(spawn_client)
+#	get_tree().create_timer(16.0).timeout.connect(spawn_client)
 	
 func spawn_client() -> void:
 	var next_client: Client = client_scene.instantiate()

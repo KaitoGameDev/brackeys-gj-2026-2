@@ -14,11 +14,11 @@ func _ready() -> void:
 		front_content.top_left_value_label.text = str(money_resource.front_value)
 		front_content.bottom_right_value_label.text = str(money_resource.front_value)
 		front_content.add_serial(money_resource.front_serial)
-		front_content.bg_color.color = money_resource.front_color
+		front_content.bg_color.self_modulate = money_resource.front_color
 		front_content.stamp.texture = money_resource.front_stamp
 		
 		back_content.top_left_value_label.text = str(money_resource.back_value)
 		back_content.bottom_right_value_label.text = str(money_resource.back_value)
-		back_content.bg_color.color = money_resource.back_color
+		back_content.bg_color.self_modulate = money_resource.back_color
 		back_content.add_serial(money_resource.back_serial)
 		back_content.stamp.texture = money_resource.back_stamp

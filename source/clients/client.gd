@@ -1,7 +1,9 @@
-class_name Client extends Sprite3D
+class_name Client extends Node3D
 
 @export var client_resource: ClientResource
 
+@onready var animation: AnimationPlayer = $AnimationPlayer
+@onready var sprite: Sprite3D = $Client
 @onready var dialog: Dialog = $Dialog
 
 signal finished_transition
@@ -13,14 +15,15 @@ func setup(resource: ClientResource) -> void:
 
 func move_to(target_position: Vector3, is_end_position: bool = false) -> void:
 	stage += 1
+	#animation.play("moving")
 	var tween: Tween = create_tween()
 	tween.set_parallel(true)
 	tween.tween_property(self, "global_position:x", target_position.x, 1.2)
-	tween.tween_property(self, "position:z", position.z + 0.1, 0.1)
 	tween.finished.connect(
 		func():
 			if is_end_position:
 				finished_transition.emit()
+			animation.stop()
 			_handle_stage()
 	)
 
@@ -34,4 +37,4 @@ func _handle_stage() -> void:
 
 func _ready() -> void:
 	if client_resource:
-		texture = client_resource.texture
+		sprite.texture = client_resource.texture

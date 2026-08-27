@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b8y1r3ccweh1o" path="res://source/dialog_system/dialog.gd" id="1_lj16x"]
 [ext_resource type="Texture2D" uid="uid://cp3wgloakks2f" path="res://assets/UI/pop up window.png" id="1_ydr1h"]
+[ext_resource type="FontFile" uid="uid://bq7fh1y3is7sg" path="res://assets/fonts/Big_Bottom_Typeface_Normal.ttf" id="3_tgr8j"]
 
 [node name="Dialog" type="Control" unique_id=772810524]
 layout_mode = 3
@@ -30,13 +31,17 @@ patch_margin_bottom = 1
 [node name="Text" type="Label" parent="." unique_id=564640493]
 custom_maximum_size = Vector2(200, 100)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_left = 0.088477366
+anchor_top = 0.12087912
+anchor_right = 0.9115226
+anchor_bottom = 0.8901099
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 12
+theme_override_fonts/font = ExtResource("3_tgr8j")
+theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 max_lines_visible = 4
+metadata/_edit_use_anchors_ = true

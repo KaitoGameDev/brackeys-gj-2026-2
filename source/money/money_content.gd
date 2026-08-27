@@ -2,7 +2,7 @@ class_name MoneyContent extends Control
 
 @export var serial_number_orientation: Orientation = Orientation.HORIZONTAL
 
-@onready var bg_color: ColorRect = $BgColor
+@onready var bg_color: NinePatchRect = $BgColor
 @onready var top_left_value_label: Label = $TopLeftValue
 @onready var bottom_right_value_label: Label = $BottomRightValue
 @onready var serial_number: Label = $Serial
