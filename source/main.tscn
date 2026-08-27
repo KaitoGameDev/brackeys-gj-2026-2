@@ -25,6 +25,9 @@ money_count = 7
 fake_chance = 0.7
 fake_alter_count = 2
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2uit2"]
+bg_color = Color(1, 1, 1, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_8heyh"]
 
 [sub_resource type="Gradient" id="Gradient_2uit2"]
@@ -55,11 +58,12 @@ customer_position = NodePath("../../MoneyContainer/CustomerPosition")
 table_position = NodePath("../../MoneyContainer/TablePosition")
 player_position = NodePath("../../MoneyContainer/PlayerPosition")
 
-[node name="WaveController" type="Node" parent="Controllers" unique_id=615429479 node_paths=PackedStringArray("money_swipe_controller", "wave_label", "bill_auth_label")]
+[node name="WaveController" type="Node" parent="Controllers" unique_id=615429479 node_paths=PackedStringArray("money_swipe_controller", "wave_label", "bill_auth_label", "wave_progress_bar")]
 script = ExtResource("2_1elff")
 money_swipe_controller = NodePath("../MoneySwipeController")
 wave_label = NodePath("../../CanvasLayer/WaveContainer/Label")
 bill_auth_label = NodePath("../../CanvasLayer/DebugContainer/BillAuth")
+wave_progress_bar = NodePath("../../CanvasLayer/WaveContainer/ProgressBar")
 waves = Array[ExtResource("8_wcfg")]([SubResource("WaveConfig_1"), SubResource("WaveConfig_2"), SubResource("WaveConfig_3")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1115977841]
@@ -72,6 +76,7 @@ anchor_right = 1.0
 grow_horizontal = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/WaveContainer" unique_id=511928219]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -80,6 +85,21 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Wave 1/99"
 horizontal_alignment = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/WaveContainer" unique_id=573205662]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = 9.0
+offset_right = -12.0
+offset_bottom = -37.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_2uit2")
+value = 50.0
+show_percentage = false
 
 [node name="DebugContainer" type="Control" parent="CanvasLayer" unique_id=1973432247]
 layout_mode = 3
