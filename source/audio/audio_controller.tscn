@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://blysljd0vmwlj"]
+
+[ext_resource type="Script" uid="uid://c6i0vtrk7oxa8" path="res://source/audio/audio_controller.gd" id="1_vjf67"]
+
+[node name="AudioController" type="Node" unique_id=1109533394]
+script = ExtResource("1_vjf67")
+
+[node name="BgAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=656461469]
+bus = &"Bg"
+
+[node name="SFXAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=1503620424]
+bus = &"Sfx"
+
+[node name="InteractionsAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=187329616]
+bus = &"Interactions"

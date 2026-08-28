@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cgphrv0vs5qic" path="res://source/clients/client_spawner.tscn" id="2_62cc7"]
 [ext_resource type="Script" uid="uid://cdgknd6qunwba" path="res://source/clients/client_resource.gd" id="3_s8x7u"]
 [ext_resource type="Resource" uid="uid://me8molp66ws5" path="res://resources/clients/gramma.tres" id="4_4naa1"]
+[ext_resource type="PackedScene" uid="uid://c7cr7cw7tvlch" path="res://source/strikes/strikes_container.tscn" id="4_rewae"]
 [ext_resource type="Resource" uid="uid://ymrln18bsxm4" path="res://resources/clients/ulises.tres" id="5_1elff"]
 [ext_resource type="Resource" uid="uid://n4vjcmdxhncl" path="res://resources/clients/chuck.tres" id="6_2uit2"]
 [ext_resource type="Texture2D" uid="uid://d2pvvijie7tql" path="res://assets/Bank.png" id="7_4naa1"]
@@ -122,29 +123,11 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Fake: No"
 
-[node name="Bg" type="ColorRect" parent="CanvasLayer" unique_id=534212323]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 0.4117647, 0.3372549, 1)
-
-[node name="Label" type="Label" parent="CanvasLayer" unique_id=1939503300]
-visible = false
-anchors_preset = -1
-anchor_left = 0.16171876
-anchor_top = 0.4375
-anchor_right = 0.8382813
-anchor_bottom = 0.5625
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 32
-text = "Brackeys GameJam 2026  - 2 (rebuild)"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
+[node name="StrikesContainer" parent="CanvasLayer" unique_id=1318416351 instance=ExtResource("4_rewae")]
+offset_left = 2.0
+offset_top = -246.0
+offset_right = 2.0
+offset_bottom = -246.0
 
 [node name="MoneyContainer" type="Node3D" parent="." unique_id=537026169]
 
