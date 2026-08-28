@@ -36,6 +36,7 @@ extends Node
 var current_money: Node3D
 var _is_sliding: bool = false
 var _is_flipping: bool = false
+var _motion_tween: Tween
 
 # -1 = none, -2 = mouse, >= 0 = touch index
 var _active_pointer: int = -1
@@ -140,6 +141,21 @@ func spawn_money(is_fake: bool = false, alter_count: int = 0) -> void:
 	current_money = money
 	EventBus.send_event(MoneySpawnedEvent.create(money, money.money_resource))
 	_slide_to(table_position)
+
+
+func destroy_current_money() -> void:
+	if current_money == null:
+		return
+	_cancel_motion_tweens()
+	_is_flipping = false
+	_is_sliding = false
+	_destroy_current()
+
+
+func _cancel_motion_tweens() -> void:
+	if _motion_tween != null and _motion_tween.is_valid():
+		_motion_tween.kill()
+	_motion_tween = null
 
 
 func _apply_fake_alterations(bill: MoneyResource, alter_count: int) -> void:
@@ -323,6 +339,7 @@ func _flip_current_money() -> void:
 	EventBus.send_event(RotateMoneyEvent.create(money, money.money_resource, showing_back))
 
 	var tween := create_tween()
+	_motion_tween = tween
 	tween.set_parallel(true)
 	tween.set_trans(flip_trans)
 	tween.set_ease(flip_ease)
@@ -349,6 +366,7 @@ func _slide_to(target: Node3D, on_finished: Callable = Callable()) -> void:
 
 	_is_sliding = true
 	var tween := create_tween()
+	_motion_tween = tween
 	tween.set_trans(slide_trans)
 	tween.set_ease(slide_ease)
 	tween.tween_property(current_money, "global_position", target.global_position, slide_duration)
@@ -364,6 +382,5 @@ func _destroy_current() -> void:
 		return
 	var money := current_money as Money
 	current_money = null
-	print("kaito")
 	EventBus.send_event(MoneyDestroyedEvent.create(money, money.money_resource))
 	money.queue_free()

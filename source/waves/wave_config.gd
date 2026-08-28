@@ -3,3 +3,4 @@ class_name WaveConfig extends Resource
 @export var money_count: int = 3
 @export_range(0.0, 1.0, 0.01) var fake_chance: float = 0.0
 @export var fake_alter_count: int = 1
+@export var patience_duration: float = 10.0

@@ -19,12 +19,14 @@ fake_chance = 0.2
 script = ExtResource("8_wcfg")
 money_count = 5
 fake_chance = 0.5
+patience_duration = 8.0
 
 [sub_resource type="Resource" id="WaveConfig_3"]
 script = ExtResource("8_wcfg")
 money_count = 7
 fake_chance = 0.7
 fake_alter_count = 2
+patience_duration = 6.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2uit2"]
 bg_color = Color(1, 1, 1, 1)

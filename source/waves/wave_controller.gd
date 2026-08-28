@@ -6,16 +6,16 @@ extends Node
 @export var wave_progress_bar: ProgressBar
 @export var waves: Array[WaveConfig] = []
 
-@export_group("Progress")
-@export var progress_tween_duration: float = 0.35
-@export var progress_trans: Tween.TransitionType = Tween.TRANS_QUAD
-@export var progress_ease: Tween.EaseType = Tween.EASE_OUT
+@export_group("Patience")
+@export var patience_trans: Tween.TransitionType = Tween.TRANS_LINEAR
+@export var patience_ease: Tween.EaseType = Tween.EASE_IN_OUT
 
 var _wave_index: int = 0
 var _spawned_in_wave: int = 0
 var _completed_in_wave: int = 0
 var _awaiting_destroy: bool = false
-var _progress_tween: Tween
+var _patience_tween: Tween
+var _patience_running: bool = false
 
 
 func _ready() -> void:
@@ -37,15 +37,21 @@ func _ready() -> void:
 	if not money_swipe_controller.has_method("spawn_money"):
 		push_error("WaveController: money_swipe_controller must expose spawn_money().")
 		return
+	if not money_swipe_controller.has_method("destroy_current_money"):
+		push_error("WaveController: money_swipe_controller must expose destroy_current_money().")
+		return
 
 	EventBus.on_event.connect(_on_event)
 	_update_wave_label()
-	_update_wave_progress(false)
-	#_try_spawn_next()
+	wave_progress_bar.max_value = 1.0
+	wave_progress_bar.value = 1.0
 
 
 func _on_event(event: Object) -> void:
+	if event is MoneySwipedEvent:
+		_stop_patience_meter()
 	if event is MoneyDestroyedEvent:
+		_stop_patience_meter()
 		_on_money_destroyed()
 	if event is OnClientEntered:
 		_try_spawn_next()
@@ -54,20 +60,16 @@ func _on_event(event: Object) -> void:
 func _on_money_destroyed() -> void:
 	_awaiting_destroy = false
 	_completed_in_wave += 1
-	_update_wave_progress()
 
 	var current_wave := waves[_wave_index]
-	#if _spawned_in_wave < current_wave.money_count:
-		#_try_spawn_next()
-		#return
+	if _completed_in_wave < current_wave.money_count:
+		return
 
 	if _wave_index + 1 < waves.size():
 		_wave_index += 1
 		_spawned_in_wave = 0
 		_completed_in_wave = 0
 		_update_wave_label()
-		_update_wave_progress(false)
-		#_try_spawn_next()
 
 
 func _try_spawn_next() -> void:
@@ -86,28 +88,41 @@ func _try_spawn_next() -> void:
 	money_swipe_controller.spawn_money(is_fake, alter_count)
 	_spawned_in_wave += 1
 	_awaiting_destroy = true
+	_start_patience_meter()
+
+
+func _start_patience_meter() -> void:
+	_stop_patience_meter()
+	var duration := waves[_wave_index].patience_duration
+	if duration <= 0.0:
+		return
+	wave_progress_bar.max_value = 1.0
+	wave_progress_bar.step = 0.0
+	wave_progress_bar.value = 1.0
+	_patience_running = true
+	_patience_tween = create_tween()
+	_patience_tween.set_trans(patience_trans)
+	_patience_tween.set_ease(patience_ease)
+	_patience_tween.tween_property(wave_progress_bar, "value", 0.0, duration)
+	_patience_tween.finished.connect(_on_patience_expired, CONNECT_ONE_SHOT)
+
+
+func _stop_patience_meter() -> void:
+	_patience_running = false
+	if _patience_tween != null and _patience_tween.is_valid():
+		_patience_tween.kill()
+	_patience_tween = null
+
+
+func _on_patience_expired() -> void:
+	if not _patience_running or not _awaiting_destroy:
+		return
+	_patience_running = false
+	money_swipe_controller.destroy_current_money()
 
 
 func _update_wave_label() -> void:
 	wave_label.text = "Wave %d/%d" % [_wave_index + 1, waves.size()]
-
-
-func _update_wave_progress(animate: bool = true) -> void:
-	var total := waves[_wave_index].money_count
-	wave_progress_bar.max_value = total
-	var target := float(_completed_in_wave)
-
-	if _progress_tween != null and _progress_tween.is_valid():
-		_progress_tween.kill()
-
-	if not animate or progress_tween_duration <= 0.0:
-		wave_progress_bar.value = target
-		return
-
-	_progress_tween = create_tween()
-	_progress_tween.set_trans(progress_trans)
-	_progress_tween.set_ease(progress_ease)
-	_progress_tween.tween_property(wave_progress_bar, "value", target, progress_tween_duration)
 
 
 func _update_bill_auth_label(is_fake: bool) -> void:
