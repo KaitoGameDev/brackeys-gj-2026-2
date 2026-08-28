@@ -50,6 +50,8 @@ enum FakeFeature {
 	BACK_VALUE,
 	FRONT_COLOR,
 	BACK_COLOR,
+	FRONT_STAMP,
+	BACK_STAMP,
 }
 
 const _IMPLEMENTED_FAKE_FEATURES: Array[FakeFeature] = [
@@ -59,6 +61,8 @@ const _IMPLEMENTED_FAKE_FEATURES: Array[FakeFeature] = [
 	FakeFeature.BACK_VALUE,
 	FakeFeature.FRONT_COLOR,
 	FakeFeature.BACK_COLOR,
+	FakeFeature.FRONT_STAMP,
+	FakeFeature.BACK_STAMP,
 ]
 
 
@@ -162,6 +166,10 @@ func _alter_fake_feature(bill: MoneyResource, feature: FakeFeature) -> void:
 			_alter_front_color(bill)
 		FakeFeature.BACK_COLOR:
 			_alter_back_color(bill)
+		FakeFeature.FRONT_STAMP:
+			_alter_front_stamp(bill)
+		FakeFeature.BACK_STAMP:
+			_alter_back_stamp(bill)
 
 
 func _pick_donor_bill(bill: MoneyResource, matches_exclusion: Callable) -> MoneyResource:
@@ -235,6 +243,26 @@ func _alter_back_color(bill: MoneyResource) -> void:
 		push_warning("MoneySwipeController: no donor bill for back_color alteration.")
 		return
 	bill.back_color = donor.back_color
+
+
+func _alter_front_stamp(bill: MoneyResource) -> void:
+	var donor := _pick_donor_bill(bill, func(candidate: MoneyResource, current: MoneyResource) -> bool:
+		return candidate.front_stamp == current.front_stamp
+	)
+	if donor == null:
+		push_warning("MoneySwipeController: no donor bill for front_stamp alteration.")
+		return
+	bill.front_stamp = donor.front_stamp
+
+
+func _alter_back_stamp(bill: MoneyResource) -> void:
+	var donor := _pick_donor_bill(bill, func(candidate: MoneyResource, current: MoneyResource) -> bool:
+		return candidate.back_stamp == current.back_stamp
+	)
+	if donor == null:
+		push_warning("MoneySwipeController: no donor bill for back_stamp alteration.")
+		return
+	bill.back_stamp = donor.back_stamp
 
 
 func _begin_swipe(screen_pos: Vector2, pointer_id: int) -> void:
