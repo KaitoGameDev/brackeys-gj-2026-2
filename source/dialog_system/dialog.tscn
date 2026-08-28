@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dp5xlgruqvtqk"]
 
 [ext_resource type="Script" uid="uid://b8y1r3ccweh1o" path="res://source/dialog_system/dialog.gd" id="1_lj16x"]
-[ext_resource type="Texture2D" uid="uid://cp3wgloakks2f" path="res://assets/UI/pop up window.png" id="1_ydr1h"]
+[ext_resource type="Texture2D" uid="uid://ch2pedbiseir7" path="res://assets/bills/bill_bg.png" id="2_tgr8j"]
 [ext_resource type="FontFile" uid="uid://bq7fh1y3is7sg" path="res://assets/fonts/Big_Bottom_Typeface_Normal.ttf" id="3_tgr8j"]
 
 [node name="Dialog" type="Control" unique_id=772810524]
@@ -15,6 +15,7 @@ metadata/_edit_vertical_guides_ = [245.0]
 metadata/_edit_horizontal_guides_ = [360.0]
 
 [node name="Panel" type="NinePatchRect" parent="." unique_id=2026693320]
+self_modulate = Color(1, 0.9137255, 0.37254903, 1)
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -22,7 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_ydr1h")
+texture = ExtResource("2_tgr8j")
 patch_margin_left = 1
 patch_margin_top = 1
 patch_margin_right = 1
@@ -38,6 +39,8 @@ anchor_right = 0.9115226
 anchor_bottom = 0.8901099
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("3_tgr8j")
 theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1

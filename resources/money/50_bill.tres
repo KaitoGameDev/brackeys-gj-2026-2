@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="MoneyResource" format=3 uid="uid://bpxc8ak8gpjx7"]
 
-[ext_resource type="Texture2D" uid="uid://blcrocqpej7ku" path="res://icon.svg" id="1_aen0p"]
+[ext_resource type="Texture2D" uid="uid://b1s6we1edjx01" path="res://assets/bills/50.png" id="1_aen0p"]
 [ext_resource type="Script" uid="uid://3icy6k2k177c" path="res://source/money/money_resource.gd" id="2_7mn3y"]
 
 [resource]
