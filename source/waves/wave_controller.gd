@@ -41,12 +41,14 @@ func _ready() -> void:
 	EventBus.on_event.connect(_on_event)
 	_update_wave_label()
 	_update_wave_progress(false)
-	_try_spawn_next()
+	#_try_spawn_next()
 
 
 func _on_event(event: Object) -> void:
 	if event is MoneyDestroyedEvent:
 		_on_money_destroyed()
+	if event is OnClientEntered:
+		_try_spawn_next()
 
 
 func _on_money_destroyed() -> void:
@@ -55,9 +57,9 @@ func _on_money_destroyed() -> void:
 	_update_wave_progress()
 
 	var current_wave := waves[_wave_index]
-	if _spawned_in_wave < current_wave.money_count:
-		_try_spawn_next()
-		return
+	#if _spawned_in_wave < current_wave.money_count:
+		#_try_spawn_next()
+		#return
 
 	if _wave_index + 1 < waves.size():
 		_wave_index += 1
@@ -65,7 +67,7 @@ func _on_money_destroyed() -> void:
 		_completed_in_wave = 0
 		_update_wave_label()
 		_update_wave_progress(false)
-		_try_spawn_next()
+		#_try_spawn_next()
 
 
 func _try_spawn_next() -> void:

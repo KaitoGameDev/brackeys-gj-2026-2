@@ -15,10 +15,10 @@ func setup(resource: ClientResource) -> void:
 
 func move_to(target_position: Vector3, is_end_position: bool = false) -> void:
 	stage += 1
-	#animation.play("moving")
+	animation.play("move")
 	var tween: Tween = create_tween()
 	tween.set_parallel(true)
-	tween.tween_property(self, "global_position:x", target_position.x, 1.2)
+	tween.tween_property(self, "position:x", target_position.x, 1.2)
 	tween.finished.connect(
 		func():
 			if is_end_position:
