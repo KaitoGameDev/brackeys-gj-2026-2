@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ClientResource" format=3 uid="uid://d16xwr4dhh5ey"]
+
+[ext_resource type="Script" uid="uid://cdgknd6qunwba" path="res://source/clients/client_resource.gd" id="1_5t48e"]
+[ext_resource type="Texture2D" uid="uid://cp5o7awi5hm65" path="res://assets/characters/Lola.png" id="2_vnans"]
+
+[resource]
+script = ExtResource("1_5t48e")
+name = "Lola"
+texture = ExtResource("2_vnans")
+lines = Array[String](["Money to buy cards in the future"])
+metadata/_custom_type_script = "uid://cdgknd6qunwba"

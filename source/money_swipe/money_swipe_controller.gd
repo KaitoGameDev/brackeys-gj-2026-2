@@ -47,7 +47,11 @@ enum SlideStyle {
 @export var flip_ease: Tween.EaseType = Tween.EASE_IN_OUT
 
 var current_money: Node3D
-var _active_bill_pool: Array[MoneyResource] = []
+var _active_bill_pool: Array[MoneyResource] = [
+	bill_pool[0],
+	bill_pool[1],
+	bill_pool[2],
+]
 var _is_sliding: bool = false
 var _is_flipping: bool = false
 var _motion_tween: Tween

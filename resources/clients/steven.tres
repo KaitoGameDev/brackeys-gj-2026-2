@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ClientResource" format=3 uid="uid://clm01jcxpx5vq"]
+
+[ext_resource type="Script" uid="uid://cdgknd6qunwba" path="res://source/clients/client_resource.gd" id="1_68635"]
+[ext_resource type="Texture2D" uid="uid://dekkkdnt16rrb" path="res://assets/characters/Steven.png" id="2_cihvc"]
+
+[resource]
+script = ExtResource("1_68635")
+name = "Steven"
+texture = ExtResource("2_cihvc")
+lines = Array[String](["Time is gold, hurry up"])
+metadata/_custom_type_script = "uid://cdgknd6qunwba"

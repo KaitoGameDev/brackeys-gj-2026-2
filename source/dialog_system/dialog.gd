@@ -12,7 +12,7 @@ func start_dialog() -> void:
 	
 	for c in _text:
 		message.text += c
-		await get_tree().create_timer(0.06).timeout
+		await get_tree().create_timer(0.05).timeout
 
 func disable() -> void:
 	visible = false

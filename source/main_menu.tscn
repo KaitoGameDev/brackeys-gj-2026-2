@@ -1,0 +1,218 @@
+[gd_scene format=3 uid="uid://dxrqie36r1phi"]
+
+[ext_resource type="Script" uid="uid://dq4vc8diqws14" path="res://source/main_menu.gd" id="1_ibc2q"]
+[ext_resource type="Texture2D" uid="uid://cp5o7awi5hm65" path="res://assets/characters/Lola.png" id="1_xig0v"]
+[ext_resource type="Texture2D" uid="uid://b6jol64tv4ji0" path="res://assets/CoverGame.png" id="1_y0xrh"]
+[ext_resource type="Texture2D" uid="uid://diqj8h2utrcev" path="res://assets/characters/Gramma.png" id="2_ea2yk"]
+[ext_resource type="Texture2D" uid="uid://pepi5boiwf85" path="res://assets/characters/Ulises.png" id="2_eqk2l"]
+[ext_resource type="Texture2D" uid="uid://dekkkdnt16rrb" path="res://assets/characters/Steven.png" id="3_2i3sm"]
+[ext_resource type="FontFile" uid="uid://bq7fh1y3is7sg" path="res://assets/fonts/Big_Bottom_Typeface_Normal.ttf" id="6_2i3sm"]
+[ext_resource type="FontFile" uid="uid://brpmi7pe5c0jr" path="res://assets/fonts/UnyuCartoon.ttf" id="7_e4wre"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e4wre"]
+bg_color = Color(0.16578212, 0.5740341, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ibc2q"]
+bg_color = Color(0.16578212, 0.5740341, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ovv1g"]
+bg_color = Color(0, 0.48103076, 0.8535674, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m8ncx"]
+bg_color = Color(0, 0.48235294, 0.85490197, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 16
+
+[node name="MainMenu" type="Node" unique_id=484431526]
+script = ExtResource("1_ibc2q")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=690061711]
+
+[node name="Bg" type="ColorRect" parent="CanvasLayer" unique_id=246594347]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.9999997, 0.8453931, 0.20616525, 1)
+
+[node name="Lola" type="TextureRect" parent="CanvasLayer" unique_id=701443525]
+offset_left = 135.0
+offset_top = 45.000004
+offset_right = 312.0
+offset_bottom = 424.0
+rotation = -0.07818472
+texture = ExtResource("1_xig0v")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Ulises" type="TextureRect" parent="CanvasLayer" unique_id=552104928]
+offset_left = 244.0
+offset_top = -104.0
+offset_right = 401.0
+offset_bottom = 428.0
+texture = ExtResource("2_eqk2l")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Steven" type="TextureRect" parent="CanvasLayer" unique_id=457152317]
+offset_left = 507.0
+offset_top = 1.0
+offset_right = 658.0
+offset_bottom = 378.0
+rotation = 0.04673916
+texture = ExtResource("3_2i3sm")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Gramma" type="TextureRect" parent="CanvasLayer" unique_id=57302859]
+anchors_preset = -1
+anchor_left = 0.3625
+anchor_top = -0.072222225
+anchor_right = 0.5953125
+anchor_bottom = 0.9527778
+offset_left = 174.0
+offset_top = 80.0
+offset_right = 174.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ea2yk")
+expand_mode = 1
+stretch_mode = 6
+metadata/_edit_use_anchors_ = true
+
+[node name="CoverGame" type="TextureRect" parent="CanvasLayer" unique_id=945462681]
+anchors_preset = -1
+anchor_left = 0.0015625
+anchor_top = 0.0055555557
+anchor_right = 1.0
+anchor_bottom = 1.075
+offset_left = 2.0
+offset_top = -1.0
+offset_right = 2.0
+offset_bottom = -1.0000305
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_y0xrh")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1484343821]
+anchors_preset = -1
+anchor_left = 0.0375
+anchor_top = -0.075
+anchor_right = 0.371875
+anchor_bottom = 0.35277778
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -42
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("6_2i3sm")
+theme_override_font_sizes/font_size = 32
+text = "Take My
+Money!"
+metadata/_edit_use_anchors_ = true
+
+[node name="ActionButtons" type="VBoxContainer" parent="CanvasLayer" unique_id=208348269]
+anchors_preset = -1
+anchor_left = 0.003125
+anchor_top = 0.6027778
+anchor_right = 0.246875
+anchor_bottom = 0.7861111
+offset_left = 7.0
+offset_top = 48.0
+offset_right = 7.0
+offset_bottom = 48.0
+theme_override_constants/separation = 12
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="PlayBtn" type="Button" parent="CanvasLayer/ActionButtons" unique_id=830716574]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_e4wre")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_e4wre")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ibc2q")
+text = "Play"
+
+[node name="CreditsBtn" type="Button" parent="CanvasLayer/ActionButtons" unique_id=661920543]
+custom_minimum_size = Vector2(100, 28)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("7_e4wre")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ovv1g")
+theme_override_styles/hover = SubResource("StyleBoxFlat_m8ncx")
+text = "Credits
+"
+
+[node name="CreditsModal" type="Control" parent="CanvasLayer" unique_id=72063193]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/CreditsModal" unique_id=1772419249]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/CreditsModal" unique_id=1245247447]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -207.0
+offset_top = -128.0
+offset_right = 207.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
