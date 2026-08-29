@@ -139,6 +139,22 @@ value = 50.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
+[node name="Label" type="Label" parent="CanvasLayer/WaveContainer/ProgressBar" unique_id=1678630974]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 3.0
+offset_right = -1.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("14_qp6gg")
+text = "PATIENCE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="PeopleIcon" type="TextureRect" parent="CanvasLayer/WaveContainer" unique_id=304296803]
 layout_mode = 0
 offset_left = 296.0
