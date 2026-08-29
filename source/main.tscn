@@ -20,6 +20,7 @@
 [ext_resource type="Resource" uid="uid://doyd3f2167sjy" path="res://resources/money/20_bill.tres" id="12_bill20"]
 [ext_resource type="Resource" uid="uid://bpxc8ak8gpjx7" path="res://resources/money/50_bill.tres" id="13_bill50"]
 [ext_resource type="Resource" uid="uid://b6wfrbnlhrevb" path="res://resources/money/100_bill.tres" id="14_bill100"]
+[ext_resource type="FontFile" uid="uid://brpmi7pe5c0jr" path="res://assets/fonts/UnyuCartoon.ttf" id="14_qp6gg"]
 [ext_resource type="Texture2D" uid="uid://0o2jrgnf4luq" path="res://assets/icons/folder_icon.png" id="14_sm8so"]
 [ext_resource type="Script" uid="uid://5yi0hln8l8pp" path="res://source/help_folders/help_folder_button.gd" id="15_ly4gw"]
 [ext_resource type="Script" uid="uid://bva8u8qxst4an" path="res://source/money_swipe/wave_start_ui.gd" id="15_vjn7t"]
@@ -166,7 +167,119 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="PlayAreaContainer" type="Control" parent="CanvasLayer" unique_id=852353758]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 318.0
+offset_top = 69.0
+offset_right = -16.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Reject" type="Label" parent="CanvasLayer/PlayAreaContainer" unique_id=719712292]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = -14.0
+offset_right = -16.0
+offset_bottom = 9.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.39308554, 0.3930855, 0.39308548, 1)
+theme_override_fonts/font = ExtResource("14_qp6gg")
+text = "Reject"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RejectGuide" type="Label" parent="CanvasLayer/PlayAreaContainer" unique_id=1966432856]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -67.0
+offset_top = 5.0
+offset_right = -13.0
+offset_bottom = 28.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.39308554, 0.3930855, 0.39308548, 1)
+theme_override_fonts/font = ExtResource("14_qp6gg")
+theme_override_font_sizes/font_size = 12
+text = "Swipe Up"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Accept" type="Label" parent="CanvasLayer/PlayAreaContainer" unique_id=1298042658]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -67.5
+offset_top = 217.48
+offset_right = -15.5
+offset_bottom = 240.48
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.39308554, 0.3930855, 0.39308548, 1)
+theme_override_fonts/font = ExtResource("14_qp6gg")
+text = "Accept"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AcceptGuide" type="Label" parent="CanvasLayer/PlayAreaContainer" unique_id=2113692219]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -77.0
+offset_top = 201.0
+offset_right = -6.0
+offset_bottom = 224.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.39308554, 0.3930855, 0.39308548, 1)
+theme_override_fonts/font = ExtResource("14_qp6gg")
+theme_override_font_sizes/font_size = 12
+text = "Swipe Down"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Flip" type="Label" parent="CanvasLayer/PlayAreaContainer" unique_id=1386997946]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -221.0
+offset_top = 85.0
+offset_right = -169.0
+offset_bottom = 108.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.39308554, 0.3930855, 0.39308548, 1)
+theme_override_fonts/font = ExtResource("14_qp6gg")
+text = "Flip"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FlipGuide" type="Label" parent="CanvasLayer/PlayAreaContainer" unique_id=1345938520]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -229.0
+offset_top = 100.999985
+offset_right = -158.0
+offset_bottom = 123.999985
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.39308554, 0.3930855, 0.39308548, 1)
+theme_override_fonts/font = ExtResource("14_qp6gg")
+theme_override_font_sizes/font_size = 12
+text = "Tap"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="DebugContainer" type="Control" parent="CanvasLayer" unique_id=1973432247]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -203,19 +316,21 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -122.0
-offset_top = -122.0
-offset_right = -25.0
-offset_bottom = -99.0
+offset_left = -115.0
+offset_top = -111.0
+offset_right = -18.0
+offset_bottom = -88.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0.39215687, 0.39215687, 0.39215687, 1)
+theme_override_fonts/font = ExtResource("14_qp6gg")
 theme_override_font_sizes/font_size = 12
-text = "Check Guide"
+text = "Guide"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="WaveStartContainer" type="Control" parent="CanvasLayer" unique_id=1653313975]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -250,10 +365,10 @@ grow_vertical = 0
 text = "Start Day"
 
 [node name="HelpFolderButton" type="TextureButton" parent="CanvasLayer" unique_id=469319324 node_paths=PackedStringArray("help_folder")]
-offset_left = 556.99994
-offset_top = 248.0
-offset_right = 605.99994
-offset_bottom = 297.0
+offset_left = 555.99994
+offset_top = 258.0
+offset_right = 604.99994
+offset_bottom = 307.0
 rotation = 0.2537237
 texture_normal = ExtResource("14_sm8so")
 ignore_texture_size = true
