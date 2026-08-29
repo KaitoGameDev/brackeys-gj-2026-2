@@ -1,0 +1,101 @@
+[gd_scene format=3 uid="uid://dbrlhek2snlrf"]
+
+[ext_resource type="Script" uid="uid://bv5gc2wn4g14u" path="res://source/money/money_content.gd" id="1_lpgo3"]
+[ext_resource type="Texture2D" uid="uid://ch2pedbiseir7" path="res://assets/bills/bill_bg.png" id="2_pxclw"]
+[ext_resource type="FontFile" uid="uid://bq7fh1y3is7sg" path="res://assets/fonts/Big_Bottom_Typeface_Normal.ttf" id="3_35rr5"]
+[ext_resource type="Texture2D" uid="uid://cpfiwoyhk2aya" path="res://assets/bills/2.png" id="4_vnjtb"]
+
+[node name="MoneyUiItem" type="Control" unique_id=606083254]
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="FrontContent" type="Control" parent="." unique_id=133415672]
+custom_minimum_size = Vector2(75, 37.5)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 25.0
+offset_bottom = -22.5
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.7278023
+pivot_offset = Vector2(37.5, 18.5)
+script = ExtResource("1_lpgo3")
+metadata/_edit_use_anchors_ = true
+
+[node name="BgColor" type="NinePatchRect" parent="FrontContent" unique_id=533716063]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_pxclw")
+
+[node name="TopLeftValue" type="Label" parent="FrontContent" unique_id=2067186124]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.011853536
+anchor_top = -0.10156616
+anchor_right = 0.25156924
+anchor_bottom = 0.3807124
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("3_35rr5")
+theme_override_font_sizes/font_size = 8
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BottomRightValue" type="Label" parent="FrontContent" unique_id=1134230581]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.749987
+anchor_top = 0.5468349
+anchor_right = 0.98970264
+anchor_bottom = 1.0291134
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("3_35rr5")
+theme_override_font_sizes/font_size = 8
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Serial" type="Label" parent="FrontContent" unique_id=350954930]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.03515625
+anchor_top = 0.7613636
+anchor_right = 0.25546876
+anchor_bottom = 0.96103895
+offset_top = 5.75
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("3_35rr5")
+theme_override_font_sizes/font_size = 6
+text = "B-1234"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Stamp" type="TextureRect" parent="FrontContent" unique_id=1418537389]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.265625
+anchor_top = 0.12987013
+anchor_right = 0.734375
+anchor_bottom = 0.8701299
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_vnjtb")
+expand_mode = 3
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true

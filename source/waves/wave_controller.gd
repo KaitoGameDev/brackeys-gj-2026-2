@@ -209,3 +209,12 @@ func can_start_wave() -> bool:
 
 func is_pending_wave_complete() -> bool:
 	return _pending_wave_complete
+
+
+func get_current_wave_bill_pool() -> Array[MoneyResource]:
+	if _wave_index >= waves.size():
+		return []
+	var pool := waves[_wave_index].bill_pool
+	if pool.is_empty() and money_swipe_controller != null and "bill_pool" in money_swipe_controller:
+		return money_swipe_controller.bill_pool
+	return pool

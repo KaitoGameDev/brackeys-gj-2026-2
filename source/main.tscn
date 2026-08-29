@@ -25,6 +25,7 @@
 [ext_resource type="Script" uid="uid://5yi0hln8l8pp" path="res://source/help_folders/help_folder_button.gd" id="15_ly4gw"]
 [ext_resource type="Script" uid="uid://bva8u8qxst4an" path="res://source/money_swipe/wave_start_ui.gd" id="15_vjn7t"]
 [ext_resource type="PackedScene" uid="uid://m6b1wb8tskyl" path="res://source/help_folders/help_folder.tscn" id="16_73f7r"]
+[ext_resource type="PackedScene" uid="uid://dbrlhek2snlrf" path="res://source/ui/money_ui_item.tscn" id="17_8bvac"]
 [ext_resource type="Script" uid="uid://dfeyjuwpa2s0j" path="res://source/ui/game_over_ui.gd" id="20_30e5b"]
 [ext_resource type="Resource" uid="uid://d16xwr4dhh5ey" path="res://resources/clients/lola.tres" id="24_nmlcr"]
 [ext_resource type="Resource" uid="uid://clm01jcxpx5vq" path="res://resources/clients/steven.tres" id="25_qp6gg"]
@@ -347,8 +348,7 @@ text = "Guide"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="WaveStartContainer" type="Control" parent="CanvasLayer" unique_id=1653313975]
-visible = false
+[node name="WaveStartContainer" type="Control" parent="CanvasLayer" unique_id=1653313975 node_paths=PackedStringArray("wave_controller")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -356,6 +356,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("15_vjn7t")
+wave_controller = NodePath("../../Controllers/WaveController")
 
 [node name="Panel" type="Panel" parent="CanvasLayer/WaveStartContainer" unique_id=1335904613]
 visible = false
@@ -374,13 +375,28 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -284.0
-offset_top = -203.0
-offset_right = -134.0
-offset_bottom = -172.0
+offset_left = -285.0
+offset_top = -230.0
+offset_right = -135.0
+offset_bottom = -199.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "Start Day"
+
+[node name="MoneyContainer" type="HBoxContainer" parent="CanvasLayer/WaveStartContainer" unique_id=311625015]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -11.0
+offset_right = 236.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
 
 [node name="HelpFolderButton" type="TextureButton" parent="CanvasLayer" unique_id=469319324 node_paths=PackedStringArray("help_folder")]
 offset_left = 555.99994
@@ -399,6 +415,7 @@ visible = false
 money_swipe_controller = NodePath("../../Controllers/MoneySwipeController")
 
 [node name="GameOverContainer" type="Control" parent="CanvasLayer" unique_id=766196934]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
