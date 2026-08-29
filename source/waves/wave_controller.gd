@@ -11,6 +11,11 @@ extends Node
 @export var patience_trans: Tween.TransitionType = Tween.TRANS_LINEAR
 @export var patience_ease: Tween.EaseType = Tween.EASE_IN_OUT
 
+@export_group("Wave Label Pop")
+@export var wave_label_pop_scale: float = 1.35
+@export var wave_label_pop_grow_duration: float = 0.12
+@export var wave_label_pop_shrink_duration: float = 0.15
+
 var _wave_index: int = 0
 var _spawned_in_wave: int = 0
 var _completed_in_wave: int = 0
@@ -19,6 +24,7 @@ var _wave_active: bool = false
 var _pending_wave_complete: bool = false
 var _patience_tween: Tween
 var _patience_running: bool = false
+var _wave_label_pop_tween: Tween
 
 
 func _ready() -> void:
@@ -45,7 +51,7 @@ func _ready() -> void:
 		return
 
 	EventBus.on_event.connect(_on_event)
-	_update_wave_label()
+	_update_wave_label(false)
 	wave_progress_bar.max_value = 1.0
 	wave_progress_bar.value = 1.0
 	wave_progress_bar.value_changed.connect(
@@ -63,6 +69,7 @@ func _on_event(event: Object) -> void:
 	if event is WaveStartedEvent:
 		if can_start_wave():
 			_wave_active = true
+			_update_wave_label(true, true)
 	if event is MoneySwipedEvent:
 		_stop_patience_meter()
 	if event is MoneyDestroyedEvent:
@@ -92,6 +99,7 @@ func _on_money_destroyed() -> void:
 		_wave_index += 1
 		_spawned_in_wave = 0
 		_completed_in_wave = 0
+		_update_wave_label(true, true)
 
 
 func _on_client_exited() -> void:
@@ -152,8 +160,28 @@ func _on_patience_expired() -> void:
 	money_swipe_controller.destroy_current_money()
 
 
-func _update_wave_label() -> void:
-	wave_label.text = "{0}".format([waves[_wave_index].money_count + 1 - _completed_in_wave])
+func _update_wave_label(animate: bool = true, force_pop: bool = false) -> void:
+	var new_text := "{0}".format([waves[_wave_index].money_count + 1 - _completed_in_wave])
+	var text_changed := wave_label.text != new_text
+	wave_label.text = new_text
+	if animate and (text_changed or force_pop):
+		_pop_wave_label()
+
+
+func _pop_wave_label() -> void:
+	wave_label.pivot_offset = wave_label.size * 0.5 if wave_label.size != Vector2.ZERO \
+		else wave_label.get_minimum_size() * 0.5
+	wave_label.scale = Vector2.ONE
+
+	if _wave_label_pop_tween != null and _wave_label_pop_tween.is_valid():
+		_wave_label_pop_tween.kill()
+
+	var peak_scale := Vector2.ONE * wave_label_pop_scale
+	_wave_label_pop_tween = create_tween()
+	_wave_label_pop_tween.tween_property(wave_label, "scale", peak_scale, wave_label_pop_grow_duration)\
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	_wave_label_pop_tween.tween_property(wave_label, "scale", Vector2.ONE, wave_label_pop_shrink_duration)\
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 
 
 func _update_bill_auth_label(is_fake: bool) -> void:

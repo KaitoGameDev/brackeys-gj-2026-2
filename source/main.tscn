@@ -22,8 +22,8 @@
 [ext_resource type="Resource" uid="uid://b6wfrbnlhrevb" path="res://resources/money/100_bill.tres" id="14_bill100"]
 [ext_resource type="Texture2D" uid="uid://0o2jrgnf4luq" path="res://assets/icons/folder_icon.png" id="14_sm8so"]
 [ext_resource type="Script" uid="uid://5yi0hln8l8pp" path="res://source/help_folders/help_folder_button.gd" id="15_ly4gw"]
-[ext_resource type="PackedScene" uid="uid://m6b1wb8tskyl" path="res://source/help_folders/help_folder.tscn" id="16_73f7r"]
 [ext_resource type="Script" uid="uid://bva8u8qxst4an" path="res://source/money_swipe/wave_start_ui.gd" id="15_vjn7t"]
+[ext_resource type="PackedScene" uid="uid://m6b1wb8tskyl" path="res://source/help_folders/help_folder.tscn" id="16_73f7r"]
 
 [sub_resource type="Resource" id="WaveConfig_1"]
 script = ExtResource("8_wcfg")
@@ -152,12 +152,15 @@ anchor_left = 0.825
 anchor_top = -0.3
 anchor_right = 1.85
 anchor_bottom = 0.925
-grow_horizontal = 0
+offset_left = -5.455
+offset_right = -5.4550095
+grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("5_5aqvd")
 theme_override_font_sizes/font_size = 16
 text = "10"
+horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
