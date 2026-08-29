@@ -30,6 +30,9 @@ extends Node
 @export_group("Flip")
 @export var flip_duration: float = 0.4
 @export var flip_jump_height: float = 0.3
+@export var flip_bounce_scale: float = 0.12
+@export var flip_land_stretch: float = 0.03
+@export var flip_land_duration: float = 0.18
 @export var flip_trans: Tween.TransitionType = Tween.TRANS_QUAD
 @export var flip_ease: Tween.EaseType = Tween.EASE_IN_OUT
 
@@ -337,6 +340,7 @@ func _flip_current_money() -> void:
 	_is_flipping = true
 	var money := current_money as Money
 	var base_y := money.global_position.y
+	var base_scale := money.scale
 	var target_z := money.rotation.z + PI
 	var normalized_z := fposmod(target_z, TAU)
 	var showing_back := normalized_z > PI * 0.5 and normalized_z < PI * 1.5
@@ -357,9 +361,42 @@ func _flip_current_money() -> void:
 		1.0,
 		flip_duration
 	)
+
+	var total_scale_duration := flip_duration + flip_land_duration
+	tween.tween_method(
+		func(t: float) -> void:
+			if not is_instance_valid(money):
+				return
+			var elapsed := t * total_scale_duration
+			var face_scale := Vector2.ONE
+			if elapsed <= flip_duration:
+				var flip_t := elapsed / flip_duration
+				var air_scale := 1.0 + flip_bounce_scale * sin(flip_t * PI)
+				face_scale = Vector2(air_scale, air_scale)
+			else:
+				var land_t := (elapsed - flip_duration) / flip_land_duration
+				var land_scale := 1.0 + flip_land_stretch * sin(land_t * PI)
+				face_scale = Vector2(land_scale, land_scale)
+			_apply_bill_face_scale(money, base_scale, face_scale),
+		0.0,
+		1.0,
+		total_scale_duration
+	)
+
 	tween.finished.connect(func () -> void:
+		if is_instance_valid(money):
+			_apply_bill_face_scale(money, base_scale, Vector2.ONE)
 		_is_flipping = false
 	, CONNECT_ONE_SHOT)
+
+
+func _apply_bill_face_scale(money: Money, base_scale: Vector3, face_scale: Vector2) -> void:
+	# PlaneMesh default (FACE_Y): bill lies on X/Z; size.x -> X, size.y -> Z.
+	money.scale = Vector3(
+		base_scale.x * face_scale.x,
+		base_scale.y,
+		base_scale.z * face_scale.y
+	)
 
 
 func _slide_to(target: Node3D, on_finished: Callable = Callable()) -> void:
