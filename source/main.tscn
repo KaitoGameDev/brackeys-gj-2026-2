@@ -5,8 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://cgphrv0vs5qic" path="res://source/clients/client_spawner.tscn" id="2_62cc7"]
 [ext_resource type="Script" uid="uid://cdgknd6qunwba" path="res://source/clients/client_resource.gd" id="3_s8x7u"]
 [ext_resource type="Resource" uid="uid://me8molp66ws5" path="res://resources/clients/gramma.tres" id="4_4naa1"]
+[ext_resource type="Texture2D" uid="uid://clg4fcqcfwolp" path="res://assets/icons/people_icon.png" id="4_d5d55"]
 [ext_resource type="PackedScene" uid="uid://c7cr7cw7tvlch" path="res://source/strikes/strikes_container.tscn" id="4_rewae"]
 [ext_resource type="Resource" uid="uid://ymrln18bsxm4" path="res://resources/clients/ulises.tres" id="5_1elff"]
+[ext_resource type="FontFile" uid="uid://bq7fh1y3is7sg" path="res://assets/fonts/Big_Bottom_Typeface_Normal.ttf" id="5_5aqvd"]
 [ext_resource type="Resource" uid="uid://n4vjcmdxhncl" path="res://resources/clients/chuck.tres" id="6_2uit2"]
 [ext_resource type="Texture2D" uid="uid://d2pvvijie7tql" path="res://assets/Bank.png" id="7_4naa1"]
 [ext_resource type="Script" uid="uid://3icy6k2k177c" path="res://source/money/money_resource.gd" id="8_money"]
@@ -38,6 +40,15 @@ fake_chance = 0.7
 fake_alter_count = 2
 patience_duration = 6.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rewae"]
+bg_color = Color(0.2509804, 0.2509804, 0.2509804, 0.59607846)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 16
+
 [sub_resource type="Resource" id="Resource_rewae"]
 script = ExtResource("8_wcfg")
 money_count = 10
@@ -48,6 +59,11 @@ metadata/_custom_type_script = "uid://c6wbvrir1wq2o"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2uit2"]
 bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 16
 
 [sub_resource type="BoxMesh" id="BoxMesh_8heyh"]
 
@@ -82,7 +98,7 @@ player_position = NodePath("../../MoneyContainer/PlayerPosition")
 [node name="WaveController" type="Node" parent="Controllers" unique_id=615429479 node_paths=PackedStringArray("money_swipe_controller", "wave_label", "bill_auth_label", "wave_progress_bar")]
 script = ExtResource("2_1elff")
 money_swipe_controller = NodePath("../MoneySwipeController")
-wave_label = NodePath("../../CanvasLayer/WaveContainer/Label")
+wave_label = NodePath("../../CanvasLayer/WaveContainer/PeopleIcon/PeopleCounter")
 bill_auth_label = NodePath("../../CanvasLayer/DebugContainer/BillAuth")
 wave_progress_bar = NodePath("../../CanvasLayer/WaveContainer/ProgressBar")
 waves = Array[ExtResource("8_wcfg")]([SubResource("WaveConfig_1"), SubResource("WaveConfig_2"), SubResource("WaveConfig_3"), SubResource("Resource_rewae")])
@@ -96,31 +112,45 @@ anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/WaveContainer" unique_id=511928219]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Wave 1/99"
-horizontal_alignment = 2
-
 [node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/WaveContainer" unique_id=573205662]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 14.0
-offset_top = 9.0
-offset_right = -12.0
-offset_bottom = -37.0
+anchors_preset = -1
+anchor_left = 0.01875
+anchor_top = 2.84
+anchor_right = 0.3765625
+anchor_bottom = 3.2266667
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_rewae")
 theme_override_styles/fill = SubResource("StyleBoxFlat_2uit2")
 value = 50.0
 show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="PeopleIcon" type="TextureRect" parent="CanvasLayer/WaveContainer" unique_id=304296803]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 5.0
+offset_right = 336.0
+offset_bottom = 45.0
+texture = ExtResource("4_d5d55")
+expand_mode = 5
+
+[node name="PeopleCounter" type="Label" parent="CanvasLayer/WaveContainer/PeopleIcon" unique_id=511928219]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.825
+anchor_top = -0.3
+anchor_right = 1.85
+anchor_bottom = 0.925
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("5_5aqvd")
+theme_override_font_sizes/font_size = 16
+text = "10"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="DebugContainer" type="Control" parent="CanvasLayer" unique_id=1973432247]
 layout_mode = 3
@@ -144,10 +174,14 @@ grow_vertical = 0
 text = "Fake: No"
 
 [node name="StrikesContainer" parent="CanvasLayer" unique_id=1318416351 instance=ExtResource("4_rewae")]
-offset_left = 2.0
-offset_top = -246.0
-offset_right = 2.0
-offset_bottom = -246.0
+anchor_left = 0.725
+anchor_top = 0.022222223
+anchor_right = 0.9828125
+anchor_bottom = 0.12500001
+offset_left = -12.0
+offset_top = -3.0
+offset_right = -12.0
+offset_bottom = -3.0000038
 
 [node name="MoneyContainer" type="Node3D" parent="." unique_id=537026169]
 

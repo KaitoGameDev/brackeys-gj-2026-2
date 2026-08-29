@@ -62,6 +62,9 @@ func _on_money_destroyed() -> void:
 	_completed_in_wave += 1
 
 	var current_wave := waves[_wave_index]
+	
+	_update_wave_label()
+	
 	if _completed_in_wave < current_wave.money_count:
 		return
 
@@ -69,8 +72,6 @@ func _on_money_destroyed() -> void:
 		_wave_index += 1
 		_spawned_in_wave = 0
 		_completed_in_wave = 0
-		_update_wave_label()
-
 
 func _try_spawn_next() -> void:
 	if _awaiting_destroy:
@@ -122,7 +123,7 @@ func _on_patience_expired() -> void:
 
 
 func _update_wave_label() -> void:
-	wave_label.text = "Wave %d/%d" % [_wave_index + 1, waves.size()]
+	wave_label.text = "{0}".format([waves[_wave_index].money_count + 1 - _completed_in_wave])
 
 
 func _update_bill_auth_label(is_fake: bool) -> void:

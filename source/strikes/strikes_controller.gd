@@ -29,3 +29,6 @@ func _on_swiped_money(event: MoneySwipedEvent) -> void:
 	elif event.direction == MoneySwipedEvent.Direction.UP and !event.money.money_resource.is_fake():
 		strikes[current_strikes].texture = enabled_strike_texture
 		current_strikes += 1
+		
+	if current_strikes == 3:
+		EventBus.send_event(OnGameOver.new())
