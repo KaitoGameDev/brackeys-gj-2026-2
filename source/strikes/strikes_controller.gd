@@ -17,7 +17,9 @@ func _ready() -> void:
 
 func _on_event(event: Object) -> void:
 	if event is MoneySwipedEvent:
-		# Hay que verificar porque no esta funcionando esta condicion		
 		if event.direction == MoneySwipedEvent.Direction.DOWN and event.money.money_resource.is_fake():
+			strikes[current_strikes].texture = enabled_strike_texture
+			current_strikes += 1
+		elif event.direction == MoneySwipedEvent.Direction.UP and !event.money.money_resource.is_fake():
 			strikes[current_strikes].texture = enabled_strike_texture
 			current_strikes += 1
