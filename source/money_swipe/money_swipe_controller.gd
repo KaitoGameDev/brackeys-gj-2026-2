@@ -371,6 +371,7 @@ func _resolve_swipe(screen_end: Vector2) -> void:
 		return
 
 	var money := current_money as Money
+	AudioController.swipe()
 	if vertical < 0.0:
 		# Bottom -> top: give to customer, then destroy.
 		EventBus.send_event(MoneySwipedEvent.create(
