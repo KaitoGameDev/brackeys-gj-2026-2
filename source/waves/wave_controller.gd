@@ -45,6 +45,15 @@ func _ready() -> void:
 	_update_wave_label()
 	wave_progress_bar.max_value = 1.0
 	wave_progress_bar.value = 1.0
+	wave_progress_bar.value_changed.connect(
+		func(value):
+			if value <= 0.3:
+				wave_progress_bar.get_theme_stylebox("fill").bg_color = Color.RED
+			elif value <= 0.6:
+				wave_progress_bar.get_theme_stylebox("fill").bg_color = Color.ORANGE
+			else:
+				wave_progress_bar.get_theme_stylebox("fill").bg_color = Color.GREEN
+	)
 
 
 func _on_event(event: Object) -> void:

@@ -40,6 +40,14 @@ fake_chance = 0.7
 fake_alter_count = 2
 patience_duration = 6.0
 
+[sub_resource type="Resource" id="Resource_rewae"]
+script = ExtResource("8_wcfg")
+money_count = 10
+bill_pool = Array[ExtResource("8_money")]([ExtResource("9_bill2"), ExtResource("10_bill5"), ExtResource("11_bill10"), ExtResource("12_bill20"), ExtResource("13_bill50"), ExtResource("14_bill100")])
+fake_chance = 0.5
+patience_duration = 6.0
+metadata/_custom_type_script = "uid://c6wbvrir1wq2o"
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rewae"]
 bg_color = Color(0.2509804, 0.2509804, 0.2509804, 0.59607846)
 border_color = Color(0, 0, 0, 1)
@@ -49,16 +57,8 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 corner_detail = 16
 
-[sub_resource type="Resource" id="Resource_rewae"]
-script = ExtResource("8_wcfg")
-money_count = 10
-bill_pool = Array[ExtResource("8_money")]([ExtResource("9_bill2"), ExtResource("10_bill5"), ExtResource("11_bill10"), ExtResource("12_bill20"), ExtResource("13_bill50"), ExtResource("14_bill100")])
-fake_chance = 0.5
-patience_duration = 6.0
-metadata/_custom_type_script = "uid://c6wbvrir1wq2o"
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2uit2"]
-bg_color = Color(1, 1, 1, 1)
+bg_color = Color(0, 1, 0, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
