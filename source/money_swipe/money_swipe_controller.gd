@@ -18,8 +18,18 @@ class_name MoneySwipeController extends Node
 
 @export_group("Slide")
 @export var slide_duration: float = 0.35
+@export var slide_enter_overshoot: float = 0.2
+@export var slide_exit_windup: float = 0.2
+@export var slide_enter_overshoot_ratio: float = 0.6
+@export var slide_exit_windup_ratio: float = 0.35
 @export var slide_trans: Tween.TransitionType = Tween.TRANS_QUAD
 @export var slide_ease: Tween.EaseType = Tween.EASE_OUT
+
+enum SlideStyle {
+	LINEAR,
+	ENTER,
+	EXIT,
+}
 
 @export_group("Swipe")
 ## Minimum vertical travel (pixels) to count as a swipe.
@@ -149,7 +159,7 @@ func spawn_money(is_fake: bool = false, alter_count: int = 0, bill_pool_override
 	money.rotation.y = deg_to_rad(randf_range(-30.0, 30.0))
 	current_money = money
 	EventBus.send_event(MoneySpawnedEvent.create(money, money.money_resource))
-	_slide_to(table_position)
+	_slide_to(table_position, Callable(), SlideStyle.ENTER)
 
 
 func destroy_current_money() -> void:
@@ -326,13 +336,13 @@ func _resolve_swipe(screen_end: Vector2) -> void:
 		EventBus.send_event(MoneySwipedEvent.create(
 			money, money.money_resource, MoneySwipedEvent.Direction.UP
 		))
-		_slide_to(customer_position, _destroy_current)
+		_slide_to(customer_position, _destroy_current, SlideStyle.EXIT)
 	else:
 		# Top -> bottom: take to player, then destroy.
 		EventBus.send_event(MoneySwipedEvent.create(
 			money, money.money_resource, MoneySwipedEvent.Direction.DOWN
 		))
-		_slide_to(player_position, _destroy_current)
+		_slide_to(player_position, _destroy_current, SlideStyle.EXIT)
 
 
 func _flip_current_money() -> void:
@@ -401,18 +411,57 @@ func _apply_bill_face_scale(money: Money, base_scale: Vector3, face_scale: Vecto
 	)
 
 
-func _slide_to(target: Node3D, on_finished: Callable = Callable()) -> void:
+func _slide_to(
+	target: Node3D,
+	on_finished: Callable = Callable(),
+	style: SlideStyle = SlideStyle.LINEAR
+) -> void:
 	if current_money == null or target == null:
 		return
 	if _is_sliding:
 		return
 
 	_is_sliding = true
+	var money := current_money
+	var start_pos := money.global_position
+	var end_pos := target.global_position
+
 	var tween := create_tween()
 	_motion_tween = tween
-	tween.set_trans(slide_trans)
-	tween.set_ease(slide_ease)
-	tween.tween_property(current_money, "global_position", target.global_position, slide_duration)
+
+	match style:
+		SlideStyle.ENTER:
+			var slide_dir := end_pos - start_pos
+			if slide_dir.length_squared() < 0.0001:
+				slide_dir = Vector3(0.0, 0.0, 1.0)
+			else:
+				slide_dir = slide_dir.normalized()
+			var overshoot_pos := end_pos + slide_dir * slide_enter_overshoot
+			var overshoot_time := slide_duration * slide_enter_overshoot_ratio
+			var settle_time := maxf(slide_duration - overshoot_time, 0.01)
+			tween.tween_property(money, "global_position", overshoot_pos, overshoot_time)\
+				.set_trans(slide_trans).set_ease(slide_ease)
+			tween.tween_property(money, "global_position", end_pos, settle_time)\
+				.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		SlideStyle.EXIT:
+			var exit_dir := end_pos - start_pos
+			if exit_dir.length_squared() < 0.0001:
+				exit_dir = Vector3(0.0, 0.0, 1.0)
+			else:
+				exit_dir = exit_dir.normalized()
+			# Wind up opposite travel: down-swipe pulls toward top, up-swipe dips toward bottom.
+			var windup_pos := start_pos - exit_dir * slide_exit_windup
+			var windup_time := slide_duration * slide_exit_windup_ratio
+			var travel_time := maxf(slide_duration - windup_time, 0.01)
+			tween.tween_property(money, "global_position", windup_pos, windup_time)\
+				.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+			tween.tween_property(money, "global_position", end_pos, travel_time)\
+				.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+		_:
+			tween.set_trans(slide_trans)
+			tween.set_ease(slide_ease)
+			tween.tween_property(money, "global_position", end_pos, slide_duration)
+
 	tween.finished.connect(func () -> void:
 		_is_sliding = false
 		if on_finished.is_valid():
