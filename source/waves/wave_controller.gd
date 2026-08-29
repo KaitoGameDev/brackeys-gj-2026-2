@@ -157,6 +157,7 @@ func _on_patience_expired() -> void:
 	if not _patience_running or not _awaiting_destroy:
 		return
 	_patience_running = false
+	EventBus.send_event(PatienceExpiredEvent.new())
 	money_swipe_controller.destroy_current_money()
 
 

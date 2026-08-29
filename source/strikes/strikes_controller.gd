@@ -24,6 +24,8 @@ func _ready() -> void:
 func _on_event(event: Object) -> void:
 	if event is MoneySwipedEvent:
 		_on_swiped_money(event)
+	elif event is PatienceExpiredEvent:
+		_register_strike()
 
 
 func _on_swiped_money(event: MoneySwipedEvent) -> void:
@@ -39,7 +41,6 @@ func _on_swiped_money(event: MoneySwipedEvent) -> void:
 func _register_strike() -> void:
 	if current_strikes >= strikes.size():
 		return
-
 	var strike := strikes[current_strikes]
 	strike.texture = enabled_strike_texture
 	_pop_strike(strike)
