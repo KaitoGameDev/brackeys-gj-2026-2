@@ -34,6 +34,7 @@ extends Node
 @export var flip_ease: Tween.EaseType = Tween.EASE_IN_OUT
 
 var current_money: Node3D
+var _active_bill_pool: Array[MoneyResource] = []
 var _is_sliding: bool = false
 var _is_flipping: bool = false
 var _motion_tween: Tween
@@ -113,23 +114,26 @@ func _input(event: InputEvent) -> void:
 			_end_swipe(mouse.position, _POINTER_MOUSE)
 
 
-func spawn_money(is_fake: bool = false, alter_count: int = 0) -> void:
+func spawn_money(is_fake: bool = false, alter_count: int = 0, bill_pool_override: Array[MoneyResource] = []) -> void:
 	if money_scene == null or money_container == null:
 		push_warning("MoneySwipeController: money_scene or money_container is not set.")
 		return
 	if current_money != null:
 		return
 
-	if bill_pool.is_empty():
-		push_warning("MoneySwipeController: bill_pool is empty.")
+	var pool := bill_pool_override if not bill_pool_override.is_empty() else bill_pool
+	if pool.is_empty():
+		push_warning("MoneySwipeController: bill pool is empty.")
 		return
+
+	_active_bill_pool = pool
 
 	var money : Money = money_scene.instantiate() as Node3D
 	if money == null:
 		push_warning("MoneySwipeController: money_scene root must be a Node3D.")
 		return
 
-	var bill: MoneyResource = bill_pool.pick_random().duplicate()
+	var bill: MoneyResource = pool.pick_random().duplicate()
 	bill.fake = is_fake
 	if is_fake and alter_count > 0:
 		_apply_fake_alterations(bill, alter_count)
@@ -190,7 +194,7 @@ func _alter_fake_feature(bill: MoneyResource, feature: FakeFeature) -> void:
 
 func _pick_donor_bill(bill: MoneyResource, matches_exclusion: Callable) -> MoneyResource:
 	var donors: Array[MoneyResource] = []
-	for candidate in bill_pool:
+	for candidate in _active_bill_pool:
 		if matches_exclusion.call(candidate, bill):
 			continue
 		donors.append(candidate)

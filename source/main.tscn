@@ -9,24 +9,42 @@
 [ext_resource type="Resource" uid="uid://ymrln18bsxm4" path="res://resources/clients/ulises.tres" id="5_1elff"]
 [ext_resource type="Resource" uid="uid://n4vjcmdxhncl" path="res://resources/clients/chuck.tres" id="6_2uit2"]
 [ext_resource type="Texture2D" uid="uid://d2pvvijie7tql" path="res://assets/Bank.png" id="7_4naa1"]
+[ext_resource type="Script" uid="uid://3icy6k2k177c" path="res://source/money/money_resource.gd" id="8_money"]
 [ext_resource type="Script" uid="uid://c6wbvrir1wq2o" path="res://source/waves/wave_config.gd" id="8_wcfg"]
+[ext_resource type="Resource" uid="uid://2mfch1ghbbnp" path="res://resources/money/2_bill.tres" id="9_bill2"]
+[ext_resource type="Resource" uid="uid://x0bwlcu6fwj6" path="res://resources/money/5_bill.tres" id="10_bill5"]
+[ext_resource type="Resource" uid="uid://dg7045q6fh45g" path="res://resources/money/10_bill.tres" id="11_bill10"]
+[ext_resource type="Resource" uid="uid://doyd3f2167sjy" path="res://resources/money/20_bill.tres" id="12_bill20"]
+[ext_resource type="Resource" uid="uid://bpxc8ak8gpjx7" path="res://resources/money/50_bill.tres" id="13_bill50"]
+[ext_resource type="Resource" uid="uid://b6wfrbnlhrevb" path="res://resources/money/100_bill.tres" id="14_bill100"]
 
 [sub_resource type="Resource" id="WaveConfig_1"]
 script = ExtResource("8_wcfg")
+bill_pool = Array[ExtResource("8_money")]([ExtResource("9_bill2"), ExtResource("10_bill5"), ExtResource("11_bill10")])
 fake_chance = 0.2
 
 [sub_resource type="Resource" id="WaveConfig_2"]
 script = ExtResource("8_wcfg")
 money_count = 5
+bill_pool = Array[ExtResource("8_money")]([ExtResource("9_bill2"), ExtResource("10_bill5"), ExtResource("11_bill10"), ExtResource("12_bill20")])
 fake_chance = 0.5
 patience_duration = 8.0
 
 [sub_resource type="Resource" id="WaveConfig_3"]
 script = ExtResource("8_wcfg")
 money_count = 7
+bill_pool = Array[ExtResource("8_money")]([ExtResource("9_bill2"), ExtResource("10_bill5"), ExtResource("11_bill10"), ExtResource("12_bill20"), ExtResource("13_bill50")])
 fake_chance = 0.7
 fake_alter_count = 2
 patience_duration = 6.0
+
+[sub_resource type="Resource" id="Resource_rewae"]
+script = ExtResource("8_wcfg")
+money_count = 10
+bill_pool = Array[ExtResource("8_money")]([ExtResource("9_bill2"), ExtResource("10_bill5"), ExtResource("11_bill10"), ExtResource("12_bill20"), ExtResource("13_bill50"), ExtResource("14_bill100")])
+fake_chance = 0.5
+patience_duration = 6.0
+metadata/_custom_type_script = "uid://c6wbvrir1wq2o"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2uit2"]
 bg_color = Color(1, 1, 1, 1)
@@ -67,7 +85,7 @@ money_swipe_controller = NodePath("../MoneySwipeController")
 wave_label = NodePath("../../CanvasLayer/WaveContainer/Label")
 bill_auth_label = NodePath("../../CanvasLayer/DebugContainer/BillAuth")
 wave_progress_bar = NodePath("../../CanvasLayer/WaveContainer/ProgressBar")
-waves = Array[ExtResource("8_wcfg")]([SubResource("WaveConfig_1"), SubResource("WaveConfig_2"), SubResource("WaveConfig_3")])
+waves = Array[ExtResource("8_wcfg")]([SubResource("WaveConfig_1"), SubResource("WaveConfig_2"), SubResource("WaveConfig_3"), SubResource("Resource_rewae")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1115977841]
 
