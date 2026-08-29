@@ -4,6 +4,7 @@ extends Control
 @export var money_ui_item_scene: PackedScene = preload("res://source/ui/money_ui_item.tscn")
 
 @onready var _money_container: HBoxContainer = $MoneyContainer
+@onready var _day_label: Label = $DayLabel
 @onready var _button: Button = $Button
 
 
@@ -26,6 +27,7 @@ func _refresh_bill_preview() -> void:
 	if wave_controller == null or money_ui_item_scene == null:
 		return
 
+	_day_label.text = "Day {0}".format([wave_controller.get_current_wave_number()])
 	_clear_money_container()
 
 	for bill in wave_controller.get_current_wave_bill_pool():

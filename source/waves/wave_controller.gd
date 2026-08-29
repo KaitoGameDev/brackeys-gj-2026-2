@@ -218,3 +218,7 @@ func get_current_wave_bill_pool() -> Array[MoneyResource]:
 	if pool.is_empty() and money_swipe_controller != null and "bill_pool" in money_swipe_controller:
 		return money_swipe_controller.bill_pool
 	return pool
+
+
+func get_current_wave_number() -> int:
+	return _wave_index + 1
