@@ -54,9 +54,12 @@ func dismiss_current_client() -> void:
 
 
 func spawn_client() -> void:
+	var resource : ClientResource = client_resources.pick_random()
+	if current_client and current_client.client_resource == resource:
+		spawn_client()
+		return
 	var previous_client: Client = current_client
 	current_client = client_scene.instantiate()
-	var resource : ClientResource = client_resources.pick_random()
 	current_client.setup(resource)
 	current_client.visible = false
 	current_client.position = origin.position
