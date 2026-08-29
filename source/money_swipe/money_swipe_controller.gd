@@ -56,6 +56,7 @@ var _is_sliding: bool = false
 var _is_flipping: bool = false
 var _motion_tween: Tween
 var _game_over: bool = false
+var _guide_open: bool = false
 
 # -1 = none, -2 = mouse, >= 0 = touch index
 var _active_pointer: int = -1
@@ -103,6 +104,19 @@ func _ready() -> void:
 func _on_event(event: Object) -> void:
 	if event is OnGameOver:
 		_on_game_over()
+	if event is HelpFolderOpenedEvent:
+		_on_guide_opened()
+	if event is HelpFolderClosedEvent:
+		_on_guide_closed()
+
+
+func _on_guide_opened() -> void:
+	_guide_open = true
+	_active_pointer = -1
+
+
+func _on_guide_closed() -> void:
+	_guide_open = false
 
 
 func _on_game_over() -> void:
@@ -129,7 +143,7 @@ func _on_debug_event(event: Object) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if _game_over:
+	if _game_over or _guide_open:
 		return
 	if event is InputEventScreenTouch:
 		var touch := event as InputEventScreenTouch
@@ -339,7 +353,7 @@ func _end_swipe(screen_pos: Vector2, pointer_id: int) -> void:
 
 
 func _resolve_swipe(screen_end: Vector2) -> void:
-	if _game_over:
+	if _game_over or _guide_open:
 		return
 	if current_money == null or _is_sliding or _is_flipping:
 		return
@@ -372,7 +386,7 @@ func _resolve_swipe(screen_end: Vector2) -> void:
 
 
 func _flip_current_money() -> void:
-	if _game_over:
+	if _game_over or _guide_open:
 		return
 	if current_money == null or _is_sliding or _is_flipping:
 		return

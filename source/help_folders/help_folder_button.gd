@@ -10,3 +10,7 @@ func _ready() -> void:
 	
 func _on_pressed() -> void:
 	help_folder.visible = !help_folder.visible
+	if help_folder.visible:
+		EventBus.send_event(HelpFolderOpenedEvent.new())
+	else:
+		EventBus.send_event(HelpFolderClosedEvent.new())

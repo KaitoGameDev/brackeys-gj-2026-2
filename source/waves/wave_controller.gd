@@ -24,6 +24,8 @@ var _wave_active: bool = false
 var _pending_wave_complete: bool = false
 var _patience_tween: Tween
 var _patience_running: bool = false
+var _patience_paused: bool = false
+var _patience_total_duration: float = 0.0
 var _wave_label_pop_tween: Tween
 var _game_over: bool = false
 
@@ -85,6 +87,10 @@ func _on_event(event: Object) -> void:
 		_try_spawn_next()
 	if event is OnClientExited:
 		_on_client_exited()
+	if event is HelpFolderOpenedEvent:
+		_pause_patience_meter()
+	if event is HelpFolderClosedEvent:
+		_resume_patience_meter()
 
 
 func _on_money_destroyed() -> void:
@@ -147,10 +153,12 @@ func _start_patience_meter() -> void:
 	var duration := waves[_wave_index].patience_duration
 	if duration <= 0.0:
 		return
+	_patience_total_duration = duration
 	wave_progress_bar.max_value = 1.0
 	wave_progress_bar.step = 0.0
 	wave_progress_bar.value = 1.0
 	_patience_running = true
+	_patience_paused = false
 	_patience_tween = create_tween()
 	_patience_tween.set_trans(patience_trans)
 	_patience_tween.set_ease(patience_ease)
@@ -158,8 +166,40 @@ func _start_patience_meter() -> void:
 	_patience_tween.finished.connect(_on_patience_expired, CONNECT_ONE_SHOT)
 
 
+func _pause_patience_meter() -> void:
+	if not _patience_running or _patience_paused:
+		return
+	_patience_paused = true
+	if _patience_tween != null and _patience_tween.is_valid():
+		_patience_tween.kill()
+	_patience_tween = null
+
+
+func _resume_patience_meter() -> void:
+	if not _patience_paused:
+		return
+	_patience_paused = false
+	if not _patience_running or not _awaiting_destroy or _game_over:
+		return
+
+	var remaining_ratio := wave_progress_bar.value
+	if remaining_ratio <= 0.0:
+		return
+
+	var remaining_duration := _patience_total_duration * remaining_ratio
+	if remaining_duration <= 0.0:
+		return
+
+	_patience_tween = create_tween()
+	_patience_tween.set_trans(patience_trans)
+	_patience_tween.set_ease(patience_ease)
+	_patience_tween.tween_property(wave_progress_bar, "value", 0.0, remaining_duration)
+	_patience_tween.finished.connect(_on_patience_expired, CONNECT_ONE_SHOT)
+
+
 func _stop_patience_meter() -> void:
 	_patience_running = false
+	_patience_paused = false
 	if _patience_tween != null and _patience_tween.is_valid():
 		_patience_tween.kill()
 	_patience_tween = null

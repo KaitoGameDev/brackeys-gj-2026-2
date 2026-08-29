@@ -19,7 +19,10 @@ func _ready() -> void:
 	_render_page()
 	
 func _on_close_btn_pressed() -> void:
+	if not visible:
+		return
 	visible = false
+	EventBus.send_event(HelpFolderClosedEvent.new())
 	
 func _on_previous_page_pressed() -> void:
 	_current_page -= 1
