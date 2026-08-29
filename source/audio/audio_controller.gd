@@ -5,7 +5,14 @@ extends Node
 @onready var interactions_player: AudioStreamPlayer = $InteractionsAudioPlayer
 
 var bgm: Dictionary[String, Resource] = {
-	"main": preload("res://assets/music/regrowth wip.wav")
+	"main": preload("res://assets/music/regrowth wip.wav"),
+	"gameplay": preload("res://assets/music/shop.wav")
+}
+
+var sfx: Dictionary[String, Resource] = {
+	"buttons": preload("res://assets/sfx/pop_3.wav"),
+	"on_page": preload("res://assets/sfx/book_close.wav"),
+	"voice_1": preload("res://assets/sfx/voice_1.wav"),
 }
 
 func _ready() -> void:
@@ -15,3 +22,15 @@ func play_bgm(track_name: String) -> void:
 	if bgm.has(track_name):
 		bgm_player.stream = bgm.get(track_name)
 		bgm_player.play()
+
+func on_click() -> void:
+	sfx_player.stream = sfx.get("buttons")
+	sfx_player.play()
+	
+func on_page() -> void:
+	sfx_player.stream = sfx.get("on_page")
+	sfx_player.play()
+
+func voice_1() -> void:
+	interactions_player.stream = sfx.get("voice_1")
+	interactions_player.play()

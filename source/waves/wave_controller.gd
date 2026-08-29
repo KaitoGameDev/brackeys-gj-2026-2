@@ -79,11 +79,13 @@ func _on_event(event: Object) -> void:
 			_wave_active = true
 			_update_wave_label(true, true)
 	if event is MoneySwipedEvent:
+		wave_progress_bar.visible = false
 		_stop_patience_meter()
 	if event is MoneyDestroyedEvent:
 		_stop_patience_meter()
 		_on_money_destroyed()
 	if event is OnClientEntered:
+		wave_progress_bar.visible = true
 		_try_spawn_next()
 	if event is OnClientExited:
 		_on_client_exited()
@@ -214,7 +216,7 @@ func _on_patience_expired() -> void:
 
 
 func _update_wave_label(animate: bool = true, force_pop: bool = false) -> void:
-	var new_text := "{0}".format([waves[_wave_index].money_count + 1 - _completed_in_wave])
+	var new_text := "{0}".format([waves[_wave_index].money_count - _completed_in_wave])
 	var text_changed := wave_label.text != new_text
 	wave_label.text = new_text
 	if animate and (text_changed or force_pop):

@@ -20,6 +20,7 @@ func _on_event(event: Object) -> void:
 
 
 func _on_start_day_pressed() -> void:
+	AudioController.on_click()
 	EventBus.send_event(WaveStartedEvent.new())
 
 

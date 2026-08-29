@@ -13,10 +13,14 @@ func _ready() -> void:
 	
 
 func _on_close_credits_pressed() -> void:
+	AudioController.on_click()
 	credits_modal.visible = false
 
 func _on_play_btn_pressed() -> void:
+	AudioController.on_click()
+	AudioController.play_bgm("gameplay")
 	get_tree().change_scene_to_file("res://source/main.tscn")
 	
 func _on_credits_btn_pressed() -> void:
+	AudioController.on_click()
 	credits_modal.visible = true

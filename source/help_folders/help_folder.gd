@@ -21,14 +21,17 @@ func _ready() -> void:
 func _on_close_btn_pressed() -> void:
 	if not visible:
 		return
+	AudioController.on_click()
 	visible = false
 	EventBus.send_event(HelpFolderClosedEvent.new())
 	
 func _on_previous_page_pressed() -> void:
+	AudioController.on_page()
 	_current_page -= 1
 	_render_page()
 	
 func _on_next_page_pressed() -> void:
+	AudioController.on_page()
 	_current_page += 1
 	_render_page()
 	

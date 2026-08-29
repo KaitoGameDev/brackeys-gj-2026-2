@@ -9,6 +9,7 @@ func _ready() -> void:
 	
 	
 func _on_pressed() -> void:
+	AudioController.on_click()
 	help_folder.visible = !help_folder.visible
 	if help_folder.visible:
 		EventBus.send_event(HelpFolderOpenedEvent.new())
