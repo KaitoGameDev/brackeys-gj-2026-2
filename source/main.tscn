@@ -16,9 +16,11 @@
 [ext_resource type="Resource" uid="uid://2mfch1ghbbnp" path="res://resources/money/2_bill.tres" id="9_bill2"]
 [ext_resource type="Resource" uid="uid://x0bwlcu6fwj6" path="res://resources/money/5_bill.tres" id="10_bill5"]
 [ext_resource type="Resource" uid="uid://dg7045q6fh45g" path="res://resources/money/10_bill.tres" id="11_bill10"]
+[ext_resource type="Script" uid="uid://bwpbp8qmsulgw" path="res://source/ui/ui_controller.gd" id="11_sm8so"]
 [ext_resource type="Resource" uid="uid://doyd3f2167sjy" path="res://resources/money/20_bill.tres" id="12_bill20"]
 [ext_resource type="Resource" uid="uid://bpxc8ak8gpjx7" path="res://resources/money/50_bill.tres" id="13_bill50"]
 [ext_resource type="Resource" uid="uid://b6wfrbnlhrevb" path="res://resources/money/100_bill.tres" id="14_bill100"]
+[ext_resource type="Script" uid="uid://bva8u8qxst4an" path="res://source/money_swipe/wave_start_ui.gd" id="15_vjn7t"]
 
 [sub_resource type="Resource" id="WaveConfig_1"]
 script = ExtResource("8_wcfg")
@@ -103,6 +105,10 @@ bill_auth_label = NodePath("../../CanvasLayer/DebugContainer/BillAuth")
 wave_progress_bar = NodePath("../../CanvasLayer/WaveContainer/ProgressBar")
 waves = Array[ExtResource("8_wcfg")]([SubResource("WaveConfig_1"), SubResource("WaveConfig_2"), SubResource("WaveConfig_3"), SubResource("Resource_rewae")])
 
+[node name="UIController" type="Node" parent="Controllers" unique_id=322865138 node_paths=PackedStringArray("wave_start_container")]
+script = ExtResource("11_sm8so")
+wave_start_container = NodePath("../../CanvasLayer/WaveStartContainer")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1115977841]
 
 [node name="WaveContainer" type="Control" parent="CanvasLayer" unique_id=706304876]
@@ -183,6 +189,39 @@ offset_top = -3.0
 offset_right = -12.0
 offset_bottom = -3.0000038
 
+[node name="WaveStartContainer" type="Control" parent="CanvasLayer" unique_id=1653313975]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("15_vjn7t")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/WaveStartContainer" unique_id=1335904613]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="CanvasLayer/WaveStartContainer" unique_id=816962166]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -15.5
+offset_right = 40.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start Day"
+
 [node name="MoneyContainer" type="Node3D" parent="." unique_id=537026169]
 
 [node name="CustomerPosition" type="Node3D" parent="MoneyContainer" unique_id=5805678]
@@ -203,9 +242,10 @@ mesh = SubResource("BoxMesh_8heyh")
 [node name="DeskContainer" type="Node3D" parent="." unique_id=1004945751]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6144667, -0.58776855, 0)
 
-[node name="ClientSpawner" parent="DeskContainer" unique_id=142628562 instance=ExtResource("2_62cc7")]
+[node name="ClientSpawner" parent="DeskContainer" unique_id=142628562 node_paths=PackedStringArray("wave_controller") instance=ExtResource("2_62cc7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9133301, 0)
 client_resources = Array[ExtResource("3_s8x7u")]([ExtResource("4_4naa1"), ExtResource("5_1elff"), ExtResource("6_2uit2")])
+wave_controller = NodePath("../../Controllers/WaveController")
 
 [node name="BankBg" type="Sprite3D" parent="DeskContainer" unique_id=1125830694]
 transform = Transform3D(0.19, 0, 0, 0, 0.19, 0, 0, 0, 0.19, -0.060441017, -3, -0.021023095)

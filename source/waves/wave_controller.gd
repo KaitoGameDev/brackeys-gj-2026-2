@@ -1,3 +1,4 @@
+class_name WaveController
 extends Node
 
 @export var money_swipe_controller: Node
@@ -14,6 +15,8 @@ var _wave_index: int = 0
 var _spawned_in_wave: int = 0
 var _completed_in_wave: int = 0
 var _awaiting_destroy: bool = false
+var _wave_active: bool = false
+var _pending_wave_complete: bool = false
 var _patience_tween: Tween
 var _patience_running: bool = false
 
@@ -57,6 +60,9 @@ func _ready() -> void:
 
 
 func _on_event(event: Object) -> void:
+	if event is WaveStartedEvent:
+		if can_start_wave():
+			_wave_active = true
 	if event is MoneySwipedEvent:
 		_stop_patience_meter()
 	if event is MoneyDestroyedEvent:
@@ -64,6 +70,8 @@ func _on_event(event: Object) -> void:
 		_on_money_destroyed()
 	if event is OnClientEntered:
 		_try_spawn_next()
+	if event is OnClientExited:
+		_on_client_exited()
 
 
 func _on_money_destroyed() -> void:
@@ -77,12 +85,25 @@ func _on_money_destroyed() -> void:
 	if _completed_in_wave < current_wave.money_count:
 		return
 
+	_wave_active = false
+	_pending_wave_complete = true
+
 	if _wave_index + 1 < waves.size():
 		_wave_index += 1
 		_spawned_in_wave = 0
 		_completed_in_wave = 0
 
+
+func _on_client_exited() -> void:
+	if not _pending_wave_complete:
+		return
+
+	_pending_wave_complete = false
+	EventBus.send_event(WaveCompletedEvent.new())
+
 func _try_spawn_next() -> void:
+	if not _wave_active:
+		return
 	if _awaiting_destroy:
 		return
 	if _wave_index >= waves.size():
@@ -137,3 +158,13 @@ func _update_wave_label() -> void:
 
 func _update_bill_auth_label(is_fake: bool) -> void:
 	bill_auth_label.text = "Fake: Yes" if is_fake else "Fake: No"
+
+
+func can_start_wave() -> bool:
+	if _wave_index >= waves.size():
+		return false
+	return _completed_in_wave < waves[_wave_index].money_count
+
+
+func is_pending_wave_complete() -> bool:
+	return _pending_wave_complete
