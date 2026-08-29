@@ -10,6 +10,7 @@ var client_scene: PackedScene = preload("res://source/clients/client.tscn")
 
 var current_client: Client = null
 var _spawning_enabled: bool = false
+var _game_over: bool = false
 
 
 func _ready() -> void:
@@ -17,6 +18,12 @@ func _ready() -> void:
 
 
 func _on_event(event: Object) -> void:
+	if _game_over:
+		return
+	if event is OnGameOver:
+		_game_over = true
+		_spawning_enabled = false
+		return
 	if event is WaveStartedEvent:
 		if wave_controller != null and wave_controller.can_start_wave():
 			_spawning_enabled = true

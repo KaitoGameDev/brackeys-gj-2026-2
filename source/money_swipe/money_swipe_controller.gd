@@ -55,6 +55,7 @@ var _active_bill_pool: Array[MoneyResource] = [
 var _is_sliding: bool = false
 var _is_flipping: bool = false
 var _motion_tween: Tween
+var _game_over: bool = false
 
 # -1 = none, -2 = mouse, >= 0 = touch index
 var _active_pointer: int = -1
@@ -96,6 +97,21 @@ func _ready() -> void:
 		push_error("MoneySwipeController: assign all position node references in the inspector.")
 		return
 
+	EventBus.on_event.connect(_on_event)
+
+
+func _on_event(event: Object) -> void:
+	if event is OnGameOver:
+		_on_game_over()
+
+
+func _on_game_over() -> void:
+	_game_over = true
+	_cancel_motion_tweens()
+	_is_sliding = false
+	_is_flipping = false
+	_active_pointer = -1
+
 func _on_debug_event(event: Object) -> void:
 	if event is MoneySpawnedEvent:
 		var spawned := event as MoneySpawnedEvent
@@ -113,6 +129,8 @@ func _on_debug_event(event: Object) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if _game_over:
+		return
 	if event is InputEventScreenTouch:
 		var touch := event as InputEventScreenTouch
 		if touch.index != 0:
@@ -134,6 +152,8 @@ func _input(event: InputEvent) -> void:
 
 
 func spawn_money(is_fake: bool = false, alter_count: int = 0, bill_pool_override: Array[MoneyResource] = []) -> void:
+	if _game_over:
+		return
 	if money_scene == null or money_container == null:
 		push_warning("MoneySwipeController: money_scene or money_container is not set.")
 		return
@@ -319,6 +339,8 @@ func _end_swipe(screen_pos: Vector2, pointer_id: int) -> void:
 
 
 func _resolve_swipe(screen_end: Vector2) -> void:
+	if _game_over:
+		return
 	if current_money == null or _is_sliding or _is_flipping:
 		return
 
@@ -350,6 +372,8 @@ func _resolve_swipe(screen_end: Vector2) -> void:
 
 
 func _flip_current_money() -> void:
+	if _game_over:
+		return
 	if current_money == null or _is_sliding or _is_flipping:
 		return
 
@@ -420,6 +444,8 @@ func _slide_to(
 	on_finished: Callable = Callable(),
 	style: SlideStyle = SlideStyle.LINEAR
 ) -> void:
+	if _game_over:
+		return
 	if current_money == null or target == null:
 		return
 	if _is_sliding:

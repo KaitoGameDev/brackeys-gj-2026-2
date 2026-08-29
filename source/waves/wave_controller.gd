@@ -25,6 +25,7 @@ var _pending_wave_complete: bool = false
 var _patience_tween: Tween
 var _patience_running: bool = false
 var _wave_label_pop_tween: Tween
+var _game_over: bool = false
 
 
 func _ready() -> void:
@@ -66,6 +67,11 @@ func _ready() -> void:
 
 
 func _on_event(event: Object) -> void:
+	if _game_over:
+		return
+	if event is OnGameOver:
+		_on_game_over()
+		return
 	if event is WaveStartedEvent:
 		if can_start_wave():
 			_wave_active = true
@@ -108,6 +114,12 @@ func _on_client_exited() -> void:
 
 	_pending_wave_complete = false
 	EventBus.send_event(WaveCompletedEvent.new())
+
+
+func _on_game_over() -> void:
+	_game_over = true
+	_wave_active = false
+	_stop_patience_meter()
 
 func _try_spawn_next() -> void:
 	if not _wave_active:
