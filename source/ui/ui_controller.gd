@@ -1,12 +1,16 @@
 extends Node
 
 @export var wave_start_container: Control
+@export var play_area_container: Control
 @export var game_over_container: Control
 
 
 func _ready() -> void:
 	if wave_start_container == null:
 		push_error("UIController: assign wave_start_container in the inspector.")
+		return
+	if play_area_container == null:
+		push_error("UIController: assign play_area_container in the inspector.")
 		return
 	if game_over_container == null:
 		push_error("UIController: assign game_over_container in the inspector.")
@@ -29,10 +33,12 @@ func _on_event(event: Object) -> void:
 
 func show_wave_start() -> void:
 	wave_start_container.visible = true
+	play_area_container.visible = false
 
 
 func hide_wave_start() -> void:
 	wave_start_container.visible = false
+	play_area_container.visible = true
 
 
 func show_game_over() -> void:

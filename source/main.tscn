@@ -112,9 +112,10 @@ bill_auth_label = NodePath("../../CanvasLayer/DebugContainer/BillAuth")
 wave_progress_bar = NodePath("../../CanvasLayer/WaveContainer/ProgressBar")
 waves = Array[ExtResource("8_wcfg")]([SubResource("WaveConfig_1"), SubResource("WaveConfig_2"), SubResource("WaveConfig_3"), SubResource("Resource_rewae")])
 
-[node name="UIController" type="Node" parent="Controllers" unique_id=322865138 node_paths=PackedStringArray("wave_start_container", "game_over_container")]
+[node name="UIController" type="Node" parent="Controllers" unique_id=322865138 node_paths=PackedStringArray("wave_start_container", "play_area_container", "game_over_container")]
 script = ExtResource("11_sm8so")
 wave_start_container = NodePath("../../CanvasLayer/WaveStartContainer")
+play_area_container = NodePath("../../CanvasLayer/PlayAreaContainer")
 game_over_container = NodePath("../../CanvasLayer/GameOverContainer")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1115977841]
@@ -374,15 +375,35 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -252.0
-offset_top = -258.0
+offset_top = -279.0
 offset_right = -176.0
-offset_bottom = -234.0
+offset_bottom = -255.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_colors/font_color = Color(0.23031491, 0.23031494, 0.23031488, 1)
 theme_override_fonts/font = ExtResource("14_qp6gg")
 theme_override_font_sizes/font_size = 24
 text = "Day 99"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BillRotationLabel" type="Label" parent="CanvasLayer/WaveStartContainer" unique_id=1330643044]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -280.0
+offset_top = -245.0
+offset_right = -145.0
+offset_bottom = -221.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.23031491, 0.23031494, 0.23031488, 1)
+theme_override_fonts/font = ExtResource("14_qp6gg")
+theme_override_font_sizes/font_size = 16
+text = "Bill Rotation"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -395,9 +416,9 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -285.0
-offset_top = -129.0
+offset_top = -120.0
 offset_right = -135.0
-offset_bottom = -98.0
+offset_bottom = -89.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "Start Day"
@@ -410,9 +431,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -11.0
-offset_top = -46.0
+offset_top = -41.0
 offset_right = 236.0
-offset_bottom = 39.0
+offset_bottom = 44.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
