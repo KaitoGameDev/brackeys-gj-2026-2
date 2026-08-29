@@ -64,10 +64,10 @@ anchor_left = 0.88671875
 anchor_right = 0.98046875
 anchor_bottom = 0.512987
 grow_horizontal = 0
-theme_override_constants/line_spacing = -5
-theme_override_constants/outline_size = 3
+theme_override_constants/line_spacing = -7
+theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("3_7l4sg")
-theme_override_font_sizes/font_size = 5
+theme_override_font_sizes/font_size = 6
 text = "B
 -
 1
