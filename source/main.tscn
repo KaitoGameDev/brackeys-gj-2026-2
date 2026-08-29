@@ -25,7 +25,7 @@
 [ext_resource type="Script" uid="uid://5yi0hln8l8pp" path="res://source/help_folders/help_folder_button.gd" id="15_ly4gw"]
 [ext_resource type="Script" uid="uid://bva8u8qxst4an" path="res://source/money_swipe/wave_start_ui.gd" id="15_vjn7t"]
 [ext_resource type="PackedScene" uid="uid://m6b1wb8tskyl" path="res://source/help_folders/help_folder.tscn" id="16_73f7r"]
-[ext_resource type="Script" uid="uid://dfeyjuwpa2s0j" path="res://source/ui/game_over_ui.gd" id="20_30e5b"]
+[ext_resource type="PackedScene" uid="uid://coskme3j2daji" path="res://source/game_over/game_over_screen.tscn" id="20_30e5b"]
 [ext_resource type="Resource" uid="uid://d16xwr4dhh5ey" path="res://resources/clients/lola.tres" id="24_nmlcr"]
 [ext_resource type="Resource" uid="uid://clm01jcxpx5vq" path="res://resources/clients/steven.tres" id="25_qp6gg"]
 
@@ -116,7 +116,7 @@ waves = Array[ExtResource("8_wcfg")]([SubResource("WaveConfig_1"), SubResource("
 script = ExtResource("11_sm8so")
 wave_start_container = NodePath("../../CanvasLayer/WaveStartContainer")
 play_area_container = NodePath("../../CanvasLayer/PlayAreaContainer")
-game_over_container = NodePath("../../CanvasLayer/GameOverContainer")
+game_over_container = NodePath("../../CanvasLayer/GameOverScreen")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1115977841]
 
@@ -454,51 +454,8 @@ help_folder = NodePath("../HelpFolder")
 visible = false
 money_swipe_controller = NodePath("../../Controllers/MoneySwipeController")
 
-[node name="GameOverContainer" type="Control" parent="CanvasLayer" unique_id=766196934]
+[node name="GameOverScreen" parent="CanvasLayer" unique_id=239139841 instance=ExtResource("20_30e5b")]
 visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("20_30e5b")
-
-[node name="Panel" type="Panel" parent="CanvasLayer/GameOverContainer" unique_id=1121146054]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Button" type="Button" parent="CanvasLayer/GameOverContainer/Panel" unique_id=1347541538]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -32.5
-offset_top = -15.5
-offset_right = 32.5
-offset_bottom = 15.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Restart"
-
-[node name="Label" type="Label" parent="CanvasLayer/GameOverContainer/Panel" unique_id=394103635]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 125.0
-offset_bottom = 157.0
-grow_horizontal = 2
-theme_override_fonts/font = ExtResource("14_qp6gg")
-theme_override_font_sizes/font_size = 32
-text = "Game Over"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="MoneyContainer" type="Node3D" parent="." unique_id=537026169]
 

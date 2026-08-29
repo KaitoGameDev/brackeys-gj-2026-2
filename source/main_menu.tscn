@@ -205,14 +205,56 @@ grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/CreditsModal" unique_id=1245247447]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -207.0
-offset_top = -128.0
-offset_right = 207.0
-offset_bottom = 128.0
+anchors_preset = -1
+anchor_left = 0.1765625
+anchor_top = 0.14444445
+anchor_right = 0.8234375
+anchor_bottom = 0.85555553
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.9490196, 0.85882354, 0.8352941, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer/CreditsModal/ColorRect" unique_id=2128400503]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.13319641, 0.13319641, 0.13319638, 1)
+theme_override_fonts/font = ExtResource("7_e4wre")
+text = "TAKE MY MONEY
+
+
+An entry for the Brackeys GameJam 2026.2
+
+Developed by
+
+Lascario Pacheco <Zcyon>
+Carlos Montes <Kaito>
+
+Thanks for playing
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseBtn" type="Button" parent="CanvasLayer/CreditsModal/ColorRect" unique_id=544478102]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -103.0
+offset_top = -36.0
+offset_right = -7.0
+offset_bottom = -5.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.34781757, 0.3478167, 0.34781688, 1)
+theme_override_colors/font_hover_color = Color(0.13682568, 0.13682568, 0.1368261, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_e4wre")
+text = "Close"
+flat = true
