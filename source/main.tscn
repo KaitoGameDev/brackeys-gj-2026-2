@@ -195,6 +195,24 @@ offset_top = -3.0
 offset_right = -12.0
 offset_bottom = -3.0000038
 
+[node name="HelpFolderLabel" type="Label" parent="CanvasLayer" unique_id=954866068]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -122.0
+offset_top = -122.0
+offset_right = -25.0
+offset_bottom = -99.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
+text = "Check Guide"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="HelpFolderButton" type="TextureButton" parent="CanvasLayer" unique_id=469319324 node_paths=PackedStringArray("help_folder")]
 offset_left = 556.99994
 offset_top = 248.0
@@ -221,6 +239,7 @@ grow_vertical = 2
 script = ExtResource("15_vjn7t")
 
 [node name="Panel" type="Panel" parent="CanvasLayer/WaveStartContainer" unique_id=1335904613]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -229,19 +248,19 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Button" type="Button" parent="CanvasLayer/WaveStartContainer" unique_id=816962166]
-custom_minimum_size = Vector2(300, 0)
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -40.0
-offset_top = -15.5
-offset_right = 40.0
-offset_bottom = 15.5
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -254.0
+offset_top = -98.0
+offset_right = -104.0
+offset_bottom = -67.0
+grow_horizontal = 0
+grow_vertical = 0
 text = "Start Day"
 
 [node name="MoneyContainer" type="Node3D" parent="." unique_id=537026169]
