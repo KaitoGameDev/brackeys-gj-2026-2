@@ -20,6 +20,9 @@
 [ext_resource type="Resource" uid="uid://doyd3f2167sjy" path="res://resources/money/20_bill.tres" id="12_bill20"]
 [ext_resource type="Resource" uid="uid://bpxc8ak8gpjx7" path="res://resources/money/50_bill.tres" id="13_bill50"]
 [ext_resource type="Resource" uid="uid://b6wfrbnlhrevb" path="res://resources/money/100_bill.tres" id="14_bill100"]
+[ext_resource type="Texture2D" uid="uid://0o2jrgnf4luq" path="res://assets/icons/folder_icon.png" id="14_sm8so"]
+[ext_resource type="Script" uid="uid://5yi0hln8l8pp" path="res://source/help_folders/help_folder_button.gd" id="15_ly4gw"]
+[ext_resource type="PackedScene" uid="uid://m6b1wb8tskyl" path="res://source/help_folders/help_folder.tscn" id="16_73f7r"]
 [ext_resource type="Script" uid="uid://bva8u8qxst4an" path="res://source/money_swipe/wave_start_ui.gd" id="15_vjn7t"]
 
 [sub_resource type="Resource" id="WaveConfig_1"]
@@ -188,6 +191,22 @@ offset_left = -12.0
 offset_top = -3.0
 offset_right = -12.0
 offset_bottom = -3.0000038
+
+[node name="HelpFolderButton" type="TextureButton" parent="CanvasLayer" unique_id=469319324 node_paths=PackedStringArray("help_folder")]
+offset_left = 556.99994
+offset_top = 248.0
+offset_right = 605.99994
+offset_bottom = 297.0
+rotation = 0.2537237
+texture_normal = ExtResource("14_sm8so")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("15_ly4gw")
+help_folder = NodePath("../HelpFolder")
+
+[node name="HelpFolder" parent="CanvasLayer" unique_id=362614798 node_paths=PackedStringArray("money_swipe_controller") instance=ExtResource("16_73f7r")]
+visible = false
+money_swipe_controller = NodePath("../../Controllers/MoneySwipeController")
 
 [node name="WaveStartContainer" type="Control" parent="CanvasLayer" unique_id=1653313975]
 layout_mode = 3

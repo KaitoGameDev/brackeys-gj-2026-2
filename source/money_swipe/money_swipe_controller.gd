@@ -1,4 +1,4 @@
-extends Node
+class_name MoneySwipeController extends Node
 
 @export var money_scene: PackedScene = preload("res://source/money/money.tscn")
 @export var bill_pool: Array[MoneyResource] = [
@@ -70,6 +70,8 @@ const _IMPLEMENTED_FAKE_FEATURES: Array[FakeFeature] = [
 	FakeFeature.BACK_STAMP,
 ]
 
+func get_active_bill_pool() -> Array[MoneyResource]:
+	return _active_bill_pool
 
 func _ready() -> void:
 	# Remove the comment below to see the Swipe Event logs

@@ -1,0 +1,293 @@
+[gd_scene format=3 uid="uid://m6b1wb8tskyl"]
+
+[ext_resource type="Script" uid="uid://c15rf6g3o325p" path="res://source/help_folders/help_folder.gd" id="1_qrdgx"]
+[ext_resource type="Texture2D" uid="uid://bu2jifeo6qbbu" path="res://assets/open_folder.png" id="2_ywrnh"]
+[ext_resource type="Script" uid="uid://bv5gc2wn4g14u" path="res://source/money/money_content.gd" id="3_aqbn0"]
+[ext_resource type="Texture2D" uid="uid://ch2pedbiseir7" path="res://assets/bills/bill_bg.png" id="3_gguyo"]
+[ext_resource type="Texture2D" uid="uid://djjgk0o0avs8t" path="res://assets/icons/arrow_icon.png" id="3_ywrnh"]
+[ext_resource type="FontFile" uid="uid://bq7fh1y3is7sg" path="res://assets/fonts/Big_Bottom_Typeface_Normal.ttf" id="4_sjxvo"]
+[ext_resource type="Texture2D" uid="uid://cpfiwoyhk2aya" path="res://assets/bills/2.png" id="6_s2t06"]
+
+[node name="HelpFolder" type="Control" unique_id=362614798]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 330.0
+offset_top = 138.0
+offset_right = 370.0
+offset_bottom = 178.0
+script = ExtResource("1_qrdgx")
+
+[node name="OpenFolderLeft" type="TextureRect" parent="." unique_id=621576420]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -278.0
+offset_top = -140.0
+offset_right = 9.0
+offset_bottom = 141.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.02982867
+texture = ExtResource("2_ywrnh")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="FrontContent" type="Control" parent="OpenFolderLeft" unique_id=1918357279]
+layout_mode = 1
+anchor_left = 0.28553063
+anchor_top = 0.34732884
+anchor_right = 0.79426336
+anchor_bottom = 0.6646245
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_aqbn0")
+metadata/_edit_use_anchors_ = true
+
+[node name="BgColor" type="NinePatchRect" parent="OpenFolderLeft/FrontContent" unique_id=579738913]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_gguyo")
+
+[node name="TopLeftValue" type="Label" parent="OpenFolderLeft/FrontContent" unique_id=1186786822]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.011853536
+anchor_top = -0.10156616
+anchor_right = 0.25156924
+anchor_bottom = 0.3807124
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_sjxvo")
+theme_override_font_sizes/font_size = 8
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BottomRightValue" type="Label" parent="OpenFolderLeft/FrontContent" unique_id=1842809506]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.749987
+anchor_top = 0.5468349
+anchor_right = 0.98970264
+anchor_bottom = 1.0291134
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_sjxvo")
+theme_override_font_sizes/font_size = 8
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Serial" type="Label" parent="OpenFolderLeft/FrontContent" unique_id=190021042]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.03515625
+anchor_top = 0.7613636
+anchor_right = 0.25546876
+anchor_bottom = 0.96103895
+offset_top = 5.75
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_sjxvo")
+theme_override_font_sizes/font_size = 6
+text = "B-1234"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Stamp" type="TextureRect" parent="OpenFolderLeft/FrontContent" unique_id=943356056]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.265625
+anchor_top = 0.12987013
+anchor_right = 0.734375
+anchor_bottom = 0.8701299
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_s2t06")
+expand_mode = 3
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="FrontLabel" type="Label" parent="OpenFolderLeft" unique_id=2040133337]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.41216046
+anchor_top = 0.14765318
+anchor_right = 0.62779564
+anchor_bottom = 0.3088581
+offset_right = -2.8872986
+offset_bottom = 3.701416
+rotation = -0.06121835
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_sjxvo")
+text = "Front"
+metadata/_edit_use_anchors_ = true
+
+[node name="OpenFolderRight" type="TextureRect" parent="." unique_id=940855950]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -47.0
+offset_top = -129.0
+offset_right = 240.0
+offset_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.05291786
+texture = ExtResource("2_ywrnh")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
+
+[node name="BackContent" type="Control" parent="OpenFolderRight" unique_id=556862073]
+layout_mode = 1
+anchor_left = 0.18356235
+anchor_top = 0.36273742
+anchor_right = 0.7320916
+anchor_bottom = 0.68843675
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_aqbn0")
+serial_number_orientation = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BgColor" type="NinePatchRect" parent="OpenFolderRight/BackContent" unique_id=383182068]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_gguyo")
+
+[node name="TopLeftValue" type="Label" parent="OpenFolderRight/BackContent" unique_id=2134195938]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.01953125
+anchor_right = 0.234375
+anchor_bottom = 0.29220778
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_sjxvo")
+theme_override_font_sizes/font_size = 8
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BottomRightValue" type="Label" parent="OpenFolderRight/BackContent" unique_id=90357367]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.76808053
+anchor_top = 0.67177385
+anchor_right = 0.9829242
+anchor_bottom = 0.9639816
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("4_sjxvo")
+theme_override_font_sizes/font_size = 8
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Serial" type="Label" parent="OpenFolderRight/BackContent" unique_id=1052484344]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.88671875
+anchor_right = 0.98046875
+anchor_bottom = 0.512987
+grow_horizontal = 0
+theme_override_constants/line_spacing = -9
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("4_sjxvo")
+theme_override_font_sizes/font_size = 5
+text = "B
+-
+1
+2
+3
+4"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Stamp" type="TextureRect" parent="OpenFolderRight/BackContent" unique_id=1851910305]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.265625
+anchor_top = 0.12987013
+anchor_right = 0.734375
+anchor_bottom = 0.8701299
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_s2t06")
+expand_mode = 5
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="BackLabel" type="Label" parent="OpenFolderRight" unique_id=527614160]
+layout_mode = 0
+offset_left = 114.93205
+offset_top = 42.138115
+offset_right = 173.93204
+offset_bottom = 91.138115
+rotation = 0.06667367
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_sjxvo")
+text = "Back"
+
+[node name="NextPageBtn" type="TextureButton" parent="." unique_id=827096790]
+layout_mode = 0
+offset_left = 135.0
+offset_top = 76.0
+offset_right = 188.0
+offset_bottom = 129.0
+texture_normal = ExtResource("3_ywrnh")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="PreviousPageBtn" type="TextureButton" parent="." unique_id=466975344]
+layout_mode = 0
+offset_left = -185.0
+offset_top = 76.0
+offset_right = -132.0
+offset_bottom = 129.0
+texture_normal = ExtResource("3_ywrnh")
+ignore_texture_size = true
+stretch_mode = 5
+flip_h = true
+
+[node name="CloseBtn" type="Button" parent="." unique_id=2130697446]
+layout_mode = 0
+offset_left = 143.0
+offset_top = -116.0
+offset_right = 241.0
+offset_bottom = -59.0
+theme_override_colors/font_color = Color(1, 0.3372549, 0.12941177, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.3372549, 0.12941177, 1)
+theme_override_colors/font_hover_color = Color(0.7420546, 0.20652226, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("4_sjxvo")
+text = "X Close"
+flat = true
