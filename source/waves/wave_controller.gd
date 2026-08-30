@@ -16,6 +16,14 @@ extends Node
 @export var wave_label_pop_grow_duration: float = 0.12
 @export var wave_label_pop_shrink_duration: float = 0.15
 
+@export_group("Endless Mode")
+@export var endless_fake_chance_min: float = 0.2
+@export var endless_fake_chance_max: float = 0.6
+@export var endless_patience_step: float = 2.0
+@export var endless_patience_min: float = 4.0
+@export var endless_alter_step: int = 1
+@export var endless_alter_min: int = 1
+
 var _wave_index: int = 0
 var _spawned_in_wave: int = 0
 var _completed_in_wave: int = 0
@@ -28,6 +36,8 @@ var _patience_paused: bool = false
 var _patience_total_duration: float = 0.0
 var _wave_label_pop_tween: Tween
 var _game_over: bool = false
+var _endless_wave_config: WaveConfig
+var _in_endless_mode: bool = false
 
 
 func _ready() -> void:
@@ -99,21 +109,21 @@ func _on_money_destroyed() -> void:
 	_awaiting_destroy = false
 	_completed_in_wave += 1
 
-	var current_wave := waves[_wave_index]
-	
+	var current_wave := _get_current_wave()
+
 	_update_wave_label()
-	
+
 	if _completed_in_wave < current_wave.money_count:
 		return
 
 	_wave_active = false
 	_pending_wave_complete = true
 
-	if _wave_index + 1 < waves.size():
-		_wave_index += 1
-		_spawned_in_wave = 0
-		_completed_in_wave = 0
-		_update_wave_label(true, true)
+	_wave_index += 1
+	_spawned_in_wave = 0
+	_completed_in_wave = 0
+	_prepare_wave_config()
+	_update_wave_label(true, true)
 
 
 func _on_client_exited() -> void:
@@ -129,15 +139,14 @@ func _on_game_over() -> void:
 	_wave_active = false
 	_stop_patience_meter()
 
+
 func _try_spawn_next() -> void:
 	if not _wave_active:
 		return
 	if _awaiting_destroy:
 		return
-	if _wave_index >= waves.size():
-		return
 
-	var current_wave := waves[_wave_index]
+	var current_wave := _get_current_wave()
 	if _spawned_in_wave >= current_wave.money_count:
 		return
 
@@ -152,7 +161,7 @@ func _try_spawn_next() -> void:
 
 func _start_patience_meter() -> void:
 	_stop_patience_meter()
-	var duration := waves[_wave_index].patience_duration
+	var duration := _get_current_wave().patience_duration
 	if duration <= 0.0:
 		return
 	_patience_total_duration = duration
@@ -216,7 +225,7 @@ func _on_patience_expired() -> void:
 
 
 func _update_wave_label(animate: bool = true, force_pop: bool = false) -> void:
-	var new_text := "{0}".format([waves[_wave_index].money_count - _completed_in_wave])
+	var new_text := "{0}".format([_get_current_wave().money_count - _completed_in_wave])
 	var text_changed := wave_label.text != new_text
 	wave_label.text = new_text
 	if animate and (text_changed or force_pop):
@@ -243,10 +252,51 @@ func _update_bill_auth_label(is_fake: bool) -> void:
 	bill_auth_label.text = "Fake: Yes" if is_fake else "Fake: No"
 
 
+func _get_last_authored_wave() -> WaveConfig:
+	return waves[waves.size() - 1]
+
+
+func _get_current_wave() -> WaveConfig:
+	if _wave_index < waves.size():
+		return waves[_wave_index]
+	if _endless_wave_config == null:
+		push_error("WaveController: endless wave config missing for index {0}.".format([_wave_index]))
+		return _get_last_authored_wave()
+	return _endless_wave_config
+
+
+func _prepare_wave_config() -> void:
+	if _wave_index < waves.size():
+		return
+
+	_in_endless_mode = true
+	var last_authored := _get_last_authored_wave()
+	var previous_patience: float
+	var previous_alter: int
+
+	if _endless_wave_config == null:
+		previous_patience = last_authored.patience_duration
+		previous_alter = last_authored.fake_alter_count
+	else:
+		previous_patience = _endless_wave_config.patience_duration
+		previous_alter = _endless_wave_config.fake_alter_count
+
+	_endless_wave_config = WaveConfig.new()
+	_endless_wave_config.money_count = last_authored.money_count
+	_endless_wave_config.bill_pool = last_authored.bill_pool.duplicate()
+	_endless_wave_config.fake_chance = randf_range(endless_fake_chance_min, endless_fake_chance_max)
+	_endless_wave_config.patience_duration = maxf(
+		endless_patience_min,
+		previous_patience - endless_patience_step
+	)
+	_endless_wave_config.fake_alter_count = maxi(
+		endless_alter_min,
+		previous_alter - endless_alter_step
+	)
+
+
 func can_start_wave() -> bool:
-	if _wave_index >= waves.size():
-		return false
-	return _completed_in_wave < waves[_wave_index].money_count
+	return _completed_in_wave < _get_current_wave().money_count
 
 
 func is_pending_wave_complete() -> bool:
@@ -254,9 +304,7 @@ func is_pending_wave_complete() -> bool:
 
 
 func get_current_wave_bill_pool() -> Array[MoneyResource]:
-	if _wave_index >= waves.size():
-		return []
-	var pool := waves[_wave_index].bill_pool
+	var pool := _get_current_wave().bill_pool
 	if pool.is_empty() and money_swipe_controller != null and "bill_pool" in money_swipe_controller:
 		return money_swipe_controller.bill_pool
 	return pool
@@ -269,6 +317,6 @@ func get_current_wave_number() -> int:
 func get_patience_fill_percent() -> float:
 	if wave_progress_bar == null:
 		return 0.0
-	if _wave_index < waves.size() and waves[_wave_index].patience_duration <= 0.0:
+	if _get_current_wave().patience_duration <= 0.0:
 		return 1.0
 	return clampf(wave_progress_bar.value, 0.0, 1.0)
