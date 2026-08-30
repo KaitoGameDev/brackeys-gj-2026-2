@@ -97,9 +97,10 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 
 [node name="Controllers" type="Node" parent="." unique_id=601628348]
 
-[node name="MoneySwipeController" type="Node" parent="Controllers" unique_id=595820871 node_paths=PackedStringArray("money_container", "customer_position", "table_position", "player_position")]
+[node name="MoneySwipeController" type="Node" parent="Controllers" unique_id=595820871 node_paths=PackedStringArray("money_container", "money_pool_container", "customer_position", "table_position", "player_position")]
 script = ExtResource("1_kaxhg")
 money_container = NodePath("../../MoneyContainer")
+money_pool_container = NodePath("../../MoneyPoolContainer")
 customer_position = NodePath("../../MoneyContainer/CustomerPosition")
 table_position = NodePath("../../MoneyContainer/TablePosition")
 player_position = NodePath("../../MoneyContainer/PlayerPosition")
@@ -236,5 +237,8 @@ texture = ExtResource("7_4naa1")
 transform = Transform3D(4.477812, 0, 4.3711385e-08, 1.9573137e-07, 6.572907e-15, -0.9999999, 0, 3.440078, 1.9106853e-15, 2.0037303, 0.03656006, 0)
 alpha_cut = 3
 texture = SubResource("GradientTexture2D_2uit2")
+
+[node name="MoneyPoolContainer" type="Node3D" parent="." unique_id=1695795287]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
 
 [editable path="CanvasLayer/WaveContainer"]

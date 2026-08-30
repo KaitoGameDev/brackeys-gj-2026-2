@@ -12,6 +12,7 @@ class_name MoneySwipeController extends Node
 
 @export_group("Positions")
 @export var money_container: Node3D
+@export var money_pool_container: Node3D
 @export var customer_position: Node3D
 @export var table_position: Node3D
 @export var player_position: Node3D
@@ -57,6 +58,9 @@ var _is_flipping: bool = false
 var _motion_tween: Tween
 var _game_over: bool = false
 var _guide_open: bool = false
+var _pooled_money_by_template: Dictionary = {}
+var _canonical_resource_by_template: Dictionary = {}
+var _template_by_money: Dictionary = {}
 
 # -1 = none, -2 = mouse, >= 0 = touch index
 var _active_pointer: int = -1
@@ -89,16 +93,65 @@ const _IMPLEMENTED_FAKE_FEATURES: Array[FakeFeature] = [
 func get_active_bill_pool() -> Array[MoneyResource]:
 	return _active_bill_pool
 
+
+func _initialize_money_pool() -> void:
+	if money_scene == null or money_pool_container == null:
+		push_error("MoneySwipeController: money_scene and money_pool_container are required for pooling.")
+		return
+
+	for template in bill_pool:
+		var money := money_scene.instantiate() as Money
+		if money == null:
+			push_warning("MoneySwipeController: money_scene root must be a Money node.")
+			continue
+
+		money_pool_container.add_child(money)
+		money.global_position = money_pool_container.global_position
+
+		var canonical := template.duplicate()
+		_canonical_resource_by_template[template] = canonical
+		money.apply_resource(canonical.duplicate())
+
+		money.visible = false
+		_pooled_money_by_template[template] = money
+		_template_by_money[money] = template
+
+
+func _resolve_pool_template(template: MoneyResource) -> MoneyResource:
+	if _pooled_money_by_template.has(template):
+		return template
+
+	for pool_template in _pooled_money_by_template:
+		if pool_template.resource_path == template.resource_path:
+			return pool_template
+
+	push_error("MoneySwipeController: no pooled money for template {0}.".format([template.resource_path]))
+	return template
+
+
+func _checkout_money(template: MoneyResource) -> Money:
+	var pool_template := _resolve_pool_template(template)
+	if not _pooled_money_by_template.has(pool_template):
+		return null
+
+	var money: Money = _pooled_money_by_template[pool_template]
+	if money == current_money:
+		push_warning("MoneySwipeController: pooled money for template is already active.")
+		return null
+
+	return money
+
 func _ready() -> void:
 	# Remove the comment below to see the Swipe Event logs
 	#EventBus.on_event.connect(_on_debug_event)
 
-	if money_container == null or customer_position == null \
+	if money_container == null or money_pool_container == null or customer_position == null \
 			or table_position == null or player_position == null:
 		push_error("MoneySwipeController: assign all position node references in the inspector.")
 		return
 
 	EventBus.on_event.connect(_on_event)
+	call_deferred("_initialize_money_pool")
 
 
 func _on_event(event: Object) -> void:
@@ -181,18 +234,21 @@ func spawn_money(is_fake: bool = false, alter_count: int = 0, bill_pool_override
 
 	_active_bill_pool = pool
 
-	var money : Money = money_scene.instantiate() as Node3D
+	var template: MoneyResource = pool.pick_random()
+	var money := _checkout_money(template)
 	if money == null:
-		push_warning("MoneySwipeController: money_scene root must be a Node3D.")
 		return
 
-	var bill: MoneyResource = pool.pick_random().duplicate()
+	var bill: MoneyResource = template.duplicate()
 	bill.fake = is_fake
 	if is_fake and alter_count > 0:
 		_apply_fake_alterations(bill, alter_count)
-	money.setup(bill)
+	money.apply_resource(bill)
 
-	money_container.add_child(money)
+	if money.get_parent() != money_container:
+		money.reparent(money_container)
+	money.visible = true
+	money.reset_transform()
 	money.global_position = customer_position.global_position
 	money.rotation.y = deg_to_rad(randf_range(-30.0, 30.0))
 	current_money = money
@@ -206,7 +262,7 @@ func destroy_current_money() -> void:
 	_cancel_motion_tweens()
 	_is_flipping = false
 	_is_sliding = false
-	_destroy_current()
+	_release_current_to_pool()
 
 
 func _cancel_motion_tweens() -> void:
@@ -377,13 +433,13 @@ func _resolve_swipe(screen_end: Vector2) -> void:
 		EventBus.send_event(MoneySwipedEvent.create(
 			money, money.money_resource, MoneySwipedEvent.Direction.UP
 		))
-		_slide_to(customer_position, _destroy_current, SlideStyle.EXIT)
+		_slide_to(customer_position, _release_current_to_pool, SlideStyle.EXIT)
 	else:
 		# Top -> bottom: take to player, then destroy.
 		EventBus.send_event(MoneySwipedEvent.create(
 			money, money.money_resource, MoneySwipedEvent.Direction.DOWN
 		))
-		_slide_to(player_position, _destroy_current, SlideStyle.EXIT)
+		_slide_to(player_position, _release_current_to_pool, SlideStyle.EXIT)
 
 
 func _flip_current_money() -> void:
@@ -514,10 +570,24 @@ func _slide_to(
 	, CONNECT_ONE_SHOT)
 
 
-func _destroy_current() -> void:
+func _release_current_to_pool() -> void:
 	if current_money == null:
 		return
+
 	var money := current_money as Money
 	current_money = null
 	EventBus.send_event(MoneyDestroyedEvent.create(money, money.money_resource))
-	money.queue_free()
+
+	if not _template_by_money.has(money):
+		push_warning("MoneySwipeController: releasing money that is not in the pool.")
+		money.visible = false
+		return
+
+	var template: MoneyResource = _template_by_money[money]
+	money.apply_resource(_canonical_resource_by_template[template].duplicate())
+	money.reset_transform()
+
+	if money.get_parent() != money_pool_container:
+		money.reparent(money_pool_container)
+	money.global_position = money_pool_container.global_position
+	money.visible = false
