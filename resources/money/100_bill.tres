@@ -13,4 +13,4 @@ front_stamp = ExtResource("1_p8vof")
 back_stamp = ExtResource("1_p8vof")
 front_serial = "S-100100"
 back_serial = "S-100100"
-base_score = 100
+base_score = 50
