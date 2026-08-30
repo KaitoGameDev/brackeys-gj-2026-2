@@ -13,10 +13,6 @@ func start_dialog() -> void:
 	for c in _text:
 		message.text += c
 		await AudioController.voice_1().finished
-#		await (get_tree().create_timer(0.05).timeout.connect(
-#			func():
-#				
-#		))
 
 func disable() -> void:
 	visible = false
