@@ -3,19 +3,20 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://le6ugupb0qj7"
-path="res://.godot/imported/enabled_x.png-5fc8c76f2a15396560c76657933435df.ctex"
+path.s3tc="res://.godot/imported/enabled_x.png-5fc8c76f2a15396560c76657933435df.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/icons/enabled_x.png"
-dest_files=["res://.godot/imported/enabled_x.png-5fc8c76f2a15396560c76657933435df.ctex"]
+dest_files=["res://.godot/imported/enabled_x.png-5fc8c76f2a15396560c76657933435df.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0

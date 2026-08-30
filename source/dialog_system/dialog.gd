@@ -27,8 +27,3 @@ func start_dialog() -> void:
 			await get_tree().create_timer(0.04).timeout
 	
 	AudioController.stop_voice()
-	
-func disable() -> void:
-	visible = false
-	_text = ""
-	message.text = ""
