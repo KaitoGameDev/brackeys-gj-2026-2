@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://chegchm7vruv1"]
+
+[ext_resource type="FontFile" uid="uid://brpmi7pe5c0jr" path="res://assets/fonts/UnyuCartoon.ttf" id="1_3nucy"]
+
+[node name="PlayAreaContainer" type="Control" unique_id=718118296]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 318.0
+offset_top = 69.0
+offset_right = -16.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Reject" type="Label" parent="." unique_id=887708573]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = -14.0
+offset_right = -16.0
+offset_bottom = 9.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.95596343, 0.9559633, 0.95596343, 1)
+theme_override_fonts/font = ExtResource("1_3nucy")
+text = "Reject"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RejectGuide" type="Label" parent="." unique_id=634008634]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -67.0
+offset_top = 5.0
+offset_right = -13.0
+offset_bottom = 28.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.95686275, 0.95686275, 0.95686275, 0.49803922)
+theme_override_fonts/font = ExtResource("1_3nucy")
+theme_override_font_sizes/font_size = 12
+text = "Swipe Up"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Accept" type="Label" parent="." unique_id=2028121370]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -67.5
+offset_top = 217.48
+offset_right = -15.5
+offset_bottom = 240.48
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.95596343, 0.9559633, 0.95596343, 1)
+theme_override_fonts/font = ExtResource("1_3nucy")
+text = "Accept"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AcceptGuide" type="Label" parent="." unique_id=1945622671]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -77.0
+offset_top = 201.0
+offset_right = -6.0
+offset_bottom = 224.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.95686275, 0.95686275, 0.95686275, 0.49803922)
+theme_override_fonts/font = ExtResource("1_3nucy")
+theme_override_font_sizes/font_size = 12
+text = "Swipe Down"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Flip" type="Label" parent="." unique_id=982290731]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -221.0
+offset_top = 96.0
+offset_right = -169.0
+offset_bottom = 119.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.95596343, 0.9559633, 0.95596343, 1)
+theme_override_fonts/font = ExtResource("1_3nucy")
+text = "Flip"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FlipGuide" type="Label" parent="." unique_id=1037973337]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -232.0
+offset_top = 112.0
+offset_right = -161.0
+offset_bottom = 135.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.95686275, 0.95686275, 0.95686275, 0.49803922)
+theme_override_fonts/font = ExtResource("1_3nucy")
+theme_override_font_sizes/font_size = 12
+text = "Tap"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -26,6 +26,7 @@
 [ext_resource type="Script" uid="uid://5yi0hln8l8pp" path="res://source/help_folders/help_folder_button.gd" id="15_ly4gw"]
 [ext_resource type="Script" uid="uid://bva8u8qxst4an" path="res://source/money_swipe/wave_start_ui.gd" id="15_vjn7t"]
 [ext_resource type="PackedScene" uid="uid://m6b1wb8tskyl" path="res://source/help_folders/help_folder.tscn" id="16_73f7r"]
+[ext_resource type="PackedScene" uid="uid://chegchm7vruv1" path="res://source/ui/play_area_container.tscn" id="16_itf6h"]
 [ext_resource type="PackedScene" uid="uid://coskme3j2daji" path="res://source/game_over/game_over_screen.tscn" id="20_30e5b"]
 [ext_resource type="Texture2D" uid="uid://b53rrcakdelw7" path="res://assets/table_material.png" id="21_8bvac"]
 [ext_resource type="Resource" uid="uid://d16xwr4dhh5ey" path="res://resources/clients/lola.tres" id="24_nmlcr"]
@@ -1139,116 +1140,7 @@ text = "Score"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PlayAreaContainer" type="Control" parent="CanvasLayer" unique_id=852353758]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 318.0
-offset_top = 69.0
-offset_right = -16.0
-offset_bottom = -17.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Reject" type="Label" parent="CanvasLayer/PlayAreaContainer" unique_id=719712292]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -64.0
-offset_top = -14.0
-offset_right = -16.0
-offset_bottom = 9.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0.95596343, 0.9559633, 0.95596343, 1)
-theme_override_fonts/font = ExtResource("14_qp6gg")
-text = "Reject"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="RejectGuide" type="Label" parent="CanvasLayer/PlayAreaContainer" unique_id=1966432856]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -67.0
-offset_top = 5.0
-offset_right = -13.0
-offset_bottom = 28.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0.95686275, 0.95686275, 0.95686275, 0.49803922)
-theme_override_fonts/font = ExtResource("14_qp6gg")
-theme_override_font_sizes/font_size = 12
-text = "Swipe Up"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Accept" type="Label" parent="CanvasLayer/PlayAreaContainer" unique_id=1298042658]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -67.5
-offset_top = 217.48
-offset_right = -15.5
-offset_bottom = 240.48
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0.95596343, 0.9559633, 0.95596343, 1)
-theme_override_fonts/font = ExtResource("14_qp6gg")
-text = "Accept"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="AcceptGuide" type="Label" parent="CanvasLayer/PlayAreaContainer" unique_id=2113692219]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -77.0
-offset_top = 201.0
-offset_right = -6.0
-offset_bottom = 224.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0.95686275, 0.95686275, 0.95686275, 0.49803922)
-theme_override_fonts/font = ExtResource("14_qp6gg")
-theme_override_font_sizes/font_size = 12
-text = "Swipe Down"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Flip" type="Label" parent="CanvasLayer/PlayAreaContainer" unique_id=1386997946]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -221.0
-offset_top = 96.0
-offset_right = -169.0
-offset_bottom = 119.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0.95596343, 0.9559633, 0.95596343, 1)
-theme_override_fonts/font = ExtResource("14_qp6gg")
-text = "Flip"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="FlipGuide" type="Label" parent="CanvasLayer/PlayAreaContainer" unique_id=1345938520]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -232.0
-offset_top = 112.0
-offset_right = -161.0
-offset_bottom = 135.0
-grow_horizontal = 2
-theme_override_colors/font_color = Color(0.95686275, 0.95686275, 0.95686275, 0.49803922)
-theme_override_fonts/font = ExtResource("14_qp6gg")
-theme_override_font_sizes/font_size = 12
-text = "Tap"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="PlayAreaContainer" parent="CanvasLayer" unique_id=718118296 instance=ExtResource("16_itf6h")]
 
 [node name="DebugContainer" type="Control" parent="CanvasLayer" unique_id=1973432247]
 visible = false
