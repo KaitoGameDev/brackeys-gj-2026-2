@@ -78,8 +78,10 @@ func _render_page() -> void:
 	front_bill.stamp.texture = bill_page.front_stamp
 	front_bill.top_left_value_label.text = str(bill_page.front_value)
 	front_bill.bottom_right_value_label.text = str(bill_page.front_value)
+	front_bill.add_serial(bill_page.front_serial)
 
 	back_bill.bg_color.self_modulate = bill_page.back_color
 	back_bill.stamp.texture = bill_page.back_stamp
 	back_bill.top_left_value_label.text = str(bill_page.back_value)
 	back_bill.bottom_right_value_label.text = str(bill_page.back_value)
+	back_bill.add_serial(bill_page.back_serial)
