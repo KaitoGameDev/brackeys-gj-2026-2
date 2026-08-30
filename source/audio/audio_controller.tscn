@@ -15,3 +15,6 @@ bus = &"Sfx"
 [node name="VoicePlayer" type="AudioStreamPlayer" parent="." unique_id=1194401616]
 stream = ExtResource("2_n88fj")
 bus = &"Interactions"
+
+[node name="JinglePlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Bg"

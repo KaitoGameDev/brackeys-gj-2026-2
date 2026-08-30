@@ -1,8 +1,11 @@
 extends Node
 
+const WAVE_START_JINGLE := preload("res://assets/music/xylophone_level_start.wav")
+
 @onready var bgm_player: AudioStreamPlayer = $BgAudioPlayer
 @onready var sfx_player: AudioStreamPlayer = $SFXAudioPlayer
 @onready var voice_player: AudioStreamPlayer = $VoicePlayer
+@onready var jingle_player: AudioStreamPlayer = $JinglePlayer
 
 var bgm: Dictionary[String, Resource] = {
 	"main": preload("res://assets/music/regrowth wip.wav"),
@@ -17,8 +20,16 @@ var sfx: Dictionary[String, Resource] = {
 	"success": preload("res://assets/sfx/success_beep.wav")
 }
 
+
 func _ready() -> void:
+	EventBus.on_event.connect(_on_event)
 	play_bgm("main")
+
+
+func _on_event(event: Object) -> void:
+	if event is WaveStartedEvent:
+		play_wave_start_jingle()
+
 
 func play_bgm(track_name: String, volume: float = 0.0) -> void:
 	if bgm.has(track_name):
@@ -26,26 +37,51 @@ func play_bgm(track_name: String, volume: float = 0.0) -> void:
 		bgm_player.stream = bgm.get(track_name)
 		bgm_player.play()
 
+
 func on_click() -> void:
 	sfx_player.stream = sfx.get("buttons")
 	sfx_player.play()
-	
+
+
 func on_page() -> void:
 	sfx_player.stream = sfx.get("on_page")
 	sfx_player.play()
+
 
 func voice_1() -> AudioStreamPlayer:
 	voice_player.play()
 	return voice_player
 
+
 func swipe() -> void:
 	sfx_player.stream = sfx.get("swipe")
 	sfx_player.play()
+
 
 func failure() -> void:
 	sfx_player.stream = sfx.get("failure")
 	sfx_player.play()
 
+
 func success() -> void:
 	sfx_player.stream = sfx.get("success")
 	sfx_player.play()
+
+
+func play_wave_start_jingle() -> void:
+	var stream := WAVE_START_JINGLE
+	if stream is AudioStreamWAV:
+		stream.loop_mode = AudioStreamWAV.LOOP_DISABLED
+	jingle_player.stream = stream
+
+	if bgm_player.playing:
+		bgm_player.stream_paused = true
+
+	if jingle_player.finished.is_connected(_resume_bgm_after_jingle):
+		jingle_player.finished.disconnect(_resume_bgm_after_jingle)
+	jingle_player.finished.connect(_resume_bgm_after_jingle, CONNECT_ONE_SHOT)
+	jingle_player.play()
+
+
+func _resume_bgm_after_jingle() -> void:
+	bgm_player.stream_paused = false
