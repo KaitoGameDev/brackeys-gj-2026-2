@@ -264,3 +264,11 @@ func get_current_wave_bill_pool() -> Array[MoneyResource]:
 
 func get_current_wave_number() -> int:
 	return _wave_index + 1
+
+
+func get_patience_fill_percent() -> float:
+	if wave_progress_bar == null:
+		return 0.0
+	if _wave_index < waves.size() and waves[_wave_index].patience_duration <= 0.0:
+		return 1.0
+	return clampf(wave_progress_bar.value, 0.0, 1.0)

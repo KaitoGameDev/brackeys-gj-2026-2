@@ -13,3 +13,4 @@ front_stamp = ExtResource("1_aen0p")
 back_stamp = ExtResource("1_aen0p")
 front_serial = "A-5050"
 back_serial = "A-5050"
+base_score = 50

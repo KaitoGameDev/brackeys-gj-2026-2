@@ -9,6 +9,8 @@ class_name MoneyResource extends Resource
 @export var front_serial: String = ""
 @export var back_serial: String = ""
 
+@export var base_score: int = 1
+
 @export var fake: bool = false
 
 func is_fake() -> bool:

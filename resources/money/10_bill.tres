@@ -13,3 +13,4 @@ front_stamp = ExtResource("1_3q18k")
 back_stamp = ExtResource("1_3q18k")
 front_serial = "G-1010"
 back_serial = "G-1010"
+base_score = 10
