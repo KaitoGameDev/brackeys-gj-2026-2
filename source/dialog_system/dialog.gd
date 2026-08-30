@@ -12,7 +12,10 @@ func start_dialog() -> void:
 	
 	for c in _text:
 		message.text += c
-		await AudioController.voice_1().finished
+
+		if c != " ":
+			AudioController.voice_1()
+			await get_tree().create_timer(0.04).timeout
 
 func disable() -> void:
 	visible = false
