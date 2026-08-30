@@ -41,6 +41,7 @@ func _on_swiped_money(event: MoneySwipedEvent) -> void:
 func _register_strike() -> void:
 	if current_strikes >= strikes.size():
 		return
+	AudioController.failure()
 	var strike := strikes[current_strikes]
 	strike.texture = enabled_strike_texture
 	_pop_strike(strike)
