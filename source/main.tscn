@@ -974,7 +974,7 @@ waves = Array[ExtResource("8_wcfg")]([SubResource("WaveConfig_1"), SubResource("
 [node name="ScoreController" type="Node" parent="Controllers" unique_id=868552427 node_paths=PackedStringArray("wave_controller", "score_counter")]
 script = ExtResource("11_83co4")
 wave_controller = NodePath("../WaveController")
-score_counter = NodePath("../../CanvasLayer/ScoreContainer/ScoreCounter")
+score_counter = NodePath("../../CanvasLayer/WaveContainer/ScoreContainer/ScoreCounter")
 
 [node name="UIController" type="Node" parent="Controllers" unique_id=322865138 node_paths=PackedStringArray("wave_start_container", "play_area_container", "game_over_container")]
 script = ExtResource("11_sm8so")
@@ -1050,6 +1050,54 @@ text = "10"
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="ScoreContainer" type="Control" parent="CanvasLayer/WaveContainer" unique_id=1783178224]
+custom_minimum_size = Vector2(100, 35)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_top = 8.0
+offset_right = 50.0
+offset_bottom = 43.0
+grow_horizontal = 2
+mouse_filter = 1
+
+[node name="ScoreCounter" type="Label" parent="CanvasLayer/WaveContainer/ScoreContainer" unique_id=1150350128]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 95.0
+offset_top = -10.0
+offset_right = 95.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("FontFile_lw61b")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/WaveContainer/ScoreContainer" unique_id=825032437]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 97.0
+offset_top = -14.0
+offset_right = 97.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("FontFile_lw61b")
+theme_override_font_sizes/font_size = 8
+text = "Score"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="PlayAreaContainer" type="Control" parent="CanvasLayer" unique_id=852353758]
 layout_mode = 3
@@ -1319,56 +1367,8 @@ help_folder = NodePath("../HelpFolder")
 visible = false
 wave_controller = NodePath("../../Controllers/WaveController")
 
-[node name="GameOverScreen" parent="CanvasLayer" unique_id=239139841 instance=ExtResource("20_30e5b")]
-visible = false
-
-[node name="ScoreContainer" type="Control" parent="CanvasLayer" unique_id=1783178224]
-custom_minimum_size = Vector2(100, 35)
-layout_mode = 3
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -50.0
-offset_top = 8.0
-offset_right = 50.0
-offset_bottom = 43.0
-grow_horizontal = 2
-mouse_filter = 1
-
-[node name="ScoreCounter" type="Label" parent="CanvasLayer/ScoreContainer" unique_id=1150350128]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 95.0
-offset_top = -10.0
-offset_right = 95.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/outline_size = 5
-theme_override_fonts/font = SubResource("FontFile_lw61b")
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ScoreLabel" type="Label" parent="CanvasLayer/ScoreContainer" unique_id=825032437]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 97.0
-offset_top = -14.0
-offset_right = 97.0
-offset_bottom = -24.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/outline_size = 5
-theme_override_fonts/font = SubResource("FontFile_lw61b")
-theme_override_font_sizes/font_size = 8
-text = "Score"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="GameOverScreen" parent="CanvasLayer" unique_id=239139841 node_paths=PackedStringArray("score_controller") instance=ExtResource("20_30e5b")]
+score_controller = NodePath("../../Controllers/ScoreController")
 
 [node name="MoneyContainer" type="Node3D" parent="." unique_id=537026169]
 

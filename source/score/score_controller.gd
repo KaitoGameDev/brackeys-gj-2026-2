@@ -70,6 +70,10 @@ func _update_label() -> void:
 		score_counter.text = str(_score)
 
 
+func get_score() -> int:
+	return _score
+
+
 func _pop_score_counter() -> void:
 	if score_counter == null:
 		return
