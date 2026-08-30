@@ -462,9 +462,9 @@ stretch_mode = 5
 script = ExtResource("15_ly4gw")
 help_folder = NodePath("../HelpFolder")
 
-[node name="HelpFolder" parent="CanvasLayer" unique_id=362614798 node_paths=PackedStringArray("money_swipe_controller") instance=ExtResource("16_73f7r")]
+[node name="HelpFolder" parent="CanvasLayer" unique_id=362614798 node_paths=PackedStringArray("wave_controller") instance=ExtResource("16_73f7r")]
 visible = false
-money_swipe_controller = NodePath("../../Controllers/MoneySwipeController")
+wave_controller = NodePath("../../Controllers/WaveController")
 
 [node name="GameOverScreen" parent="CanvasLayer" unique_id=239139841 instance=ExtResource("20_30e5b")]
 visible = false
