@@ -33,8 +33,9 @@ func on_page() -> void:
 	sfx_player.stream = sfx.get("on_page")
 	sfx_player.play()
 
-func voice_1() -> void:
+func voice_1() -> AudioStreamPlayer:
 	voice_player.play.call_deferred()
+	return voice_player
 
 func swipe() -> void:
 	sfx_player.stream = sfx.get("swipe")
