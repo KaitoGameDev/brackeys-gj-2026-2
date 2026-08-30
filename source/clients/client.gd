@@ -4,7 +4,6 @@ class_name Client extends Node3D
 
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var sprite: Sprite3D = $Client
-@onready var dialog: Dialog = $Dialog
 
 signal finished_transition
 
@@ -29,9 +28,7 @@ func move_to(target_position: Vector3, is_end_position: bool = false) -> void:
 
 func _handle_stage() -> void:
 	if stage == 1:
-		dialog.set_text(client_resource.lines.pick_random())
-		dialog.start_dialog()
-		EventBus.send_event(OnClientEntered.new())
+		EventBus.send_event(OnClientEntered.create(client_resource))
 	if stage == 2:
 		EventBus.send_event(OnClientExited.new())
 

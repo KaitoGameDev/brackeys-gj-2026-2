@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://pepi5boiwf85" path="res://assets/characters/Ulises.png" id="1_iy4jk"]
 [ext_resource type="Script" uid="uid://beikrpvkhepc1" path="res://source/clients/client.gd" id="2_50b80"]
-[ext_resource type="PackedScene" uid="uid://dp5xlgruqvtqk" path="res://source/dialog_system/dialog.tscn" id="3_eiho7"]
 
 [sub_resource type="Animation" id="Animation_foecp"]
 length = 0.001
@@ -45,10 +44,6 @@ _data = {
 
 [node name="Client" type="Node3D" unique_id=1997058928]
 script = ExtResource("2_50b80")
-
-[node name="Dialog" parent="." unique_id=772810524 instance=ExtResource("3_eiho7")]
-anchor_top = 0.67777777
-anchor_bottom = 0.9305556
 
 [node name="Client" type="Sprite3D" parent="." unique_id=1809174983]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)

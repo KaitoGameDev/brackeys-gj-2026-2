@@ -48,9 +48,11 @@ func on_page() -> void:
 	sfx_player.play()
 
 
-func voice_1() -> AudioStreamPlayer:
+func start_voice() -> void:
 	voice_player.play()
-	return voice_player
+
+func stop_voice() -> void:
+	voice_player.stop()
 
 
 func swipe() -> void:

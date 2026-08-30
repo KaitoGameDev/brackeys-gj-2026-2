@@ -19,6 +19,7 @@
 [ext_resource type="Resource" uid="uid://doyd3f2167sjy" path="res://resources/money/20_bill.tres" id="12_bill20"]
 [ext_resource type="PackedScene" uid="uid://c4p6uvcxj1kx7" path="res://source/ui/wave_container.tscn" id="13_83co4"]
 [ext_resource type="Resource" uid="uid://bpxc8ak8gpjx7" path="res://resources/money/50_bill.tres" id="13_bill50"]
+[ext_resource type="PackedScene" uid="uid://dp5xlgruqvtqk" path="res://source/dialog_system/dialog.tscn" id="13_itf6h"]
 [ext_resource type="Resource" uid="uid://b6wfrbnlhrevb" path="res://resources/money/100_bill.tres" id="14_bill100"]
 [ext_resource type="FontFile" uid="uid://brpmi7pe5c0jr" path="res://assets/fonts/UnyuCartoon.ttf" id="14_qp6gg"]
 [ext_resource type="Texture2D" uid="uid://0o2jrgnf4luq" path="res://assets/icons/folder_icon.png" id="14_sm8so"]
@@ -126,6 +127,10 @@ game_over_container = NodePath("../../CanvasLayer/GameOverScreen")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1115977841]
 
+[node name="Dialog" parent="CanvasLayer" unique_id=772810524 instance=ExtResource("13_itf6h")]
+anchor_top = 0.67777777
+anchor_bottom = 0.9305556
+
 [node name="WaveContainer" parent="CanvasLayer" unique_id=1731680668 instance=ExtResource("13_83co4")]
 
 [node name="PlayAreaContainer" parent="CanvasLayer" unique_id=718118296 instance=ExtResource("16_itf6h")]
@@ -201,6 +206,7 @@ visible = false
 wave_controller = NodePath("../../Controllers/WaveController")
 
 [node name="GameOverScreen" parent="CanvasLayer" unique_id=239139841 node_paths=PackedStringArray("score_controller") instance=ExtResource("20_30e5b")]
+visible = false
 score_controller = NodePath("../../Controllers/ScoreController")
 
 [node name="MoneyContainer" type="Node3D" parent="." unique_id=537026169]
