@@ -7,5 +7,5 @@
 script = ExtResource("1_5t48e")
 name = "Lola"
 texture = ExtResource("2_vnans")
-lines = Array[String](["Money to buy cards in the future"])
+lines = Array[String](["Money to buy cards in the future.", "This is for trading cards.", "I'm saving up for cards."])
 metadata/_custom_type_script = "uid://cdgknd6qunwba"

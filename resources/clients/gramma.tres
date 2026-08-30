@@ -7,5 +7,5 @@
 script = ExtResource("1_1n76f")
 name = "Gertrudis"
 texture = ExtResource("2_p2l82")
-lines = Array[String](["Hello dear, I want to deposit my pention", "Today was a great day at the bingo", "This money will be to my grandson, I love him", "What a day, when you are my age, doing this is way to have fun"])
+lines = Array[String](["Hello, dear, I want to deposit my pension.", "Today was a great day at bingo!", "This money is for my grandson. I love him!", "What a day, when you are my age, doing this is the best way to have fun!"])
 metadata/_custom_type_script = "uid://cdgknd6qunwba"

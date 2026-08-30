@@ -7,5 +7,5 @@
 script = ExtResource("1_okf6h")
 name = "Chuck"
 texture = ExtResource("2_2ft2g")
-lines = Array[String](["Honk! honk!...", "My wallet is like an onion. Every time I open it, it makes me cry", "Keep calm and honk on", "Not all clowns wear costumes. Some just live rent free in your head"])
+lines = Array[String](["Honk! Honk!", "My wallet is like an onion: every time I open it, it makes me cry!", "Keep calm and honk on.", "Not all clowns wear costumes. Some just live rent-free in your head!"])
 metadata/_custom_type_script = "uid://cdgknd6qunwba"

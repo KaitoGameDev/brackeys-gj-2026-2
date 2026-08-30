@@ -7,5 +7,5 @@
 script = ExtResource("1_68635")
 name = "Steven"
 texture = ExtResource("2_cihvc")
-lines = Array[String](["Time is gold, hurry up"])
+lines = Array[String](["Time is money, hurry up!"])
 metadata/_custom_type_script = "uid://cdgknd6qunwba"

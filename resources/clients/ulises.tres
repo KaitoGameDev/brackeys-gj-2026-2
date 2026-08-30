@@ -7,5 +7,5 @@
 script = ExtResource("1_hh6rl")
 name = "Ulises"
 texture = ExtResource("2_nkqfc")
-lines = Array[String](["Let's do this fast", "Do not waste my time", "Dude! just save this", "C'mon! just take my money", "Why is taking too long"])
+lines = Array[String](["Let's do this fast.", "Don't waste my time!", "Dude! Just deposit it already!", "C'mon! Just take my money!", "Why is it taking so long?"])
 metadata/_custom_type_script = "uid://cdgknd6qunwba"
