@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://h7uurmqyfj1m"]
+
+[ext_resource type="Script" uid="uid://bva8u8qxst4an" path="res://source/money_swipe/wave_start_ui.gd" id="1_smnfi"]
+[ext_resource type="FontFile" uid="uid://brpmi7pe5c0jr" path="res://assets/fonts/UnyuCartoon.ttf" id="2_4cwr6"]
+
+[node name="WaveStartContainer" type="Control" unique_id=1198586445 node_paths=PackedStringArray("wave_controller")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_smnfi")
+wave_controller = NodePath("")
+
+[node name="Panel" type="Panel" parent="." unique_id=957909041]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DayLabel" type="Label" parent="." unique_id=512899577]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -252.0
+offset_top = -279.0
+offset_right = -176.0
+offset_bottom = -255.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.95686275, 0.95686275, 0.95686275, 1)
+theme_override_fonts/font = ExtResource("2_4cwr6")
+theme_override_font_sizes/font_size = 24
+text = "Day 99"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BillRotationLabel" type="Label" parent="." unique_id=600420932]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -280.0
+offset_top = -245.0
+offset_right = -145.0
+offset_bottom = -221.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.95686275, 0.95686275, 0.95686275, 0.49803922)
+theme_override_fonts/font = ExtResource("2_4cwr6")
+theme_override_font_sizes/font_size = 16
+text = "Bill Rotation"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="." unique_id=612278946]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -285.0
+offset_top = -120.0
+offset_right = -135.0
+offset_bottom = -89.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Start Day"
+
+[node name="MoneyContainer" type="HBoxContainer" parent="." unique_id=1844557871]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -11.0
+offset_top = -41.0
+offset_right = 236.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1

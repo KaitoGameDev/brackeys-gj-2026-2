@@ -23,9 +23,9 @@
 [ext_resource type="FontFile" uid="uid://brpmi7pe5c0jr" path="res://assets/fonts/UnyuCartoon.ttf" id="14_qp6gg"]
 [ext_resource type="Texture2D" uid="uid://0o2jrgnf4luq" path="res://assets/icons/folder_icon.png" id="14_sm8so"]
 [ext_resource type="Script" uid="uid://5yi0hln8l8pp" path="res://source/help_folders/help_folder_button.gd" id="15_ly4gw"]
-[ext_resource type="Script" uid="uid://bva8u8qxst4an" path="res://source/money_swipe/wave_start_ui.gd" id="15_vjn7t"]
 [ext_resource type="PackedScene" uid="uid://m6b1wb8tskyl" path="res://source/help_folders/help_folder.tscn" id="16_73f7r"]
 [ext_resource type="PackedScene" uid="uid://chegchm7vruv1" path="res://source/ui/play_area_container.tscn" id="16_itf6h"]
+[ext_resource type="PackedScene" uid="uid://h7uurmqyfj1m" path="res://source/ui/wave_start_container.tscn" id="17_83co4"]
 [ext_resource type="PackedScene" uid="uid://coskme3j2daji" path="res://source/game_over/game_over_screen.tscn" id="20_30e5b"]
 [ext_resource type="Texture2D" uid="uid://b53rrcakdelw7" path="res://assets/table_material.png" id="21_8bvac"]
 [ext_resource type="Resource" uid="uid://d16xwr4dhh5ey" path="res://resources/clients/lola.tres" id="24_nmlcr"]
@@ -180,95 +180,8 @@ text = "Guide"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="WaveStartContainer" type="Control" parent="CanvasLayer" unique_id=1653313975 node_paths=PackedStringArray("wave_controller")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("15_vjn7t")
+[node name="WaveStartContainer" parent="CanvasLayer" unique_id=1198586445 node_paths=PackedStringArray("wave_controller") instance=ExtResource("17_83co4")]
 wave_controller = NodePath("../../Controllers/WaveController")
-
-[node name="Panel" type="Panel" parent="CanvasLayer/WaveStartContainer" unique_id=1335904613]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="DayLabel" type="Label" parent="CanvasLayer/WaveStartContainer" unique_id=1626764432]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -252.0
-offset_top = -279.0
-offset_right = -176.0
-offset_bottom = -255.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_colors/font_color = Color(0.95686275, 0.95686275, 0.95686275, 1)
-theme_override_fonts/font = ExtResource("14_qp6gg")
-theme_override_font_sizes/font_size = 24
-text = "Day 99"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="BillRotationLabel" type="Label" parent="CanvasLayer/WaveStartContainer" unique_id=1330643044]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -280.0
-offset_top = -245.0
-offset_right = -145.0
-offset_bottom = -221.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_colors/font_color = Color(0.95686275, 0.95686275, 0.95686275, 0.49803922)
-theme_override_fonts/font = ExtResource("14_qp6gg")
-theme_override_font_sizes/font_size = 16
-text = "Bill Rotation"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Button" type="Button" parent="CanvasLayer/WaveStartContainer" unique_id=816962166]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -285.0
-offset_top = -120.0
-offset_right = -135.0
-offset_bottom = -89.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Start Day"
-
-[node name="MoneyContainer" type="HBoxContainer" parent="CanvasLayer/WaveStartContainer" unique_id=311625015]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -11.0
-offset_top = -41.0
-offset_right = 236.0
-offset_bottom = 44.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
 
 [node name="HelpFolderButton" type="TextureButton" parent="CanvasLayer" unique_id=469319324 node_paths=PackedStringArray("help_folder")]
 offset_left = 555.99994
