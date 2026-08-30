@@ -36,7 +36,7 @@ func on_page() -> void:
 
 func voice_1() -> void:
 	interactions_player.stream = sfx.get("voice_1")
-	interactions_player.play()
+	interactions_player.play.call_deferred()
 
 func swipe() -> void:
 	sfx_player.stream = sfx.get("swipe")
