@@ -13,7 +13,8 @@ var sfx: Dictionary[String, Resource] = {
 	"buttons": preload("res://assets/sfx/pop_3.wav"),
 	"on_page": preload("res://assets/sfx/book_close.wav"),
 	"swipe": preload("res://assets/sfx/whoosh_1.wav"),
-	"failure": preload("res://assets/sfx/failure.wav")
+	"failure": preload("res://assets/sfx/failure.wav"),
+	"success": preload("res://assets/sfx/success_beep.wav")
 }
 
 func _ready() -> void:
@@ -43,4 +44,8 @@ func swipe() -> void:
 
 func failure() -> void:
 	sfx_player.stream = sfx.get("failure")
+	sfx_player.play()
+
+func success() -> void:
+	sfx_player.stream = sfx.get("success")
 	sfx_player.play()

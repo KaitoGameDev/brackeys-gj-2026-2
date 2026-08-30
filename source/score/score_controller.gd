@@ -37,6 +37,8 @@ func _on_money_swiped(event: MoneySwipedEvent) -> void:
 	if wave_controller == null or not _is_correct_swipe(event):
 		return
 
+	AudioController.success()
+
 	var bill := event.money_resource
 	var wave_number := wave_controller.get_current_wave_number()
 	var patience_fill := wave_controller.get_patience_fill_percent()
