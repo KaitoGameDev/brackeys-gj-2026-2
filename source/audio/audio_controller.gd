@@ -20,8 +20,9 @@ var sfx: Dictionary[String, Resource] = {
 func _ready() -> void:
 	play_bgm("main")
 
-func play_bgm(track_name: String) -> void:
+func play_bgm(track_name: String, volume: float = 0.0) -> void:
 	if bgm.has(track_name):
+		bgm_player.volume_db = volume
 		bgm_player.stream = bgm.get(track_name)
 		bgm_player.play()
 

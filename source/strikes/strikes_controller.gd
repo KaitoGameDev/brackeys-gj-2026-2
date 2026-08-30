@@ -48,6 +48,7 @@ func _register_strike() -> void:
 	current_strikes += 1
 
 	if current_strikes == 3:
+		AudioController.play_bgm("gameplay", -15.0)
 		EventBus.send_event(OnGameOver.new())
 
 
