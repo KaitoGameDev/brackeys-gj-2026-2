@@ -2,7 +2,7 @@ extends Node
 
 @onready var bgm_player: AudioStreamPlayer = $BgAudioPlayer
 @onready var sfx_player: AudioStreamPlayer = $SFXAudioPlayer
-@onready var interactions_player: AudioStreamPlayer = $InteractionsAudioPlayer
+@onready var voice_player: AudioStreamPlayer = $VoicePlayer
 
 var bgm: Dictionary[String, Resource] = {
 	"main": preload("res://assets/music/regrowth wip.wav"),
@@ -12,7 +12,6 @@ var bgm: Dictionary[String, Resource] = {
 var sfx: Dictionary[String, Resource] = {
 	"buttons": preload("res://assets/sfx/pop_3.wav"),
 	"on_page": preload("res://assets/sfx/book_close.wav"),
-	"voice_1": preload("res://assets/sfx/voice_1.wav"),
 	"swipe": preload("res://assets/sfx/whoosh_1.wav"),
 	"failure": preload("res://assets/sfx/failure.wav")
 }
@@ -35,8 +34,7 @@ func on_page() -> void:
 	sfx_player.play()
 
 func voice_1() -> void:
-	interactions_player.stream = sfx.get("voice_1")
-	interactions_player.play.call_deferred()
+	voice_player.play.call_deferred()
 
 func swipe() -> void:
 	sfx_player.stream = sfx.get("swipe")

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://blysljd0vmwlj"]
 
 [ext_resource type="Script" uid="uid://c6i0vtrk7oxa8" path="res://source/audio/audio_controller.gd" id="1_vjf67"]
+[ext_resource type="AudioStream" uid="uid://8ubr5b8r8kle" path="res://assets/sfx/voice_1.wav" id="2_n88fj"]
 
 [node name="AudioController" type="Node" unique_id=1109533394]
 script = ExtResource("1_vjf67")
@@ -11,5 +12,6 @@ bus = &"Bg"
 [node name="SFXAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=1503620424]
 bus = &"Sfx"
 
-[node name="InteractionsAudioPlayer" type="AudioStreamPlayer" parent="." unique_id=187329616]
+[node name="VoicePlayer" type="AudioStreamPlayer" parent="." unique_id=1194401616]
+stream = ExtResource("2_n88fj")
 bus = &"Interactions"
