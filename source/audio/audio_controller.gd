@@ -2,6 +2,7 @@ extends Node
 
 const WAVE_START_JINGLE := preload("res://assets/music/xylophone_level_start.wav")
 const WAVE_END_JINGLE := preload("res://assets/music/xylophone_positive_long.wav")
+const GAME_OVER_JINGLE := preload("res://assets/music/xylophone_defeated.wav")
 
 @onready var bgm_player: AudioStreamPlayer = $BgAudioPlayer
 @onready var sfx_player: AudioStreamPlayer = $SFXAudioPlayer
@@ -32,6 +33,8 @@ func _on_event(event: Object) -> void:
 		play_wave_start_jingle()
 	if event is WaveCompletedEvent:
 		play_wave_end_jingle()
+	if event is OnGameOver:
+		play_game_over_jingle()
 
 
 func play_bgm(track_name: String, volume: float = 0.0) -> void:
@@ -93,6 +96,10 @@ func play_wave_start_jingle() -> void:
 
 func play_wave_end_jingle() -> void:
 	_play_jingle(WAVE_END_JINGLE)
+
+
+func play_game_over_jingle() -> void:
+	_play_jingle(GAME_OVER_JINGLE)
 
 
 func _resume_bgm_after_jingle() -> void:
