@@ -112,7 +112,6 @@ func _initialize_money_pool() -> void:
 		_canonical_resource_by_template[template] = canonical
 		money.apply_resource(canonical.duplicate())
 
-		money.visible = false
 		_pooled_money_by_template[template] = money
 		_template_by_money[money] = template
 
@@ -247,7 +246,6 @@ func spawn_money(is_fake: bool = false, alter_count: int = 0, bill_pool_override
 
 	if money.get_parent() != money_container:
 		money.reparent(money_container)
-	money.visible = true
 	money.reset_transform()
 	money.global_position = customer_position.global_position
 	money.rotation.y = deg_to_rad(randf_range(-30.0, 30.0))
@@ -580,7 +578,6 @@ func _release_current_to_pool() -> void:
 
 	if not _template_by_money.has(money):
 		push_warning("MoneySwipeController: releasing money that is not in the pool.")
-		money.visible = false
 		return
 
 	var template: MoneyResource = _template_by_money[money]
@@ -590,4 +587,3 @@ func _release_current_to_pool() -> void:
 	if money.get_parent() != money_pool_container:
 		money.reparent(money_pool_container)
 	money.global_position = money_pool_container.global_position
-	money.visible = false
