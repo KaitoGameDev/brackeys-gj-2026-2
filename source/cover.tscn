@@ -1,0 +1,131 @@
+[gd_scene format=3 uid="uid://c7sj8ybxdmqyk"]
+
+[ext_resource type="Texture2D" uid="uid://b6jol64tv4ji0" path="res://assets/CoverGame.png" id="1_8g7vr"]
+[ext_resource type="Texture2D" uid="uid://dekkkdnt16rrb" path="res://assets/characters/Steven.png" id="1_gw5u8"]
+[ext_resource type="FontFile" uid="uid://bq7fh1y3is7sg" path="res://assets/fonts/Big_Bottom_Typeface_Normal.ttf" id="1_sy6t6"]
+[ext_resource type="Texture2D" uid="uid://pepi5boiwf85" path="res://assets/characters/Ulises.png" id="3_5spx4"]
+[ext_resource type="Texture2D" uid="uid://diqj8h2utrcev" path="res://assets/characters/Gramma.png" id="3_uc1fo"]
+[ext_resource type="Texture2D" uid="uid://cp5o7awi5hm65" path="res://assets/characters/Lola.png" id="4_owsio"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sy6t6"]
+bg_color = Color(0, 0.7019608, 0.12156863, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 16
+shadow_color = Color(0, 0.5137255, 0.12156863, 1)
+shadow_size = 1
+shadow_offset = Vector2(-3, 3)
+
+[node name="Cover" type="Control" unique_id=976134291]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_vertical_guides_ = [360.0]
+metadata/_edit_horizontal_guides_ = [360.0]
+
+[node name="Bg" type="ColorRect" parent="." unique_id=556380388]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.9999997, 0.8453931, 0.20616525, 1)
+
+[node name="Steven" type="TextureRect" parent="." unique_id=831610415]
+layout_mode = 0
+offset_left = 155.0
+offset_top = -1.0
+offset_right = 483.0
+offset_bottom = 327.0
+texture = ExtResource("1_gw5u8")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Gramma" type="TextureRect" parent="." unique_id=473190757]
+layout_mode = 0
+offset_left = 146.0
+offset_top = 72.0
+offset_right = 367.3844
+offset_bottom = 354.96005
+rotation = -0.07588208
+texture = ExtResource("3_uc1fo")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Ulises" type="TextureRect" parent="." unique_id=756100651]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -153.0
+offset_right = 324.0
+offset_bottom = 424.0
+texture = ExtResource("3_5spx4")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Lola" type="TextureRect" parent="." unique_id=480306742]
+layout_mode = 0
+offset_left = -70.0
+offset_top = 58.0
+offset_right = 218.0
+offset_bottom = 346.0
+rotation = -0.09118814
+texture = ExtResource("4_owsio")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="CoverGame" type="TextureRect" parent="." unique_id=1460586252]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -275.0
+offset_top = -124.0
+offset_right = 9.5
+offset_bottom = 106.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_8g7vr")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="Panel" type="Panel" parent="." unique_id=1675621652]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0765625
+anchor_top = 0.65
+anchor_right = 0.4953125
+anchor_bottom = 0.8388889
+offset_left = 17.0
+offset_top = 19.0
+offset_right = 17.0
+offset_bottom = 19.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_sy6t6")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Panel" unique_id=2138487961]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -9.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = -3
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("1_sy6t6")
+theme_override_font_sizes/font_size = 18
+text = "TAKE MY MONEY"
+horizontal_alignment = 1
+vertical_alignment = 1
