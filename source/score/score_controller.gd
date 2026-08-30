@@ -3,8 +3,14 @@ class_name ScoreController extends Node
 @export var wave_controller: WaveController
 @export var score_counter: Label
 
+@export_group("Score Pop")
+@export var score_pop_scale: float = 1.35
+@export var score_pop_grow_duration: float = 0.12
+@export var score_pop_shrink_duration: float = 0.15
+
 var _score: int = 0
 var _game_over: bool = false
+var _score_pop_tween: Tween
 
 
 func _ready() -> void:
@@ -56,8 +62,28 @@ func _award_points(amount: int) -> void:
 		return
 	_score += amount
 	_update_label()
+	_pop_score_counter()
 
 
 func _update_label() -> void:
 	if score_counter != null:
 		score_counter.text = str(_score)
+
+
+func _pop_score_counter() -> void:
+	if score_counter == null:
+		return
+
+	score_counter.pivot_offset = score_counter.size * 0.5 if score_counter.size != Vector2.ZERO \
+		else score_counter.get_minimum_size() * 0.5
+	score_counter.scale = Vector2.ONE
+
+	if _score_pop_tween != null and _score_pop_tween.is_valid():
+		_score_pop_tween.kill()
+
+	var peak_scale := Vector2.ONE * score_pop_scale
+	_score_pop_tween = create_tween()
+	_score_pop_tween.tween_property(score_counter, "scale", peak_scale, score_pop_grow_duration)\
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	_score_pop_tween.tween_property(score_counter, "scale", Vector2.ONE, score_pop_shrink_duration)\
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
